@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/huntress-rest-openapi.json
+summary:
+  types:
+  - http
+schemes:
+- name: basic_auth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/huntress-rest-openapi.json
