@@ -1,0 +1,391 @@
+swagger: '2.0'
+info:
+  title: Huntress API Reference Accounts Escalations API
+  description: "<!-- DO NOT LINT FOR FORMATTING, you will break how it appears on the docs site -->\n<p><a href='https://www.huntress.com/terms-of-service'>© Huntress - All rights reserved</a></p>\n<h1 id='introduction'>Introduction</h1>\n\n<p>Webhook event payloads are available via the dropdown menu above the search bar on this page.</p>\n\n<p>The Huntress API follows a RESTful pattern. Requests are made via resource-oriented URLs as described in this document and API responses are formatted as JSON data.</p>\n\n<p>A command-line client is also available for interacting with the API from your terminal. It requires Ruby 3.1+ and has no external dependencies. You can download it from <a href='https://api.huntress.io/api/huntress-cli'>https://api.huntress.io/api/huntress-cli</a>.</p>\n\n<p>Alternatively, if you'd prefer to use an MCP, we have <a href=\"https://support.huntress.io/hc/en-us/articles/50846554117395-Connecting-to-the-Huntress-MCP-Server\">instructions for setting up the Huntress MCP</a>. Note that the MCP is read-only, so this is a good option if you're looking for a safer way to access your Huntress data from an LLM.</p>\n\n<p>If you&#39;d like to request additional API endpoints or capabilities, <a href=\"https://feedback.huntress.com/\">submit feedback</a> through our feedback portal.</p>\n\n<h1 id='api-overview'>API Overview</h1>\n<details>\n\t<summary><h2 id='authentication'>Authentication</h2></summary>\n<div class=\"scalar-code-copy\"><pre class=\"scalar-codeblock-pre\"><code class=\"hljs language-curl\"><span class=\"hljs-variable\">$KEY</span> = </span><span class=\"hljs-built_in\">echo </span><span class=\"hljs-string\">\"$HUNTRESS_PUBLIC_KEY:$HUNTRESS_PRIVATE_KEY\"</span> | <span class=\"hljs-built_in\">base64</span>\n<span class=\"hljs-built_in\">curl </span><span class=\"hljs-string\">\"https://api.huntress.io/v1/agents\"</span> \\ -H <span class=\"hljs-string\">\"Authorization: Basic $KEY\"</span>\n</code></pre>\n</div>\n<p>To begin, generate your API Key at <code>&lt;your_account_subdomain&gt;.huntress.io</code>. Once you are logged into your account on the Huntress site, check the dropdown menu at the top-right corner of the site header. You should see <code>API Credentials</code> among the options if your account has been granted access to the Huntress API. Click on the option to continue to the API Key generation page.</p>\n\n<p>Once on the API Key generation page, click on the green Setup button to begin the process to generate your API Key. You will be redirected to a page where you will be prompted to generate your API Key. Click the Generate button to generate a public and private key pair for Huntress API access. The inputs on the page will be filled in with your access credentials once you have done so.</p>\n\n<p><strong>Your API Private Key will only be visible at this stage of API Key generation. Be sure to save the value provided somewhere secure, as once you navigate away from this page, this value will no longer be accessible and you must regenerate your API credentials if your secret key value is lost.</strong></p>\n\n<p>If necessary, you can repeat the process to regenerate your API credentials with a new API Key and API Secret Key on the same API Key generation page, at <code>&lt;your_account_subdomain&gt;.huntress.io/account/api_credentials</code>.</p>\n\n<p>The Huntress API implements basic access authentication. Once you have your API Key and API Secret Key, provide these values as the result of a Base64 encoded string in every request to the Huntress API via the <code>Authorization</code> header. Your request header should look something like <code>Authorization: Basic [Base64Encode(&lt;your_api_key&gt;:&lt;your_api_secret_key&gt;)]</code>. Please refer to the code snippets for further examples.</p>\n</details>\n<details>\n\t<summary><h2 id='rate-limits'>Rate Limits</h2></summary>\n<p>Every Huntress API account is rate limited to 60 requests per minute, on a sliding window. This means that no more than 60 requests can be made within a 60 second time interval between the first request and the last request.</p>\n\n<p>For example, if request 1 is made at T0, request 2 is made at T5, and requests 3 through 60 are made at T10, making request 61 at T55 would result in a 429 error response. Making request 61 at T61 would succeed, however making request 62 at T61 would fail, at least until the time has passed T65, corresponding to a minute after request 2 was made.</p>\n</details>\n<details>\n\t<summary><h2 id='http-response-codes'>HTTP Response Codes</h2></summary>\n<p>Huntress follows HTTP standards when delivering responses: a <code>2xx</code> response is a success, a <code>4xx</code> response indicates an issue with the client request, and a <code>5xx</code> response indicates an issue with Huntress servers.\n<br>\n<br>\nSpecific error codes are detailed in the following table:</p>\n<table><thead>\n<tr>\n<th>Error Status Code</th>\n<th>Details</th>\n</tr>\n</thead><tbody>\n<tr>\n<td>400</td>\n<td>There is an unexpected value in the API request being made.</td>\n</tr>\n<tr>\n<td>401</td>\n<td>Your request could not be authenticated. Check that your API key is properly formatted and included in the <code>Authorization</code> header.</td>\n</tr>\n<tr>\n<td>404</td>\n<td>The requested resource is unavailable: either it doesn&#39;t exist, or your account does not hold correct permissions to access it.</td>\n</tr>\n<tr>\n<td>429</td>\n<td>You have made too many requests within the rate limit timeframe. See the previous section on <a href=\"#rate_limits\">rate_limits</a> for details.</td>\n</tr>\n<tr>\n<td>500</td>\n<td><p>An error has occurred within Huntress servers.</p><p>You could retry the request, but if you encounter continued errors, please <a href=\"https://support.huntress.io\">contact Support</a> with details of your error. If all traffic from Huntress is resulting in 500 responses, please check our <a href=\"https://huntressstatus.statuspage.io/\">Huntress Status Page</a>.</p></td>\n</tr>\n</tbody></table>\n</details>\n<details>\n\t<summary><h2 id='pagination'>Pagination</h2></summary>\n<p>Certain Huntress API endpoints utilize a <code>page_token</code> and <code>limit</code> parameter to specify a window location and size, respectively, to the resources currently being requested.\n<br><br>\nEach API request will also return a pagination object with details about your current pagination state based on the parameters provided. The pagination object contains:<br></p>\n\n<table><thead>\n<tr>\n<th>Key</th>\n<th>Type</th>\n<th>Description</th>\n</tr>\n</thead><tbody>\n<tr>\n<td>next_page_token</td>\n<td>string</td>\n<td>The token used to request the next page in paginated results. If no page token is included, the first page contains all results.</td>\n</tr>\n<tr>\n<td>next_page_url</td>\n<td>string</td>\n<td>URL containing the next page and the limit provided in the original API request, to be used to continue sequentially accessing resources. Only displays when another page can be accessed.</td>\n</tr>\n</tbody></table>\n<br>\n<p>Following is a formatted example of the pagination object in an API response:<br>\n<div class=\"scalar-code-copy\">\n<pre class=\"scalar-codeblock-pre\">\n<code class=\"hljs language-json\"><span class=\"hljs-attr\">\"pagination\"</span><span class=\"hljs-punctuation\">: {</span>\n<span class=\"hljs-attr\">  \"next_page_url\"</span><span class=\"hljs-punctuation\">: </span><span class=\"hljs-string\">\"https://api.huntress.io/v1/agents?page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo&amp;limit=10\"</span><span class=\"hljs-punctuation\">,\n</span><span class=\"hljs-attr\">  \"next_page_token\"</span><span class=\"hljs-punctuation\">: </span><span class=\"hljs-string\">\"MjAyMi0wMy0wMVQxODo1NDoyNFo\"</span><span class=\"hljs-punctuation\">\n}</span></code></pre>\n</div>\n</details>\n<details>\n\t<summary><h2 id='request-and-response-format'>Request and Response Format</h2></summary>\n\t<details>\n\t\t<summary><h3 id='request'>Request</h3></summary>\n\t<div class=\"scalar-code-copy\">\n<pre class=\"scalar-codeblock-pre\">\n<code class=\"hljs language-curl\"><span class=\"hljs-built_in\">curl</span> <span class=\"hljs-string\">\"https://api.huntress.io/v1/agents?organization_id=1&amp;page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo\"</span> -H <span class=\"hljs-string\">\"Authorization: Basic &lt;Your B64 encoded hash&gt;\"</span></code></pre></div>\n\t<p>The base URL for API requests is <code>api.huntress.io/v1/</code>, followed by the resource requested. Resources can be requested either singularly or as a list, which correspond to <code>/v1/&lt;resources&gt;/:id</code> or <code>/v1/&lt;resources&gt;</code> respectively, with the exception of the <code>/v1/account</code> and <code>/v1/actor</code> endpoints, which only returns the account associated with the API credentials provided.</p>\n\t<p>As an example, <code>api.huntress.io/v1/agents</code> would return a list of agents, while <code>api.huntress.io/v1/agents/1</code> would return a singular agent with ID: 1.</p>\n\t<p>Parameters are provided to the API through a query string. As an example, providing the organization_id filter as a parameter to the <code>/v1/agents</code> endpoint would look like <code>api.huntress/io/v1/agents?organization_id=1</code>. Accessing a sequential page with the same filter active would look like <code>api.huntress.io/v1/agents?organization_id=1&amp;page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo</code>.</p>\n\t</details>\n\t<details>\n\t\t<summary><h3 id='response'>Response</h3></summary>\n\t<p>The Huntress API responds with a JSON object containing requested resources if the request is valid and authorized.</p>\n\t<h4 id='singular-case'>Singular Case</h4>\n\t<div class=\"scalar-code-copy\">\n\t<pre class=\"scalar-codeblock-pre\"><code class=\"hljs-json\"><span class=\"hljs-punctuation\">{</span>\n<span class=\"hljs-attr\">  \"report\"</span><span class=\"hljs-punctuation\">: { ... }\n}</span></code>\n</div>\n\t<p>In the case of accessing a singular resource, the JSON object in question will contain one key that maps the singular resource to the singular representation of the resource name. As an example, if you were to request <code>api.huntress.io/v1/reports/1</code>, the JSON response would contain a single key <code>report</code> that maps to the report with ID: 1.</p>\n\t<h4 id='multiple-case'>Multiple Case</h4><div class=\"highlight\"><pre class=\"highlight json tab-json\">\n<pre class=\"scalar-codeblock-pre\"><code  class=\"hljs-json\"><span class=\"hljs-punctuation\">{</span>\n<span class=\"hljs-attr\">  \"reports\"</span><span class=\"hljs-punctuation\">: [ ... ],</span>\n<span class=\"hljs-attr\">  \"pagination\"</span><span class=\"hljs-punctuation\">: { ... }</span>\n<span class=\"hljs-punctuation\">}</span>\n</code></pre></div>\n\t<p>When accessing a list of resources, the JSON response contains two keys at the root level. The first key is the plural representation of that resource. The second is a <code>pagination</code> key that represents the current state of pagination based on parameters provided in the original request. As an example, a request to <code>api.huntress.io/v1/reports</code> returns a JSON object with the keys <code>reports</code> and <code>pagination</code> at its root level. Further details on the fields within the pagination object can be seen at <a href=\"#pagination\">the relevant section</a>.</p>\n\t</details>\n</details>\n"
+  version: 1.0.0
+host: api.huntress.io
+schemes:
+- https
+produces:
+- application/json
+security:
+- basic:
+  - basic_auth
+tags:
+- name: Escalations
+  description: Operations about Escalations
+paths:
+  /v1/escalations:
+    get:
+      summary: List Escalations
+      description: "\nShows Escalations associated with your account.\nAdditional details for a specific escalation can be obtained by using the **GET Escalation** endpoint.\n\nEscalations are used to notify Huntress account administrators that a situation requires their attention.\nBelow are some common use cases:\n - Security Operation Centers (SOC) suspect that an application being flagged as malicious is a false positive, and we want to get your authorization to allow-list the application moving forward.\n - A potential threat flagged by Managed Defender requires additional information (file path details, etc.) in order for Huntress to provide actionable assisted remediation steps.\n - A login event occurred from an unexpected country or VPN, and Huntress would like partner feedback on whether that event should be expected or unauthorized.\n\n Though Escalations are not incident reports, they do have severities (low, high, critical) associated with them that dictate an expected response time.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n"
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: limit
+        description: Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500.
+        type: integer
+        format: int32
+        default: 10
+        minimum: 1
+        maximum: 500
+        required: false
+      - in: query
+        name: page_token
+        description: Token used to request the next page in paginated results. Defaults to 'null'
+        type: string
+        required: false
+      - in: query
+        name: sort_field
+        description: Field to sort by. Defaults to 'id'.
+        type: string
+        default: id
+        enum:
+        - id
+        - severity
+        - due_at
+        - created_at
+        - updated_at
+        required: false
+      - in: query
+        name: sort_direction
+        description: Sort direction. Defaults to 'desc'.
+        type: string
+        default: desc
+        enum:
+        - asc
+        - desc
+        required: false
+      - in: query
+        name: status
+        description: Filter by status.
+        type: string
+        enum:
+        - open
+        - overdue
+        - resolved
+        required: false
+      - in: query
+        name: severity
+        description: Filter by severity.
+        type: string
+        enum:
+        - low
+        - high
+        - critical
+        required: false
+      - in: query
+        name: subtype
+        description: Filter by subtype.
+        type: string
+        required: false
+      - in: query
+        name: organization_id
+        description: Filter by organization ID.
+        type: integer
+        format: int32
+        required: false
+      responses:
+        '200':
+          description: List Escalations
+          schema:
+            type: object
+            properties:
+              escalations:
+                type: array
+                items:
+                  $ref: '#/definitions/Escalation'
+              pagination:
+                $ref: '#/definitions/Pagination'
+            required:
+            - escalations
+            - pagination
+        '403':
+          description: There was an issue with your API credential or permissions.
+          schema:
+            $ref: '#/definitions/Escalation'
+      tags:
+      - Escalations
+      operationId: getV1Escalations
+  /v1/escalations/{id}:
+    get:
+      summary: Get Escalation
+      description: Shows details on a single Escalation associated with your account.
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        description: Escalation ID within Huntress Account
+        type: integer
+        format: int32
+        required: true
+      responses:
+        '200':
+          description: Get Escalation
+          schema:
+            type: object
+            properties:
+              escalation:
+                $ref: '#/definitions/EscalationWithEntities'
+        '403':
+          description: There was an issue with your API credential or permissions.
+          schema:
+            $ref: '#/definitions/Escalation'
+      tags:
+      - Escalations
+      operationId: getV1EscalationsId
+  /v1/escalations/{id}/resolution:
+    post:
+      summary: Create an Escalation Resolution
+      description: "Allows you to resolve an Escalation. Creating a resolution updates the Escalation's status\nto resolved. This endpoint requires an API key with permissions to write to Escalations. **Note that the default account API key is read-only, so you'll need to create a user-based API key with the appropriate permissions to access this endpoint**.\nThe behavior of this endpoint varies by Escalation type so your request should be crafted based on the specific Escalation you are interacting with.\n\n#### Simple Resolution\n\nFor most types of Escalations, a POST to the resolution endpoint with only the Escalation's ID is sufficient. This action resolves the Escalation directly without requiring any additional parameters.\n\n#### Complex Resolution\n\nFor Escalations that have many entities which all require action, a call to this endpoint will **bulk resolve all associated entities at once**. The determination provided will be **applied to every single entity attached to the Escalation.** \nNote that these kinds of Escalation resolutions require extra parameters in their requests. \n\nEscalation types that can resolve multiple associated entities at once are:\n  - Unwanted Country Access\n  - Unwanted VPN Access\n\n **NOTE:** Ommitting both `determination` and `scope` params will temporarily resolve the Unwanted Access Escalations.\n  The escalation will reopen upon the next occurrence of the event that created the escalation.\n  This is equivalent to using the \"dismiss\" option in the portal.\n"
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        format: int32
+        required: true
+      - name: EscalationResolutionParameters
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/EscalationResolutionParameters'
+      responses:
+        '201':
+          description: Create an Escalation Resolution
+          schema:
+            $ref: '#/definitions/EscalationResolution'
+        '400':
+          description: Invalid resolution parameters
+        '403':
+          description: There was an issue with your API credential or permissions.
+        '409':
+          description: Escalation has already been resolved
+        '422':
+          description: Escalation cannot be resolved through the API
+      tags:
+      - Escalations
+      operationId: EscalationResolutionParameters
+definitions:
+  EscalationResolutionParameters:
+    type: object
+    properties:
+      determination:
+        type: string
+        description: Determination is only used for Unwanted Country Access and Unwanted VPN Access Escalations. This field determines whether **all** the associated identities are expected or unauthorized.
+        enum:
+        - expected
+        - unauthorized
+      scope:
+        type: string
+        description: 'Scope is used only for Unwanted Access Escalations. This determines what kinds of access rules are created in response to the Escalation. This parameter is better explained using an example:
+
+          In the scenario when `email123@example.com` logs in from Russia and the determination is `unauthorized`:
+
+
+          When the scope is `identity`:
+
+
+          Rules created based on the resolution will only apply to the identities associated with the Escalation. In this case a rule will be created specifically preventing `email123@example.com` from logging in from Russia.
+
+
+          When the scope is `organization`:
+
+
+          Rules created based on the resolution will apply to all identities in the organization. In this case all logins from Russia will be prevented across the organization.
+
+
+          When the scope is `account`:
+
+
+          Rules created based on the resolution will apply to all identities on the account. In this case all logins from Russia will be prevented across the account.
+
+          '
+        enum:
+        - account
+        - organization
+        - identity
+    description: Create an Escalation Resolution
+  Escalation:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 84938
+        description: A Huntress-unique identifier for the escalation.
+      account:
+        type: Account
+        example:
+          id: 1
+          name: Your Account Name
+        description: The Account the escalation pertains to.
+      organizations:
+        type: array
+        items:
+          type: string
+        example:
+        - id: 1234
+          name: ExampleCo
+        description: An array of Organizations this escalation pertains to
+      created_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was created.
+      resolved_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was resolved.
+      severity:
+        type: string
+        enum:
+        - low
+        - high
+        - critical
+        example: low
+        description: The severity of the escalation.
+      status:
+        type: string
+        enum:
+        - open
+        - sent
+        - resolved
+        example: resolved
+        description: The status of the Escalation
+      subject:
+        type: string
+        example: Defender Disabled
+        description: The subject of the Escalation
+      subtype:
+        type: string
+        example: US
+        description: An additional classifier for the escalation. The interpretation depends on the escalation type (e.g. an ISO country code for Unexpected Country Access escalations).
+      type:
+        type: string
+        example: Environmental Issue
+        description: The type of the Escalation
+      updated_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was last updated.
+    description: Escalation model
+  EscalationResolution:
+    type: object
+    properties:
+      escalation:
+        $ref: '#/definitions/EscalationWithEntities'
+        description: The resolved Escalation.
+      resolution_method:
+        type: string
+        enum:
+        - rule
+        - dismiss
+        - direct
+        example: rule
+        description: The code path the server took to resolve the Escalation. `rule` indicates a bulk resolution that created attribute rules from the supplied `determination` and `scope` parameters. `dismiss` indicates a temporary resolution from omitting both parameters on an Unwanted Access Escalation. `direct` indicates a simple resolution on an Escalation type that does not accept resolution parameters.
+    required:
+    - escalation
+    - resolution_method
+    description: EscalationResolution model
+  EscalationWithEntities:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 84938
+        description: A Huntress-unique identifier for the escalation.
+      account:
+        type: Account
+        example:
+          id: 1
+          name: Your Account Name
+        description: The Account the escalation pertains to.
+      organizations:
+        type: array
+        items:
+          type: string
+        example:
+        - id: 1234
+          name: ExampleCo
+        description: An array of Organizations this escalation pertains to
+      created_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was created.
+      resolved_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was resolved.
+      severity:
+        type: string
+        enum:
+        - low
+        - high
+        - critical
+        example: low
+        description: The severity of the escalation.
+      status:
+        type: string
+        enum:
+        - open
+        - sent
+        - resolved
+        example: resolved
+        description: The status of the Escalation
+      subject:
+        type: string
+        example: Defender Disabled
+        description: The subject of the Escalation
+      subtype:
+        type: string
+        example: US
+        description: An additional classifier for the escalation. The interpretation depends on the escalation type (e.g. an ISO country code for Unexpected Country Access escalations).
+      type:
+        type: string
+        example: Environmental Issue
+        description: The type of the Escalation
+      updated_at:
+        type: string
+        format: date-time
+        example: '2025-09-05T18:20:34Z'
+        description: ISO-8601 formatted timestamp for when this escalation was last updated.
+      entities:
+        type: Object
+        example:
+          total_count: 1
+          has_more: false
+          items:
+          - id: 1
+            type: Agent
+            details:
+              hostname: laptop01
+              platform: windows
+              os: Windows 8 Pro
+              last_callback_at: '2025-09-05T18:20:35Z'
+        description: Object containing information about Entities associated with the escalation.
+    required:
+    - entities
+    description: EscalationWithEntities model
+  Pagination:
+    type: object
+    properties:
+      next_page_url:
+        type: string
+      next_page_token:
+        type: string
+    description: Pagination model
+securityDefinitions:
+  basic_auth:
+    type: basic
+    desc: Base 64 encoded string of your Huntress Account API key and API secret.

@@ -1,0 +1,417 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Huntress Webhooks",
+    "description": "OpenAPI specification for Huntress webhook event payloads.\n\nWebhooks are HTTP callbacks that deliver real-time event notifications from the Huntress Portal to an endpoint you control. Instead of polling our API to ask \"did anything change?\", your endpoint receives a POST request whenever a subscribed event occurs.\n\nFor more information on setting up a Webhook integration, see our [support guide](https://support.huntress.io/hc/en-us/articles/51679111552147-How-to-use-Webhooks-Integration).",
+    "contact": {
+      "name": "Huntress Support",
+      "email": "support@huntress.com",
+      "url": "https://support.huntress.io/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.huntress.io",
+      "description": "Huntress production API"
+    }
+  ],
+  "webhooks": {
+    "account_notice.notification": {
+      "post": {
+        "summary": "account_notice.notification",
+        "description": "Sent when Huntress needs to share information that impacts the account in question.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AccountNoticeNotification" }
+            }
+          }
+        }
+      }
+    },
+    "escalation.closed": {
+      "post": {
+        "summary": "escalation.closed",
+        "description": "Sent when an Escalation is closed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EscalationClosed" }
+            }
+          }
+        }
+      }
+    },
+    "escalation.created": {
+      "post": {
+        "summary": "escalation.created",
+        "description": "Sent when an Escalation is created.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EscalationCreated" }
+            }
+          }
+        }
+      }
+    },
+    "escalation.overdue": {
+      "post": {
+        "summary": "escalation.overdue",
+        "description": "Sent when an Escalation becomes overdue.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EscalationOverdue" }
+            }
+          }
+        }
+      }
+    },
+    "incident_report.closed": {
+      "post": {
+        "summary": "incident_report.closed",
+        "description": "Sent when an Incident Report is closed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/IncidentReportClosed" }
+            }
+          }
+        }
+      }
+    },
+    "incident_report.comment_added": {
+      "post": {
+        "summary": "incident_report.comment_added",
+        "description": "Sent when a comment is added to an Incident Report.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/IncidentReportCommentAdded" }
+            }
+          }
+        }
+      }
+    },
+    "incident_report.created": {
+      "post": {
+        "summary": "incident_report.created",
+        "description": "Sent when an Incident Report is created.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/IncidentReportCreated" }
+            }
+          }
+        }
+      }
+    },
+    "platform_action.closed": {
+      "post": {
+        "summary": "platform_action.closed",
+        "description": "Sent when a Platform Action is closed.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatformActionClosed" }
+            }
+          }
+        }
+      }
+    },
+    "platform_action.created": {
+      "post": {
+        "summary": "platform_action.created",
+        "description": "Sent when a Platform Action is created.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatformActionCreated" }
+            }
+          }
+        }
+      }
+    },
+    "platform_action.notification": {
+      "post": {
+        "summary": "platform_action.notification",
+        "description": "Sent when Huntress needs to share information that impacts an integration.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatformActionNotification" }
+            }
+          }
+        }
+      }
+    },
+    "platform_action.overdue": {
+      "post": {
+        "summary": "platform_action.overdue",
+        "description": "Sent when a Platform Action becomes overdue.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PlatformActionOverdue" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountNoticeNotification": {
+        "allOf": [
+          { "$ref": "#/components/schemas/OneTimeNotificationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "account_notice.notification" }
+            }
+          }
+        ]
+      },
+      "EscalationClosed": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "escalation.closed" }
+            }
+          }
+        ]
+      },
+      "EscalationCreated": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "escalation.created" }
+            }
+          }
+        ]
+      },
+      "EscalationOverdue": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "required": ["message"],
+            "properties": {
+              "event_type": { "const": "escalation.overdue" },
+              "message": { "type": ["string", "null"] }
+            }
+          }
+        ]
+      },
+      "EscalationPayload": {
+        "type": "object",
+        "required": [
+          "account", "api_url", "created_at", "event_type", "id", "organizations",
+          "resolved_at", "severity", "status", "subject", "total_organizations_impacted",
+          "type", "updated_at"
+        ],
+        "properties": {
+          "account": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": ["integer", "null"] },
+              "name": { "type": ["string", "null"] }
+            }
+          },
+          "api_url": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "event_type": { "type": "string" },
+          "id": { "type": "integer" },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["id", "name"],
+              "properties": {
+                "id": { "type": "integer" },
+                "name": { "type": "string" }
+              }
+            }
+          },
+          "resolved_at": { "type": ["string", "null"], "format": "date-time" },
+          "severity": { "type": "string" },
+          "status": { "type": "string" },
+          "subject": { "type": "string" },
+          "total_organizations_impacted": { "type": "integer" },
+          "type": { "type": "string" },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "IncidentReportClosed": {
+        "allOf": [
+          { "$ref": "#/components/schemas/IncidentReportPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "incident_report.closed" }
+            }
+          }
+        ]
+      },
+      "IncidentReportCommentAdded": {
+        "allOf": [
+          { "$ref": "#/components/schemas/IncidentReportPayload" },
+          {
+            "type": "object",
+            "required": ["comment"],
+            "properties": {
+              "comment": { "type": "string" },
+              "event_type": { "const": "incident_report.comment_added" }
+            }
+          }
+        ]
+      },
+      "IncidentReportCreated": {
+        "allOf": [
+          { "$ref": "#/components/schemas/IncidentReportPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "incident_report.created" }
+            }
+          }
+        ]
+      },
+      "IncidentReportPayload": {
+        "type": "object",
+        "required": [
+          "account", "api_url", "body", "closed_at", "created_at",
+          "event_type", "id", "indicator_counts", "organization", "platform",
+          "sent_at", "severity", "status", "status_updated_at", "subject", "summary",
+          "updated_at"
+        ],
+        "properties": {
+          "account":  {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": ["integer", "null"] },
+              "name": { "type": ["string", "null"] }
+            }
+          },
+          "account_id": {
+            "type": ["integer", "null"],
+            "deprecated": true,
+            "description": "use `account` instead"
+          },
+          "agent_id": { "type": ["integer", "null"] },
+          "api_url": { "type": "string" },
+          "body": { "type": "string" },
+          "closed_at": { "type": ["string", "null"], "format": "date-time" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "event_type": { "type": "string" },
+          "id": { "type": "integer" },
+          "indicator_counts": { "type": "object" },
+          "organization":  {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": ["integer", "null"] },
+              "name": { "type": ["string", "null"] }
+            }
+          },
+          "organization_id": {
+            "type": ["integer", "null"],
+            "deprecated": true,
+            "description": "use `organization` instead"
+          },
+          "platform": { "type": "string" },
+          "sent_at": { "type": ["string", "null"], "format": "date-time" },
+          "severity": { "type": ["string", "null"] },
+          "status": { "type": ["string", "null"] },
+          "status_updated_at": { "type": ["string", "null"], "format": "date-time" },
+          "subject": { "type": ["string", "null"] },
+          "summary": { "type": ["string", "null"] },
+          "updated_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "OneTimeNotificationPayload": {
+        "type": "object",
+        "required": ["account", "body", "created_at", "event_type", "id", "subject"],
+        "properties": {
+          "account": {
+            "type": "object",
+            "required": ["id", "name"],
+            "properties": {
+              "id": { "type": "integer" },
+              "name": { "type": ["string", "null"] }
+            }
+          },
+          "body": { "type": "string" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "event_type": { "type": "string" },
+          "id": { "type": "integer" },
+          "subject": { "type": "string" }
+        }
+      },
+      "PlatformActionClosed": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "platform_action.closed" }
+            }
+          }
+        ]
+      },
+      "PlatformActionCreated": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "platform_action.created" }
+            }
+          }
+        ]
+      },
+      "PlatformActionNotification": {
+        "allOf": [
+          { "$ref": "#/components/schemas/OneTimeNotificationPayload" },
+          {
+            "type": "object",
+            "properties": {
+              "event_type": { "const": "platform_action.notification" }
+            }
+          }
+        ]
+      },
+      "PlatformActionOverdue": {
+        "allOf": [
+          { "$ref": "#/components/schemas/EscalationPayload" },
+          {
+            "type": "object",
+            "required": ["message"],
+            "properties": {
+              "event_type": { "const": "platform_action.overdue" },
+              "message": { "type": "string", "minLength": 1 }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
