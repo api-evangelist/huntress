@@ -1,0 +1,56 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/huntress-rest-openapi.json
+authentication:
+  style: http-basic
+  detail: >-
+    HTTP Basic authentication. The username is the Huntress Account API key and
+    the password is the API secret; the SDK/client sends the Base64-encoded
+    `key:secret` in the Authorization header. Keys are generated in the Huntress
+    portal under Account settings. See authentication/huntress-authentication.yml.
+  mcp: >-
+    The remote MCP server (mcp/huntress-mcp.yml) instead uses OAuth 2.1
+    (authorization code + PKCE or client credentials) with the `mcp` scope.
+pagination:
+  style: cursor
+  request_params:
+    - name: limit
+      in: query
+      description: Max number of resources returned in a page.
+    - name: page_token
+      in: query
+      description: Token used to request the next page of results.
+    - name: sort_field
+      in: query
+      description: Field to sort by (defaults to id).
+    - name: sort_direction
+      in: query
+      description: Sort direction (defaults to desc).
+  response_fields:
+    object: pagination
+    fields:
+      - next_page_token
+      - next_page_url
+versioning:
+  style: uri-path
+  current: v1
+  base_url: https://api.huntress.io/v1
+error_envelope:
+  media_type: application/json
+  format: message-string
+  note: Not RFC 9457. See errors/huntress-problem-types.yml.
+idempotency:
+  supported: false
+  note: >-
+    The OpenAPI declares no Idempotency-Key header or parameter; write operations
+    (create/update/delete/isolate/remediate) are not documented as idempotent.
+rate_limiting:
+  documented: partial
+  note: >-
+    No explicit X-RateLimit response headers are declared in the OpenAPI; the SIEM
+    query endpoint documents 408 (timeout) and 413 (memory limit) resource guards.
+cross_references:
+  authentication: authentication/huntress-authentication.yml
+  errors: errors/huntress-problem-types.yml
+  lifecycle: lifecycle/huntress-lifecycle.yml
+  webhooks: asyncapi/huntress-webhooks.yml

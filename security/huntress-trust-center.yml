@@ -1,0 +1,14 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+source: https://trust.huntress.com/
+url: https://trust.huntress.com/
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://trust.huntress.com/
+  keywords:
+  - soc 2
+  - trust center
+  - gdpr

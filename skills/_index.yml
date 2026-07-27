@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/huntress-rest-openapi.json
+skills:
+  - file: huntress-triage-incident-report.md
+    name: Triage and resolve a Huntress incident report
+    api: openapi/huntress-rest-openapi.json
+    operations: [getV1IncidentReports, getV1IncidentReportsId, getV1IncidentReportsIncidentReportIdRemediations, postV1IncidentReportsIncidentReportIdRemediationsBulkApproval, postV1IncidentReportsIdResolution]
+  - file: huntress-isolate-endpoint.md
+    name: Isolate and release a compromised endpoint
+    api: openapi/huntress-rest-openapi.json
+    operations: [getV1Agents, getV1AgentsId, IsolateAgent, ReleaseAgent]

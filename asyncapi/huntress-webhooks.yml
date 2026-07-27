@@ -1,0 +1,34 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.huntress.io/v1/webhooks_doc.json
+spec_type: Webhooks
+spec_file: openapi/huntress-webhooks-openapi.json
+spec_format: OpenAPI 3.1.0 (webhooks)
+docs: https://support.huntress.io/hc/en-us/articles/51679111552147-How-to-use-Webhooks-Integration
+description: >-
+  Huntress delivers real-time event notifications as HTTP POST callbacks from the
+  Huntress Portal to a partner-controlled endpoint. The webhook payload contract
+  is published as an OpenAPI 3.1 webhooks document (11 event types).
+events:
+  - name: account_notice.notification
+    schema: AccountNoticeNotification
+  - name: escalation.created
+    schema: EscalationCreated
+  - name: escalation.closed
+    schema: EscalationClosed
+  - name: escalation.overdue
+    schema: EscalationOverdue
+  - name: incident_report.created
+    schema: IncidentReportCreated
+  - name: incident_report.closed
+    schema: IncidentReportClosed
+  - name: incident_report.comment_added
+    schema: IncidentReportCommentAdded
+  - name: platform_action.created
+    schema: PlatformActionCreated
+  - name: platform_action.closed
+    schema: PlatformActionClosed
+  - name: platform_action.overdue
+    schema: PlatformActionOverdue
+  - name: platform_action.notification
+    schema: PlatformActionNotification

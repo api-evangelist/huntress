@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/huntress-rest-openapi.json
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.huntress.io/v1
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No formal API deprecation/Sunset (RFC 8594) policy is published, and the
+    OpenAPI declares no deprecated operations. Product-level changes are
+    communicated via the changelog (feedback.huntress.com/changelog).
+sla:
+  url: null
+  uptime_target: null
+status_page: https://status.huntress.io
+changelog: https://feedback.huntress.com/changelog
+deprecated_operations: []

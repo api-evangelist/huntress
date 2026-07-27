@@ -1,0 +1,22 @@
+generated: '2026-07-19'
+method: searched
+source: https://api.huntress.io/.well-known/oauth-authorization-server
+docs: https://api.huntress.io/.well-known/oauth-protected-resource
+note: >-
+  The Huntress REST API uses HTTP Basic auth (no OAuth scopes). OAuth 2.1 applies
+  only to the remote MCP server, whose authorization-server metadata advertises a
+  single coarse-grained scope.
+schemes:
+  - name: MCP OAuth
+    source: https://api.huntress.io/.well-known/oauth-authorization-server
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://api.huntress.io/v1/mcp/authorize
+        tokenUrl: https://api.huntress.io/v1/mcp/token
+      - flow: clientCredentials
+        tokenUrl: https://api.huntress.io/v1/mcp/token
+scopes:
+  - scope: mcp
+    description: Grants an OAuth client access to the Huntress remote MCP server.
+    flows: [authorizationCode, clientCredentials]
+    sources: [https://api.huntress.io/.well-known/oauth-authorization-server]

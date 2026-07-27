@@ -1,0 +1,58 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/huntress-rest-openapi.json
+format: json
+envelope:
+  media_type: application/json
+  note: >-
+    Errors are returned as a JSON body with a human-readable message. The API
+    does not use RFC 9457 application/problem+json; each error response documents
+    a descriptive message string. Status semantics below are aggregated from the
+    OpenAPI 4xx/5xx responses across all 66 operations.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Something about the request is malformed / invalid query or body parameters.
+    occurrences: 20
+    example_operations:
+      - openapi/huntress-rest-openapi.json#getV1Organizations
+      - openapi/huntress-rest-openapi.json#postV1SiemQuery
+  - status: 401
+    title: Unauthorized
+    meaning: Authentication credentials are missing or invalid (Basic auth of API key + secret).
+    occurrences: 1
+    remediation: "Send a Base64-encoded `Authorization: Basic` header of your Huntress API key and secret."
+  - status: 403
+    title: Forbidden
+    meaning: There was an issue with your API credential or permissions.
+    occurrences: 85
+    remediation: Verify the API key has access to the requested account/organization scope.
+  - status: 404
+    title: Not Found
+    meaning: The requested record (agent, organization, membership, incident report, etc.) does not exist.
+    occurrences: 24
+  - status: 408
+    title: Request Timeout
+    meaning: Query timed out (SIEM ES|QL query execution).
+    occurrences: 1
+    example_operations:
+      - openapi/huntress-rest-openapi.json#postV1SiemQuery
+  - status: 409
+    title: Conflict
+    meaning: >-
+      The resource is in a state that conflicts with the request — e.g. an
+      incident report must have status 'sent', or an agent does not support host
+      isolation / tamper protection.
+    occurrences: 17
+  - status: 413
+    title: Payload Too Large
+    meaning: Query exceeded memory limit (SIEM ES|QL query).
+    occurrences: 1
+    example_operations:
+      - openapi/huntress-rest-openapi.json#postV1SiemQuery
+  - status: 422
+    title: Unprocessable Entity
+    meaning: >-
+      Invalid creation/update parameters, or a business-rule violation (e.g.
+      incident report cannot be resolved unless status is 'sent').
+    occurrences: 29

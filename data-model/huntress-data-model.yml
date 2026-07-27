@@ -1,0 +1,82 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/huntress-rest-openapi.json
+note: >-
+  Entity graph derived from the OpenAPI path hierarchy and definition id-reference
+  fields. Huntress is a multi-tenant MSP/MSSP model: an Account contains
+  Organizations, which contain Agents; SOC output (Incident Reports, Signals,
+  Escalations, Platform Actions) hangs off the account/organization scope.
+entities:
+  - name: Account
+    description: Top-level tenant (partner / MSP account).
+    relationships:
+      - has_many: Organization
+        via: account_id
+      - has_many: Membership
+        via: account_id
+      - has_many: Invoice
+        via: account_id
+      - has_many: Subscription
+        via: account_id (reseller)
+  - name: Organization
+    description: A managed customer/organization within an account.
+    relationships:
+      - belongs_to: Account
+        via: account_id
+      - has_many: Agent
+        via: organization_id
+  - name: Agent
+    description: A deployed Huntress endpoint agent.
+    relationships:
+      - belongs_to: Organization
+        via: organization_id
+      - belongs_to: Account
+        via: account_id
+  - name: IncidentReport
+    description: A SOC-produced incident report.
+    relationships:
+      - belongs_to: Account
+        via: account_id
+      - has_many: Remediation
+        via: incident_report_id
+  - name: Remediation
+    description: A remediation action attached to an incident report.
+    relationships:
+      - belongs_to: IncidentReport
+        via: incident_report_id
+  - name: Escalation
+    description: An escalated detection requiring partner action.
+    relationships:
+      - belongs_to: Account
+        via: account_id
+      - has_one: EscalationResolution
+        via: escalation_id
+  - name: PlatformAction
+    description: A required platform action (with associated entities).
+  - name: Signal
+    description: A raw detection signal.
+    relationships:
+      - belongs_to: Account
+        via: account_id
+  - name: Identity
+    description: An ITDR-managed identity.
+  - name: Membership
+    description: A user's membership/role within an account.
+    relationships:
+      - belongs_to: Account
+        via: account_id
+      - belongs_to: User
+        via: user_id
+  - name: Invoice
+    description: Account or reseller invoice with usage line items.
+    relationships:
+      - has_many: AccountUsageLineItem
+      - has_many: OrganizationUsageLineItem
+  - name: Subscription
+    description: Reseller subscription (with schedule).
+  - name: ExternalPort
+    description: External Recon exposed-port finding.
+  - name: UnwantedAccessRule
+    description: ITDR expected/unwanted-access rule.
+  - name: KnownVpn
+    description: Known VPN / proxy reference data.

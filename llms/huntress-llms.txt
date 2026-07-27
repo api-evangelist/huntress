@@ -1,0 +1,119 @@
+# Huntress
+
+> Huntress is a leading cybersecurity platform with a human-powered, 24/7 Security Operations Center (SOC) that provides enterprise-grade threat detection and managed security services for businesses of all sizes. Our solutions, which focus on continuous protection and real-time threat detection, include Managed EDR, Managed Security Awareness Training, Managed ITDR, and Managed SIEM.
+
+## Product Pages
+
+  - [Managed EDR](https://www.huntress.com/platform/managed-edr): Provides powerful managed endpoint detection and response (MDR) to proactively hunt for threats and stop attacks.
+  - [Managed EDR for macOS](https://www.huntress.com/platform/managed-edr-for-macos): Specialized managed EDR solution for macOS to protect Mac endpoints from sophisticated cyber threats.
+  - [External Recon](https://www.huntress.com/platform/managed-edr/external-recon): A cybersecurity tool that performs external vulnerability scanning to identify and close attack surfaces.
+  - [Malicious Process Behavior](https://www.huntress.com/platform/managed-edr/malicious-process-behavior): Uses behavioral analysis to detect and automatically stop malicious processes and advanced persistent threats.
+  - [Managed Microsoft Defender](https://www.huntress.com/platform/managed-edr/managed-microsoft-defender): Delivers expert management for Microsoft Defender to enhance your existing security posture.
+  - [Persistent Footholds](https://www.huntress.com/platform/managed-edr/persistent-footholds): Detects persistent access by attackers, a key cybersecurity defense against long-term compromise.
+  - [Ransomware Canaries](https://www.huntress.com/platform/managed-edr/ransomware-canaries): Deploys decoy files to act as ransomware protection, triggering an alert at the first sign of an attack.
+  - [Managed ITDR](https://www.huntress.com/platform/managed-itdr): Provides managed identity threat detection and response to protect against compromised credentials and identity-based attacks.
+  - [Security Awareness Training](https://www.huntress.com/platform/security-awareness-training): A comprehensive program for cybersecurity awareness training that helps employees recognize and avoid threats.
+  - [Compliance Training](https://www.huntress.com/platform/security-awareness-training/compliance-training): Ensures regulatory compliance by providing essential compliance training for various industry standards.
+  - [Cybersecurity Training Content](https://www.huntress.com/platform/security-awareness-training/cyber-security-awareness-training-content): Offers high-quality cybersecurity training content for building a security-conscious culture.
+  - [Phishing Training](https://www.huntress.com/platform/security-awareness-training/phishing-training): An interactive program for phishing training that uses simulated attacks to teach employees how to identify phishing emails.
+  - [Managed SIEM](https://www.huntress.com/platform/siem): A managed security information and event management (SIEM) solution to centralize threat data and streamline incident response.
+
+-----
+
+## Pricing, Demos, Trials
+
+  - [Pricing](https://www.huntress.com/pricing): Detailed information on cybersecurity pricing for the Huntress platform and services.
+  - [Security Awareness Training Pricing](https://www.huntress.com/pricing/sat): Specific pricing details for security awareness training.
+  - [Start a Free Trial](https://www.huntress.com/start-trial): Sign up for a free cybersecurity trial to test the Huntress platform.
+  - [Request a Demo](https://www.huntress.com/demo): Request a personalized cybersecurity demo to see our solutions in action.
+  - [Product Demo Center](https://www.huntress.com/why-huntress/product-demo-center): Access a library of security product demonstrations and videos.
+
+-----
+
+## Huntress Versus the Competition
+
+  - [Competitive Comparisons](https://www.huntress.com/comparison): A series of detailed cybersecurity comparisons with other industry solutions.
+  - [Huntress vs. Bitdefender](https://www.huntress.com/comparison/huntress-vs-bitdefender): A direct comparison of the Huntress platform with Bitdefender cybersecurity.
+  - [Huntress vs. Blackpoint](https://www.huntress.com/comparison/huntress-vs-blackpoint): A detailed analysis of Huntress's managed security services against Blackpoint.
+  - [Huntress vs. Blumira](https://www.huntress.com/comparison/huntress-vs-blumira): Compares the Huntress platform to Blumira's SIEM and security services.
+  - [Huntress vs. Breach Secure Now](https://www.huntress.com/comparison/huntress-vs-breach-secure-now): An in-depth look at Huntress’s offerings versus Breach Secure Now.
+  - [Huntress vs. CrowdStrike](https://www.huntress.com/comparison/huntress-vs-crowdstrike): A feature-by-feature breakdown comparing Huntress to CrowdStrike's EDR solutions.
+  - [Huntress vs. Datto](https://www.huntress.com/comparison/huntress-vs-datto): Comparison of our managed security solutions with Datto's cybersecurity platform.
+  - [Huntress vs. K365](https://www.huntress.com/comparison/huntress-vs-k365): Compares the Huntress platform to Kaseya IT management and security services.
+  - [Huntress vs. KnowBe4](https://www.huntress.com/comparison/huntress-vs-knowbe4): A detailed comparison of our security awareness training vs KnowBe4.
+  - [Huntress vs. Malwarebytes](https://www.huntress.com/comparison/huntress-vs-malwarebytes): A look at how Huntress's managed security services compare to Malwarebytes.
+  - [Huntress vs. Petra](https://www.huntress.com/comparison/huntress-vs-petra): Compares the Huntress platform to Petra's security solutions.
+  - [Huntress vs. Proofpoint](https://www.huntress.com/comparison/huntress-vs-proofpoint): A breakdown of our cybersecurity offerings against Proofpoint's email and security services.
+  - [Huntress vs. Red Canary](https://www.huntress.com/comparison/huntress-vs-red-canary): An in-depth comparison of Huntress's MDR services vs Red Canary.
+  - [Huntress vs. SentinelOne](https://www.huntress.com/comparison/huntress-vs-sentinelone): A comprehensive comparison of our EDR platform with SentinelOne's cybersecurity solutions.
+  - [Huntress vs. Sophos](https://www.huntress.com/comparison/huntress-vs-sophos): Compares the Huntress platform to Sophos's managed threat response.
+  - [Huntress vs. Threatlocker](https://www.huntress.com/comparison/huntress-vs-threatlocker): A look at our services versus Threatlocker's application whitelisting and ringfencing.
+  - [Huntress vs. Webroot](https://www.huntress.com/comparison/huntress-vs-webroot): A comparison of our platform against Webroot's endpoint security and threat intelligence.
+
+-----
+
+## Industries We Serve
+
+  - [Solutions by Industry](https://www.huntress.com/solutions-by-industry): Cybersecurity solutions tailored for specific industries and verticals.
+  - [Solutions for E-commerce](https://www.huntress.com/industries/ecommerce): Dedicated cybersecurity services for e-commerce businesses.
+  - [Solutions for Education](https://www.huntress.com/industries/education): Cybersecurity solutions for the education sector, including schools and universities.
+  - [Phishing in Schools](https://www.huntress.com/industries/education/how-does-phishing-affect-schools): Information on the growing threat of phishing attacks in schools and how to prevent them.
+  - [K-12 Cybersecurity](https://www.huntress.com/industries/education/k-12-cybersecurity): Specialized cybersecurity solutions for K-12 schools and districts.
+  - [Solutions for Universities](https://www.huntress.com/industries/education/universities): Cybersecurity services for universities and higher education institutions.
+  - [Cybersecurity in Digital Banking](https://www.huntress.com/industries/finance/cybersecurity-in-digital-banking): Solutions for cybersecurity in digital banking to protect financial data.
+  - [Cybercrime in Banking](https://www.huntress.com/industries/finance/types-of-cyber-crime-in-banking-sector): Information on common types of cybercrime in the banking sector.
+  - [Financial Information Security](https://www.huntress.com/industries/finance/what-is-financial-information-security): Explains the importance of financial information security for financial services.
+  - [Solutions for Financial Services](https://www.huntress.com/industries/financial-services): Comprehensive cybersecurity services for financial services firms.
+  - [Solutions for Healthcare](https://www.huntress.com/industries/healthcare): Tailored cybersecurity solutions for the healthcare industry.
+  - [Healthcare Compliance](https://www.huntress.com/industries/healthcare/healthcare-compliance-essentials): A guide to essential healthcare compliance and data security requirements.
+  - [Healthcare Resource Kit](https://www.huntress.com/industries/healthcare/healthcare-resource-kit): A kit of resources for healthcare cybersecurity.
+  - [Solutions for Hospitals](https://www.huntress.com/industries/healthcare/hospitals): Specialized cybersecurity services for hospitals.
+  - [Solutions for Law Firms](https://www.huntress.com/industries/law-firms): Cybersecurity services for law firms to protect sensitive client data.
+  - [Solutions for Manufacturing](https://www.huntress.com/industries/manufacturing): Cybersecurity solutions for the manufacturing industry to protect against cyber threats.
+  - [Ransomware in Construction](https://www.huntress.com/industries/manufacturing-and-construction/ransomware-in-construction): Information on the threat of ransomware in the construction sector.
+  - [Ransomware in Manufacturing](https://www.huntress.com/industries/manufacturing-and-construction/ransomware-in-manufacturing): Information on ransomware threats in the manufacturing sector.
+  - [Solutions for Retail](https://www.huntress.com/industries/retail): Cybersecurity services for the retail industry to secure POS systems and customer data.
+  - [Solutions for Startups](https://www.huntress.com/industries/startups): Cybersecurity solutions for startups and fast-growing companies.
+  - [Solutions for State & Local Government](https://www.huntress.com/industries/state-and-local-government): Cybersecurity services for state and local government bodies.
+  - [Ransomware Defense for Government](https://www.huntress.com/industries/state-and-local-governments/defending-against-ransomware): Strategies for defending against ransomware attacks in the public sector.
+  - [Solutions for Utilities](https://www.huntress.com/industries/utilities): Cybersecurity services for the utilities sector and critical infrastructure.
+
+-----
+
+## Who We Serve
+
+  - [IT Security Teams](https://www.huntress.com/why-huntress/it-security-teams): How Huntress provides a co-managed security solution to help internal IT security teams.
+  - [Managed Security Services](https://www.huntress.com/why-huntress/managed-security-services): In-depth information on our managed security services and how they supplement internal teams.
+  - [Managed Service Providers](https://www.huntress.com/why-huntress/managed-service-providers): How Huntress partners with Managed Service Providers (MSPs) to deliver robust security to their clients.
+  - [Huntress and Microsoft](https://www.huntress.com/why-huntress/partnerships/huntress-and-microsoft-better-together): Partnership information on how Huntress and Microsoft work together for better security.
+  - [Value-Added Resellers](https://www.huntress.com/why-huntress/value-added-resellers): How Huntress works with Value-Added Resellers (VARs) to expand their security portfolio.
+  - [In-house IT and Security Teams](https://www.huntress.com/who-we-serve/in-house-it-and-security-teams): Solutions tailored for in-house IT and security teams seeking to augment their capabilities.
+  - [Outsourced IT and Security Teams](https://www.huntress.com/who-we-serve/outsourced-it-and-security-teams): How we empower outsourced IT and security teams with comprehensive managed security.
+
+-----
+
+## Solutions
+
+  - [Solutions](https://www.huntress.com/solutions): An overview of all our cybersecurity solutions.
+  - [Solutions by Industry](https://www.huntress.com/solutions-by-industry): Cybersecurity solutions tailored for specific industries.
+  - [Solutions for Alert Fatigue](https://www.huntress.com/solutions/topics/alert-fatigue): How Huntress's human-in-the-loop approach helps solve alert fatigue.
+  - [Solutions for Business Email Compromise](https://www.huntress.com/solutions/topics/business-email-compromise): How Huntress's services help prevent and respond to business email compromise attacks.
+  - [Solutions for Cybersecurity Compliance](https://www.huntress.com/solutions/topics/cybersecurity-compliance): Solutions for meeting cybersecurity compliance requirements.
+  - [Solutions for Phishing](https://www.huntress.com/solutions/topics/phishing): Solutions for preventing and responding to phishing attacks.
+  - [Solutions for Phishing Reporting](https://www.huntress.com/solutions/topics/phishing-reporting): How Huntress simplifies the process of reporting and analyzing phishing attempts.
+
+-----
+
+## Optional
+
+  - [EDR Guide](https://www.huntress.com/edr-guide): A comprehensive guide to endpoint detection and response.
+  - [Enterprise Security Guide](https://www.huntress.com/enterprise-security-guide): A guide to implementing robust enterprise-level security.
+  - [Ransomware Guide](https://www.huntress.com/ransomware-guide): A complete guide to understanding, preventing, and recovering from ransomware attacks.
+  - [SIEM Guide](https://www.huntress.com/siem-guide): A guide to security information and event management.
+  - [SOC Guide](https://www.huntress.com/soc-guide): A guide to understanding and building a Security Operations Center.
+  - [Phishing Guide](https://www.huntress.com/phishing-guide): A guide to recognizing and preventing phishing attacks.
+  - [MSP Guide](https://www.huntress.com/msp-guide): A guide to cybersecurity for Managed Service Providers.
+  - [Internal IT Cybersecurity Guide](https://www.huntress.com/internal-it-cybersecurity-guide): A cybersecurity guide for in-house IT and security teams.
+  - [Data Breach Prevention Guide](https://www.huntress.com/data-breach-guide/prevent-a-data-breach): A guide with steps to prevent a data breach.
+  - [Business Email Compromise Guide](https://www.huntress.com/business-email-compromise-guide): A guide to understanding and defending against business email compromise.
+  - [Advanced Persistent Threat Guide](https://www.huntress.com/advanced-persistent-threat-guide): A guide to detecting and mitigating advanced persistent threats.

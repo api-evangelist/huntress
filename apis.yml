@@ -1,28 +1,404 @@
 aid: huntress
 name: Huntress
-description: 'Huntress is a company surfaced as a portfolio company of kleiner-perkins, sapphire-ventures
-  and added to the API Evangelist network as a stub for enrichment. Sector: security. This profile is
-  a lead awaiting the enrichment pipeline.'
+description: >-
+  Huntress is a managed cybersecurity platform built for small and mid-sized
+  businesses and the MSPs/MSSPs that serve them, pairing purpose-built software
+  with a human-powered 24/7 Security Operations Center (SOC). Its products span
+  Managed EDR (including macOS and Managed Microsoft Defender), Managed ITDR for
+  Microsoft 365 identities, Managed SIEM, and Managed Security Awareness
+  Training. The Huntress REST API (api.huntress.io/v1) gives partners
+  programmatic access to accounts, organizations, agents, incident reports,
+  remediations, escalations, platform actions, signals, external recon, billing
+  and reseller subscriptions, plus a SIEM ES|QL query endpoint — secured with
+  HTTP Basic API keys, cursor-paginated, with real-time webhooks and an official
+  remote MCP server for AI agents.
 url: https://raw.githubusercontent.com/api-evangelist/huntress/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - kleiner-perkins
 - sapphire-ventures
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://huntresscdn.com/portal/assets/huntress_logo_wide_teal_small-34bc9ba6.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Security
-apis: []
+- Cybersecurity
+- Managed Detection and Response
+- Endpoint Security
+- SOC
+- SIEM
+- Identity Threat Detection
+- MSP
+- Webhooks
+apis:
+- aid: huntress:huntress-accounts-api
+  name: Huntress Accounts API
+  description: Operations about Accounts
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-accounts-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-actor-api
+  name: Huntress Actor API
+  description: Operations about Actors
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Actor
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-actor-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-agents-api
+  name: Huntress Agents API
+  description: Operations about Agents
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-agents-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-escalations-api
+  name: Huntress Escalations API
+  description: Operations about Escalations
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Escalations
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-escalations-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-external-recon-api
+  name: Huntress External Recon API
+  description: Operations about External Recons
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - External Recon
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-external-recon-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-identities-api
+  name: Huntress Identities API
+  description: Operations about Identities
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-identities-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-incident-reports-api
+  name: Huntress Incident Reports API
+  description: Operations about Incident Reports
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Incident Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-incident-reports-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-invoices-api
+  name: Huntress Invoices API
+  description: Operations about Invoices
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-invoices-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-known-vpns-api
+  name: Huntress Known VPNs API
+  description: Operations about Known VPNs
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Known VPNs
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-known-vpns-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-organizations-api
+  name: Huntress Organizations API
+  description: Operations about Organizations
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-organizations-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-platform-actions-api
+  name: Huntress Platform Actions API
+  description: Operations about Platform Actions
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Platform Actions
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-platform-actions-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-reseller-api
+  name: Huntress Reseller API
+  description: >-
+    Operations for Reseller-level API credentials. These are mostly the same endpoints available in the
+    rest of the API. However, the account ID is included in the URL, so that you can specify which account's
+    resources you want to access.
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Reseller
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-reseller-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-siem-api
+  name: Huntress SIEM API
+  description: >-
+    Query your SIEM logs programmatically using <a href="https://support.huntress.io/hc/en-us/articles/30113222043155-Searching-Logs-ESQL">ES|QL
+    (Elasticsearch Query Language)</a>.
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - SIEM
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-siem-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-signals-api
+  name: Huntress Signals API
+  description: Operations about Signals
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Signals
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-signals-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-summary-reports-api
+  name: Huntress Summary Reports API
+  description: Operations about Summary Reports
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Summary Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-summary-reports-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-unwanted-access-rules-api
+  name: Huntress Unwanted Access Rules API
+  description: Operations about Unwanted Access Rules
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Unwanted Access Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-unwanted-access-rules-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
+- aid: huntress:huntress-users-api
+  name: Huntress Users API
+  description: Operations about Users
+  humanURL: https://api.huntress.io/docs
+  baseURL: https://api.huntress.io/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/huntress-users-api-openapi.yml
+  - type: Webhooks
+    url: openapi/huntress-webhooks-openapi.json
+  - type: APIReference
+    url: https://api.huntress.io/docs
+  - type: Documentation
+    url: https://api.huntress.io/docs
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://api.huntress.io/docs
+- type: Documentation
+  url: https://api.huntress.io/docs
+- type: APIReference
+  url: https://api.huntress.io/docs
+- type: Support
+  url: https://support.huntress.io
+- type: Blog
+  url: https://www.huntress.com/blog
+- type: GitHubOrganization
+  url: https://github.com/huntresslabs
+- type: Pricing
+  url: https://www.huntress.com/pricing
+- type: SignUp
+  url: https://www.huntress.com/start-trial
+- type: TermsOfService
+  url: https://www.huntress.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.huntress.com/privacy-policy
+- type: StatusPage
+  url: https://status.huntress.io
+- type: ChangeLog
+  url: changelog/huntress-changelog.yml
+- type: MCPServer
+  url: mcp/huntress-mcp.yml
+- type: WellKnown
+  url: well-known/huntress-well-known.yml
+- type: SecurityTxt
+  url: well-known/huntress-security.txt
+- type: LLMsTxt
+  url: llms/huntress-llms.txt
+- type: Overlay
+  url: overlays/huntress-rest-overlay.yaml
+- type: Conformance
+  url: conformance/huntress-conformance.yml
+- type: Compliance
+  url: https://trust.huntress.com
+- type: ErrorCatalog
+  url: errors/huntress-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/huntress-lifecycle.yml
+- type: OAuthScopes
+  url: scopes/huntress-scopes.yml
+- type: Conventions
+  url: conventions/huntress-conventions.yml
+- type: DataModel
+  url: data-model/huntress-data-model.yml
+- type: Webhooks
+  url: asyncapi/huntress-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Security
+  url: https://support.huntress.io/hc/en-us/articles/24119617302291-Huntress-Vulnerability-Disclosure-Program-Terms-and-Conditions
+- type: TrustCenter
+  url: security/huntress-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/huntress-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/huntress-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/huntress-agentic-access.yml
+- type: Authentication
+  url: authentication/huntress-authentication.yml
 - type: Website
   url: https://www.huntress.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

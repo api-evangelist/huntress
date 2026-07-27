@@ -1,0 +1,5 @@
+# RFC 9116: https://www.rfc-editor.org/rfc/rfc9116
+Contact: security-disclosures@huntresslabs.com
+Preferred-Languages: en
+Policy: https://support.huntress.io/hc/en-us/articles/24119617302291-Huntress-Vulnerability-Disclosure-Program-Terms-and-Conditions
+Expires: 2026-12-31T05:00:00.000Z

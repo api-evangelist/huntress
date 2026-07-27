@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Huntress REST API
+  version: 1.0.0
+extends: openapi/huntress-rest-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-19'
+      x-apievangelist-artifacts:
+        authentication: authentication/huntress-authentication.yml
+        conventions: conventions/huntress-conventions.yml
+        errors: errors/huntress-problem-types.yml
+        lifecycle: lifecycle/huntress-lifecycle.yml
+        data_model: data-model/huntress-data-model.yml
+        webhooks: asyncapi/huntress-webhooks.yml
+        mcp: mcp/huntress-mcp.yml
+  - target: $.info
+    update:
+      x-apievangelist-auth: http-basic (API key + secret)
+      x-apievangelist-pagination: cursor (limit + page_token)
+      x-apievangelist-versioning: uri-path v1

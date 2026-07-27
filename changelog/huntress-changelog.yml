@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: searched
+source: https://feedback.huntress.com/changelog
+scheme: dated-product-changelog
+current_version: v1
+note: >-
+  Huntress publishes a dated product changelog (Canny). Entries cover the Huntress
+  platform broadly (Managed EDR, ITDR, SIEM, SAT, integrations); API-affecting
+  changes appear here alongside product releases. Recent window captured below.
+entries:
+  - date: '2026-07-16'
+    title: IP-Based Expected Rules Now Available in Managed ITDR
+    highlights: Create single-IP Expected Unwanted Access rules to suppress escalations for known IPs.
+  - date: '2026-07-14'
+    title: Partner Investigations View (Early Access)
+    highlights: New view surfacing Reported and Closed-Benign investigations from the last 90 days.
+  - date: '2026-07-08'
+    title: OSINT 2 Simulation is in GA
+    highlights: Fifth security-awareness simulation reaches general availability.
+  - date: '2026-07-07'
+    title: Microsoft Defender for Endpoint integration supports GCC High tenants
+    highlights: MDE traffic routes to GCC High .us endpoints.
+  - date: '2026-07-06'
+    title: ConnectWise and HaloPSA billing sync totals across multiple orgs
+    highlights: PSA billing sync aggregates counts accurately across organizations per company.
+  - date: '2026-06-30'
+    title: Managed ISPM hits General Availability
+    highlights: Identity Security Posture Management GA with managed controls and Conditional Access.
+  - date: '2026-06-24'
+    title: SIEM Okta integration is now GA
+    highlights: Okta supported as an identity/authentication log source with built-in SOC detections.
