@@ -6,55 +6,63 @@ server:
   name: huntress
   transport: http
   url: https://api.huntress.io/v1/mcp
-  description: >-
-    Huntress operates an official remote MCP server fronting the Huntress API,
-    discoverable via RFC 8414 OAuth Authorization Server metadata and RFC 9728
-    OAuth Protected Resource metadata at api.huntress.io. Agents authenticate
-    with OAuth 2.1 (authorization code + PKCE S256, or client credentials) and
-    request the single `mcp` scope. Dynamic Client Registration is supported.
+  description: Huntress operates an official remote MCP server fronting the Huntress API, discoverable
+    via RFC 8414 OAuth Authorization Server metadata and RFC 9728 OAuth Protected Resource metadata at
+    api.huntress.io. Agents authenticate with OAuth 2.1 (authorization code + PKCE S256, or client credentials)
+    and request the single `mcp` scope. Dynamic Client Registration is supported.
 authorization:
   type: oauth2
   issuer: https://api.huntress.io
   authorization_endpoint: https://api.huntress.io/v1/mcp/authorize
   token_endpoint: https://api.huntress.io/v1/mcp/token
   registration_endpoint: https://api.huntress.io/v1/mcp/register
-  grant_types_supported: [authorization_code, client_credentials]
-  code_challenge_methods_supported: [S256]
-  scopes_supported: [mcp]
+  grant_types_supported:
+  - authorization_code
+  - client_credentials
+  code_challenge_methods_supported:
+  - S256
+  scopes_supported:
+  - mcp
   protected_resource_metadata: https://api.huntress.io/.well-known/oauth-protected-resource
-notes: >-
-  Tool list is not published in the discovery metadata; the server is backed by
-  the Huntress REST API (openapi/huntress-rest-openapi.json, 66 operations across
-  17 tags). The candidate tool surface below is DERIVED from that OpenAPI as a
-  reference for the operations an agent could reach through the MCP server.
+notes: Tool list is not published in the discovery metadata; the server is backed by the Huntress REST
+  API (openapi/huntress-rest-openapi.json, 66 operations across 17 tags). The candidate tool surface below
+  is DERIVED from that OpenAPI as a reference for the operations an agent could reach through the MCP
+  server.
 tools:
-  - name: list_organizations
-    description: List organizations in the account
-    source_operation: openapi/huntress-rest-openapi.json#getV1Organizations
-  - name: list_agents
-    description: List deployed Huntress agents
-    source_operation: openapi/huntress-rest-openapi.json#getV1Agents
-  - name: get_agent
-    description: Get a single agent by id
-    source_operation: openapi/huntress-rest-openapi.json#getV1AgentsId
-  - name: isolate_agent
-    description: Isolate an agent host from the network
-    source_operation: openapi/huntress-rest-openapi.json#IsolateAgent
-  - name: release_agent_isolation
-    description: Release an agent from network isolation
-    source_operation: openapi/huntress-rest-openapi.json#ReleaseAgent
-  - name: list_incident_reports
-    description: List SOC incident reports
-    source_operation: openapi/huntress-rest-openapi.json#getV1IncidentReports
-  - name: get_incident_report
-    description: Get a single incident report
-    source_operation: openapi/huntress-rest-openapi.json#getV1IncidentReportsId
-  - name: approve_remediations
-    description: Bulk approve incident remediations
-    source_operation: openapi/huntress-rest-openapi.json#postV1IncidentReportsIncidentReportIdRemediationsBulkApproval
-  - name: list_signals
-    description: List detection signals
-    source_operation: openapi/huntress-rest-openapi.json#getV1Signals
-  - name: siem_query
-    description: Execute an ES|QL query against SIEM data
-    source_operation: openapi/huntress-rest-openapi.json#postV1SiemQuery
+- name: list_organizations
+  description: List organizations in the account
+  source_operation: openapi/huntress-rest-openapi.json#getV1Organizations
+- name: list_agents
+  description: List deployed Huntress agents
+  source_operation: openapi/huntress-rest-openapi.json#getV1Agents
+- name: get_agent
+  description: Get a single agent by id
+  source_operation: openapi/huntress-rest-openapi.json#getV1AgentsId
+- name: isolate_agent
+  description: Isolate an agent host from the network
+  source_operation: openapi/huntress-rest-openapi.json#IsolateAgent
+- name: release_agent_isolation
+  description: Release an agent from network isolation
+  source_operation: openapi/huntress-rest-openapi.json#ReleaseAgent
+- name: list_incident_reports
+  description: List SOC incident reports
+  source_operation: openapi/huntress-rest-openapi.json#getV1IncidentReports
+- name: get_incident_report
+  description: Get a single incident report
+  source_operation: openapi/huntress-rest-openapi.json#getV1IncidentReportsId
+- name: approve_remediations
+  description: Bulk approve incident remediations
+  source_operation: openapi/huntress-rest-openapi.json#postV1IncidentReportsIncidentReportIdRemediationsBulkApproval
+- name: list_signals
+  description: List detection signals
+  source_operation: openapi/huntress-rest-openapi.json#getV1Signals
+- name: siem_query
+  description: Execute an ES|QL query against SIEM data
+  source_operation: openapi/huntress-rest-openapi.json#postV1SiemQuery
+deployment:
+  mode: remote
+  endpoint: https://api.huntress.io/v1/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census

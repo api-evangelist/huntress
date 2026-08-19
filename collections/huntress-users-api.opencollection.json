@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Memberships",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/memberships",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID to return only memberships for that organization."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID to return only memberships for that user."
+              },
+              {
+                "name": "permissions",
+                "value": "",
+                "type": "query",
+                "description": "Filter by permission label."
+              }
+            ]
+          },
+          "docs": "Shows a list of memberships.\n\nBy default, this endpoint returns both account and organization\nmemberships, but if an organization ID is supplied, it will return\nonly organization memberships, instead.\n\nThe example return value shows both an organization and an account, but\na given membership will only have one or the other.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our"
+        },
+        {
+          "info": {
+            "name": "Create a Membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/memberships"
+          },
+          "docs": "This endpoint allows you to invite a user to join your organization or\naccount.  A user will often be a person you wish to grant access to,\nbut it could also represent a team, an automated system, or any other\ntype of actor.\n\nIf an organization ID is provided, the user will be invited to that\norganization. If not, they will be invited to the account associated\nwith this API credential. Note that while the sample return value\nincludes both an organization and an account for completeness, in\npract"
+        },
+        {
+          "info": {
+            "name": "Get Membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Membership ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Shows details on a single Membership associated with your account or organization."
+        },
+        {
+          "info": {
+            "name": "Update a User's membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Membership ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Update a User's membership"
+        },
+        {
+          "info": {
+            "name": "Delete Membership",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/memberships/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Membership ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Deletes a single Membership associated with your account or organization. Does not delete the user associated with the membership."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

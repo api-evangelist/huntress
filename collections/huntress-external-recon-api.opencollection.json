@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts External Recon API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "External Recon",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List External Ports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/external_ports",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID within Huntress account"
+              },
+              {
+                "name": "protocol",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol."
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "query",
+                "description": "Filter by port number."
+              },
+              {
+                "name": "risky_service",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the detected service is considered risky."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the detected service name (lowercase Shodan module name, e.g. 'ssh', 'http', 'rdp')."
+              }
+            ]
+          },
+          "docs": "Shows external port records from External Recon scans associated with your account."
+        },
+        {
+          "info": {
+            "name": "Get External Port",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/external_ports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "External port record ID"
+              }
+            ]
+          },
+          "docs": "Shows details on a single external port record associated with your account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

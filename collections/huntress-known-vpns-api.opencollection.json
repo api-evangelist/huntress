@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Known VPNs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Known VPNs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Known VPNs and Proxies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/known_vpns"
+          },
+          "docs": "Returns the list of VPN and proxy operators recognized by Huntress.\n\nUse any value from this list as the `vpn` parameter when creating an Unwanted Access Rule.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

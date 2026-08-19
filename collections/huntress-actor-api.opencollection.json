@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Actor API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Actor",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Actor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/actor"
+          },
+          "docs": "Shows details of the entities associated with the supplied API credentials. It will only return the fields relevant to the current credentials.\nFor more information on User management, see [Product Support](https://support.huntress.io/hc/en-us/articles/4404012574227-Adding-and-Managing-Huntress-Users)\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

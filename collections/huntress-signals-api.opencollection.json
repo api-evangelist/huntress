@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Signals API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Signals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/signals",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "investigated_at_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an ISO-8601 formatted date string that represents the lower bound of the search range for the investigated_at date."
+              },
+              {
+                "name": "investigated_at_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter by an ISO-8601 formatted date string that represents the upper bound of the search range for the investigated_at date."
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the entity type that the Signal originated from. This filter can be used without specifying entity_id."
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the entity ID that the Signal originated from. Must be used in tandem with entity_type parameter."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID within Huntress account"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the types of Signal, must be comma-separated string containing the values: `Antivirus, Process Insights, Managed ITDR, Footholds, MDE Detections, SIEM, Ransomware Canaries, Favicon Detections, Attack Disruptions, App Control`"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status. Must be comma-separated string containing the values: `reported`, `closed`"
+              }
+            ]
+          },
+          "docs": "Shows details of Signals belonging to the account associated with your API credentials.\n\nSignals are used to highlight interesting user or system behaviors that an analyst can reference during a cyber investigation.\nA detected Signal could be as broad and low fidelity as the detection of a command line user running whoami, or it could be as specific and high fidelity as detecting a known malware file.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer "
+        },
+        {
+          "info": {
+            "name": "Get Signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/signals/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Signal ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Shows details of a single Signal belonging to the account associated with your API credentials.\n\nSignals are used to highlight interesting user or system behaviors that an analyst can reference during a cyber investigation.\nA detected Signal could be as broad and low fidelity as the detection of a command line user running whoami, or it could be as specific and high fidelity as detecting a known malware file.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Escalations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Escalations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Escalations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escalations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status."
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by severity."
+              },
+              {
+                "name": "subtype",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subtype."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID."
+              }
+            ]
+          },
+          "docs": "\nShows Escalations associated with your account.\nAdditional details for a specific escalation can be obtained by using the **GET Escalation** endpoint.\n\nEscalations are used to notify Huntress account administrators that a situation requires their attention.\nBelow are some common use cases:\n - Security Operation Centers (SOC) suspect that an application being flagged as malicious is a false positive, and we want to get your authorization to allow-list the application moving forward.\n - A potenti"
+        },
+        {
+          "info": {
+            "name": "Get Escalation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/escalations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Escalation ID within Huntress Account"
+              }
+            ]
+          },
+          "docs": "Shows details on a single Escalation associated with your account."
+        },
+        {
+          "info": {
+            "name": "Create an Escalation Resolution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/escalations/:id/resolution",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Allows you to resolve an Escalation. Creating a resolution updates the Escalation's status\nto resolved. This endpoint requires an API key with permissions to write to Escalations. **Note that the default account API key is read-only, so you'll need to create a user-based API key with the appropriate permissions to access this endpoint**.\nThe behavior of this endpoint varies by Escalation type so your request should be crafted based on the specific Escalation you are interacting with.\n\n#### Simpl"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

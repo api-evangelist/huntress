@@ -1,0 +1,378 @@
+{
+  "item": [
+    {
+      "id": "61f7553b-a263-4889-ba19-45405ae715fa",
+      "name": "Summary Reports",
+      "description": {
+        "content": "Operations about Summary Reports",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3731cde0-c914-4ccb-ba05-ebe02ac65d43",
+          "name": "List Summary Reports",
+          "request": {
+            "name": "List Summary Reports",
+            "description": {
+              "content": "Shows Summary Reports associated with your account.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_token",
+                  "value": "<string>",
+                  "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_field",
+                  "value": "id",
+                  "description": "Field to sort by. Defaults to 'id'."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_direction",
+                  "value": "desc",
+                  "description": "Sort direction. Defaults to 'desc'."
+                },
+                {
+                  "disabled": false,
+                  "key": "period_min",
+                  "value": "<string>",
+                  "description": "Filter by an ISO-8601 formatted date string that represents the lower bound of the search range for the period date."
+                },
+                {
+                  "disabled": false,
+                  "key": "period_max",
+                  "value": "<string>",
+                  "description": "Filter by an ISO-8601 formatted date string that represents the upper bound of the search range for the period date."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization_id",
+                  "value": "<integer>",
+                  "description": "Filter by organization ID within Huntress account"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by report type. One of monthly_summary, quarterly_summary, yearly_summary"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bb9c7511-62aa-4d5e-b541-def39dd7b394",
+              "name": "List Summary Reports",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_field",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "period_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"id\": 1,\n      \"agents_count\": 2,\n      \"allowed_exclusions_count\": 0,\n      \"analyst_name\": \"Jane Doe\",\n      \"analyst_note\": \"Everything is awesome! Thanks for using Huntress.\",\n      \"analyst_threats\": [\n        \"Ransomware\",\n        \"Dridex\",\n        \"Jupyter\"\n      ],\n      \"analyst_title\": \"Senior Security Analyst\",\n      \"antivirus_exclusions_count\": 0,\n      \"autorun_events\": 0,\n      \"autorun_signals_detected\": 0,\n      \"autorun_signals_reviewed\": 0,\n      \"autoruns_reviewed\": 0,\n      \"blocked_malware_count\": 0,\n      \"created_at\": \"2022-03-01T20:56:15Z\",\n      \"deployed_canaries_count\": 0,\n      \"events_analyzed\": 0,\n      \"external_ips_count\": 3,\n      \"external_ports_count\": 12,\n      \"external_services\": [\n        {\n          \"name\": \"SSH\",\n          \"risky\": true\n        },\n        {\n          \"name\": \"HTTP\",\n          \"risky\": false\n        }\n      ],\n      \"firewall_disabled_count\": 0,\n      \"firewall_disabled_with_conflict_count\": 0,\n      \"firewall_enabled_count\": 10,\n      \"firewall_enabled_with_conflict_count\": 0,\n      \"global_threats_note\": \"World peace! No threats to see here.\",\n      \"host_processes_analyzed\": 0,\n      \"incident_indicator_counts\": {\n        \"managed_av\": 0\n      },\n      \"incident_product_counts\": {\n        \"edr\": 16,\n        \"itdr\": 0,\n        \"siem\": 0\n      },\n      \"incident_severity_counts\": {\n        \"low\": 16\n      },\n      \"incidents_reported\": 16,\n      \"incidents_resolved\": 1,\n      \"investigated_mav_detection_count\": 0,\n      \"investigations_completed\": 0,\n      \"itdr_entities\": 0,\n      \"itdr_events\": 0,\n      \"itdr_incidents_reported\": 0,\n      \"itdr_investigations_completed\": 0,\n      \"itdr_signals\": 0,\n      \"itdr_billable_identity_count\": 50,\n      \"itdr_non_billable_identity_count\": 10,\n      \"itdr_license_distribution\": {\n        \"Microsoft 365 E3\": 25,\n        \"Microsoft 365 E5\": 15,\n        \"Other\": 10\n      },\n      \"itdr_usage_locations\": [\n        \"US\",\n        \"CA\",\n        \"GB\",\n        \"DE\"\n      ],\n      \"linux_agent_count\": 0,\n      \"macos_agent_count\": 0,\n      \"macos_agents\": false,\n      \"mav_incident_report_count\": 0,\n      \"new_exclusions_count\": 0,\n      \"only_macos_agents\": false,\n      \"organization_id\": 7,\n      \"period\": \"2022-02-01...2022-03-02\",\n      \"powerful_application_count\": 3,\n      \"potential_threat_indicators\": 0,\n      \"process_detections\": 0,\n      \"process_detections_reported\": 0,\n      \"process_detections_reviewed\": 0,\n      \"protected_profiles_count\": 0,\n      \"ransomware_note\": \"No ransoms to report, all is well.\",\n      \"risky_exclusions_removed_count\": 0,\n      \"risky_services_count\": 1,\n      \"rogue_app_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"servers_agent_count\": 0,\n      \"shadow_workflow_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"siem_incidents_reported\": 0,\n      \"siem_ingested_logs\": 0,\n      \"siem_investigations_completed\": 0,\n      \"siem_signals\": 0,\n      \"siem_total_logs\": 0,\n      \"signals_detected\": 0,\n      \"signals_investigated\": 0,\n      \"top_incident_av_threats\": [\n        \"some_threat\",\n        \"another_threat\",\n        \"threats_threats_threats\"\n      ],\n      \"top_incident_hosts\": [\n        \"some_host\",\n        \"another_host\",\n        \"hosts_hosts_hosts\"\n      ],\n      \"total_entities\": 2,\n      \"total_mav_detection_count\": 0,\n      \"type\": \"monthly_summary\",\n      \"unwanted_access_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"updated_at\": \"2022-03-01T20:56:15Z\",\n      \"url\": \"https://huntress.io/rails/active_storage/blobs/redirect/uuid.pdf?disposition=download\",\n      \"windows_agent_count\": 2,\n      \"weak_application_count\": 1,\n      \"windows_agents\": true\n    },\n    {\n      \"id\": 1,\n      \"agents_count\": 2,\n      \"allowed_exclusions_count\": 0,\n      \"analyst_name\": \"Jane Doe\",\n      \"analyst_note\": \"Everything is awesome! Thanks for using Huntress.\",\n      \"analyst_threats\": [\n        \"Ransomware\",\n        \"Dridex\",\n        \"Jupyter\"\n      ],\n      \"analyst_title\": \"Senior Security Analyst\",\n      \"antivirus_exclusions_count\": 0,\n      \"autorun_events\": 0,\n      \"autorun_signals_detected\": 0,\n      \"autorun_signals_reviewed\": 0,\n      \"autoruns_reviewed\": 0,\n      \"blocked_malware_count\": 0,\n      \"created_at\": \"2022-03-01T20:56:15Z\",\n      \"deployed_canaries_count\": 0,\n      \"events_analyzed\": 0,\n      \"external_ips_count\": 3,\n      \"external_ports_count\": 12,\n      \"external_services\": [\n        {\n          \"name\": \"SSH\",\n          \"risky\": true\n        },\n        {\n          \"name\": \"HTTP\",\n          \"risky\": false\n        }\n      ],\n      \"firewall_disabled_count\": 0,\n      \"firewall_disabled_with_conflict_count\": 0,\n      \"firewall_enabled_count\": 10,\n      \"firewall_enabled_with_conflict_count\": 0,\n      \"global_threats_note\": \"World peace! No threats to see here.\",\n      \"host_processes_analyzed\": 0,\n      \"incident_indicator_counts\": {\n        \"managed_av\": 0\n      },\n      \"incident_product_counts\": {\n        \"edr\": 16,\n        \"itdr\": 0,\n        \"siem\": 0\n      },\n      \"incident_severity_counts\": {\n        \"low\": 16\n      },\n      \"incidents_reported\": 16,\n      \"incidents_resolved\": 1,\n      \"investigated_mav_detection_count\": 0,\n      \"investigations_completed\": 0,\n      \"itdr_entities\": 0,\n      \"itdr_events\": 0,\n      \"itdr_incidents_reported\": 0,\n      \"itdr_investigations_completed\": 0,\n      \"itdr_signals\": 0,\n      \"itdr_billable_identity_count\": 50,\n      \"itdr_non_billable_identity_count\": 10,\n      \"itdr_license_distribution\": {\n        \"Microsoft 365 E3\": 25,\n        \"Microsoft 365 E5\": 15,\n        \"Other\": 10\n      },\n      \"itdr_usage_locations\": [\n        \"US\",\n        \"CA\",\n        \"GB\",\n        \"DE\"\n      ],\n      \"linux_agent_count\": 0,\n      \"macos_agent_count\": 0,\n      \"macos_agents\": false,\n      \"mav_incident_report_count\": 0,\n      \"new_exclusions_count\": 0,\n      \"only_macos_agents\": false,\n      \"organization_id\": 7,\n      \"period\": \"2022-02-01...2022-03-02\",\n      \"powerful_application_count\": 3,\n      \"potential_threat_indicators\": 0,\n      \"process_detections\": 0,\n      \"process_detections_reported\": 0,\n      \"process_detections_reviewed\": 0,\n      \"protected_profiles_count\": 0,\n      \"ransomware_note\": \"No ransoms to report, all is well.\",\n      \"risky_exclusions_removed_count\": 0,\n      \"risky_services_count\": 1,\n      \"rogue_app_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"servers_agent_count\": 0,\n      \"shadow_workflow_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"siem_incidents_reported\": 0,\n      \"siem_ingested_logs\": 0,\n      \"siem_investigations_completed\": 0,\n      \"siem_signals\": 0,\n      \"siem_total_logs\": 0,\n      \"signals_detected\": 0,\n      \"signals_investigated\": 0,\n      \"top_incident_av_threats\": [\n        \"some_threat\",\n        \"another_threat\",\n        \"threats_threats_threats\"\n      ],\n      \"top_incident_hosts\": [\n        \"some_host\",\n        \"another_host\",\n        \"hosts_hosts_hosts\"\n      ],\n      \"total_entities\": 2,\n      \"total_mav_detection_count\": 0,\n      \"type\": \"monthly_summary\",\n      \"unwanted_access_incidents\": [\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": 12345678,\n          \"severity\": \"critical\",\n          \"sent_at\": \"2026-04-17T12:34:56Z\",\n          \"event_summary\": \"Suspicious login detected from unusual location.\",\n          \"body\": \"A suspicious login was detected from an unusual location.\",\n          \"remediations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"subtype\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"updated_at\": \"2022-03-01T20:56:15Z\",\n      \"url\": \"https://huntress.io/rails/active_storage/blobs/redirect/uuid.pdf?disposition=download\",\n      \"windows_agent_count\": 2,\n      \"weak_application_count\": 1,\n      \"windows_agents\": true\n    }\n  ],\n  \"pagination\": {\n    \"next_page_url\": \"string\",\n    \"next_page_token\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f29be1d-df84-4c12-8f10-8a0d86237433",
+              "name": "There was an issue with your API credential or permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_field",
+                      "value": "id"
+                    },
+                    {
+                      "key": "sort_direction",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "period_min",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "period_max",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6da320ea-acde-459c-b585-1a510e66a014",
+          "name": "Get Summary Report",
+          "request": {
+            "name": "Get Summary Report",
+            "description": {
+              "content": "Shows details on a single Summary Report associated with your account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "reports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Report ID within Huntress account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4389573e-18fc-40a1-a8e9-eedd295bcf96",
+              "name": "Get Summary Report",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Report ID within Huntress account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"report\": {\n    \"id\": 1,\n    \"agents_count\": 2,\n    \"allowed_exclusions_count\": 0,\n    \"analyst_name\": \"Jane Doe\",\n    \"analyst_note\": \"Everything is awesome! Thanks for using Huntress.\",\n    \"analyst_threats\": [\n      \"Ransomware\",\n      \"Dridex\",\n      \"Jupyter\"\n    ],\n    \"analyst_title\": \"Senior Security Analyst\",\n    \"antivirus_exclusions_count\": 0,\n    \"autorun_events\": 0,\n    \"autorun_signals_detected\": 0,\n    \"autorun_signals_reviewed\": 0,\n    \"autoruns_reviewed\": 0,\n    \"blocked_malware_count\": 0,\n    \"created_at\": \"2022-03-01T20:56:15Z\",\n    \"deployed_canaries_count\": 0,\n    \"events_analyzed\": 0,\n    \"external_ips_count\": 3,\n    \"external_ports_count\": 12,\n    \"external_services\": [\n      {\n        \"name\": \"SSH\",\n        \"risky\": true\n      },\n      {\n        \"name\": \"HTTP\",\n        \"risky\": false\n      }\n    ],\n    \"firewall_disabled_count\": 0,\n    \"firewall_disabled_with_conflict_count\": 0,\n    \"firewall_enabled_count\": 10,\n    \"firewall_enabled_with_conflict_count\": 0,\n    \"global_threats_note\": \"World peace! No threats to see here.\",\n    \"host_processes_analyzed\": 0,\n    \"incident_indicator_counts\": {\n      \"managed_av\": 0\n    },\n    \"incident_product_counts\": {\n      \"edr\": 16,\n      \"itdr\": 0,\n      \"siem\": 0\n    },\n    \"incident_severity_counts\": {\n      \"low\": 16\n    },\n    \"incidents_reported\": 16,\n    \"incidents_resolved\": 1,\n    \"investigated_mav_detection_count\": 0,\n    \"investigations_completed\": 0,\n    \"itdr_entities\": 0,\n    \"itdr_events\": 0,\n    \"itdr_incidents_reported\": 0,\n    \"itdr_investigations_completed\": 0,\n    \"itdr_signals\": 0,\n    \"itdr_billable_identity_count\": 50,\n    \"itdr_non_billable_identity_count\": 10,\n    \"itdr_license_distribution\": {\n      \"Microsoft 365 E3\": 25,\n      \"Microsoft 365 E5\": 15,\n      \"Other\": 10\n    },\n    \"itdr_usage_locations\": [\n      \"US\",\n      \"CA\",\n      \"GB\",\n      \"DE\"\n    ],\n    \"linux_agent_count\": 0,\n    \"macos_agent_count\": 0,\n    \"macos_agents\": false,\n    \"mav_incident_report_count\": 0,\n    \"new_exclusions_count\": 0,\n    \"only_macos_agents\": false,\n    \"organization_id\": 7,\n    \"period\": \"2022-02-01...2022-03-02\",\n    \"powerful_application_count\": 3,\n    \"potential_threat_indicators\": 0,\n    \"process_detections\": 0,\n    \"process_detections_reported\": 0,\n    \"process_detections_reviewed\": 0,\n    \"protected_profiles_count\": 0,\n    \"ransomware_note\": \"No ransoms to report, all is well.\",\n    \"risky_exclusions_removed_count\": 0,\n    \"risky_services_count\": 1,\n    \"rogue_app_incidents\": [\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      },\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      }\n    ],\n    \"servers_agent_count\": 0,\n    \"shadow_workflow_incidents\": [\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      },\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      }\n    ],\n    \"siem_incidents_reported\": 0,\n    \"siem_ingested_logs\": 0,\n    \"siem_investigations_completed\": 0,\n    \"siem_signals\": 0,\n    \"siem_total_logs\": 0,\n    \"signals_detected\": 0,\n    \"signals_investigated\": 0,\n    \"top_incident_av_threats\": [\n      \"some_threat\",\n      \"another_threat\",\n      \"threats_threats_threats\"\n    ],\n    \"top_incident_hosts\": [\n      \"some_host\",\n      \"another_host\",\n      \"hosts_hosts_hosts\"\n    ],\n    \"total_entities\": 2,\n    \"total_mav_detection_count\": 0,\n    \"type\": \"monthly_summary\",\n    \"unwanted_access_incidents\": [\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      },\n      {\n        \"id\": 12345678,\n        \"severity\": \"critical\",\n        \"sent_at\": \"2026-04-17T12:34:56Z\",\n        \"event_summary\": \"Suspicious login detected from unusual location.\",\n        \"body\": \"A suspicious login was detected from an unusual location.\",\n        \"remediations\": [\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          },\n          {\n            \"type\": \"Remediations::SessionRevocation\",\n            \"subtype\": \"containment\"\n          }\n        ]\n      }\n    ],\n    \"updated_at\": \"2022-03-01T20:56:15Z\",\n    \"url\": \"https://huntress.io/rails/active_storage/blobs/redirect/uuid.pdf?disposition=download\",\n    \"windows_agent_count\": 2,\n    \"weak_application_count\": 1,\n    \"windows_agents\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "487dc344-572c-4e6c-98fb-9dbdd33c0af2",
+              "name": "There was an issue with your API credential or permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "reports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Report ID within Huntress account"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.huntress.io",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9354a119-5645-4ca2-a75f-61104ab215d4",
+    "name": "Huntress API Reference Accounts Summary Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "<!-- DO NOT LINT FOR FORMATTING, you will break how it appears on the docs site -->\n<p><a href='https://www.huntress.com/terms-of-service'>© Huntress - All rights reserved</a></p>\n<h1 id='introduction'>Introduction</h1>\n\n<p>Webhook event payloads are available via the dropdown menu above the search bar on this page.</p>\n\n<p>The Huntress API follows a RESTful pattern. Requests are made via resource-oriented URLs as described in this document and API responses are formatted as JSON data.</p>\n\n<p>A command-line client is also available for interacting with the API from your terminal. It requires Ruby 3.1+ and has no external dependencies. You can download it from <a href='https://api.huntress.io/api/huntress-cli'>https://api.huntress.io/api/huntress-cli</a>.</p>\n\n<p>Alternatively, if you'd prefer to use an MCP, we have <a href=\"https://support.huntress.io/hc/en-us/articles/50846554117395-Connecting-to-the-Huntress-MCP-Server\">instructions for setting up the Huntress MCP</a>. Note that the MCP is read-only, so this is a good option if you're looking for a safer way to access your Huntress data from an LLM.</p>\n\n<p>If you&#39;d like to request additional API endpoints or capabilities, <a href=\"https://feedback.huntress.com/\">submit feedback</a> through our feedback portal.</p>\n\n<h1 id='api-overview'>API Overview</h1>\n<details>\n\t<summary><h2 id='authentication'>Authentication</h2></summary>\n<div class=\"scalar-code-copy\"><pre class=\"scalar-codeblock-pre\"><code class=\"hljs language-curl\"><span class=\"hljs-variable\">$KEY</span> = </span><span class=\"hljs-built_in\">echo </span><span class=\"hljs-string\">\"$HUNTRESS_PUBLIC_KEY:$HUNTRESS_PRIVATE_KEY\"</span> | <span class=\"hljs-built_in\">base64</span>\n<span class=\"hljs-built_in\">curl </span><span class=\"hljs-string\">\"https://api.huntress.io/v1/agents\"</span> \\ -H <span class=\"hljs-string\">\"Authorization: Basic $KEY\"</span>\n</code></pre>\n</div>\n<p>To begin, generate your API Key at <code>&lt;your_account_subdomain&gt;.huntress.io</code>. Once you are logged into your account on the Huntress site, check the dropdown menu at the top-right corner of the site header. You should see <code>API Credentials</code> among the options if your account has been granted access to the Huntress API. Click on the option to continue to the API Key generation page.</p>\n\n<p>Once on the API Key generation page, click on the green Setup button to begin the process to generate your API Key. You will be redirected to a page where you will be prompted to generate your API Key. Click the Generate button to generate a public and private key pair for Huntress API access. The inputs on the page will be filled in with your access credentials once you have done so.</p>\n\n<p><strong>Your API Private Key will only be visible at this stage of API Key generation. Be sure to save the value provided somewhere secure, as once you navigate away from this page, this value will no longer be accessible and you must regenerate your API credentials if your secret key value is lost.</strong></p>\n\n<p>If necessary, you can repeat the process to regenerate your API credentials with a new API Key and API Secret Key on the same API Key generation page, at <code>&lt;your_account_subdomain&gt;.huntress.io/account/api_credentials</code>.</p>\n\n<p>The Huntress API implements basic access authentication. Once you have your API Key and API Secret Key, provide these values as the result of a Base64 encoded string in every request to the Huntress API via the <code>Authorization</code> header. Your request header should look something like <code>Authorization: Basic [Base64Encode(&lt;your_api_key&gt;:&lt;your_api_secret_key&gt;)]</code>. Please refer to the code snippets for further examples.</p>\n</details>\n<details>\n\t<summary><h2 id='rate-limits'>Rate Limits</h2></summary>\n<p>Every Huntress API account is rate limited to 60 requests per minute, on a sliding window. This means that no more than 60 requests can be made within a 60 second time interval between the first request and the last request.</p>\n\n<p>For example, if request 1 is made at T0, request 2 is made at T5, and requests 3 through 60 are made at T10, making request 61 at T55 would result in a 429 error response. Making request 61 at T61 would succeed, however making request 62 at T61 would fail, at least until the time has passed T65, corresponding to a minute after request 2 was made.</p>\n</details>\n<details>\n\t<summary><h2 id='http-response-codes'>HTTP Response Codes</h2></summary>\n<p>Huntress follows HTTP standards when delivering responses: a <code>2xx</code> response is a success, a <code>4xx</code> response indicates an issue with the client request, and a <code>5xx</code> response indicates an issue with Huntress servers.\n<br>\n<br>\nSpecific error codes are detailed in the following table:</p>\n<table><thead>\n<tr>\n<th>Error Status Code</th>\n<th>Details</th>\n</tr>\n</thead><tbody>\n<tr>\n<td>400</td>\n<td>There is an unexpected value in the API request being made.</td>\n</tr>\n<tr>\n<td>401</td>\n<td>Your request could not be authenticated. Check that your API key is properly formatted and included in the <code>Authorization</code> header.</td>\n</tr>\n<tr>\n<td>404</td>\n<td>The requested resource is unavailable: either it doesn&#39;t exist, or your account does not hold correct permissions to access it.</td>\n</tr>\n<tr>\n<td>429</td>\n<td>You have made too many requests within the rate limit timeframe. See the previous section on <a href=\"#rate_limits\">rate_limits</a> for details.</td>\n</tr>\n<tr>\n<td>500</td>\n<td><p>An error has occurred within Huntress servers.</p><p>You could retry the request, but if you encounter continued errors, please <a href=\"https://support.huntress.io\">contact Support</a> with details of your error. If all traffic from Huntress is resulting in 500 responses, please check our <a href=\"https://huntressstatus.statuspage.io/\">Huntress Status Page</a>.</p></td>\n</tr>\n</tbody></table>\n</details>\n<details>\n\t<summary><h2 id='pagination'>Pagination</h2></summary>\n<p>Certain Huntress API endpoints utilize a <code>page_token</code> and <code>limit</code> parameter to specify a window location and size, respectively, to the resources currently being requested.\n<br><br>\nEach API request will also return a pagination object with details about your current pagination state based on the parameters provided. The pagination object contains:<br></p>\n\n<table><thead>\n<tr>\n<th>Key</th>\n<th>Type</th>\n<th>Description</th>\n</tr>\n</thead><tbody>\n<tr>\n<td>next_page_token</td>\n<td>string</td>\n<td>The token used to request the next page in paginated results. If no page token is included, the first page contains all results.</td>\n</tr>\n<tr>\n<td>next_page_url</td>\n<td>string</td>\n<td>URL containing the next page and the limit provided in the original API request, to be used to continue sequentially accessing resources. Only displays when another page can be accessed.</td>\n</tr>\n</tbody></table>\n<br>\n<p>Following is a formatted example of the pagination object in an API response:<br>\n<div class=\"scalar-code-copy\">\n<pre class=\"scalar-codeblock-pre\">\n<code class=\"hljs language-json\"><span class=\"hljs-attr\">\"pagination\"</span><span class=\"hljs-punctuation\">: {</span>\n<span class=\"hljs-attr\">  \"next_page_url\"</span><span class=\"hljs-punctuation\">: </span><span class=\"hljs-string\">\"https://api.huntress.io/v1/agents?page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo&amp;limit=10\"</span><span class=\"hljs-punctuation\">,\n</span><span class=\"hljs-attr\">  \"next_page_token\"</span><span class=\"hljs-punctuation\">: </span><span class=\"hljs-string\">\"MjAyMi0wMy0wMVQxODo1NDoyNFo\"</span><span class=\"hljs-punctuation\">\n}</span></code></pre>\n</div>\n</details>\n<details>\n\t<summary><h2 id='request-and-response-format'>Request and Response Format</h2></summary>\n\t<details>\n\t\t<summary><h3 id='request'>Request</h3></summary>\n\t<div class=\"scalar-code-copy\">\n<pre class=\"scalar-codeblock-pre\">\n<code class=\"hljs language-curl\"><span class=\"hljs-built_in\">curl</span> <span class=\"hljs-string\">\"https://api.huntress.io/v1/agents?organization_id=1&amp;page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo\"</span> -H <span class=\"hljs-string\">\"Authorization: Basic &lt;Your B64 encoded hash&gt;\"</span></code></pre></div>\n\t<p>The base URL for API requests is <code>api.huntress.io/v1/</code>, followed by the resource requested. Resources can be requested either singularly or as a list, which correspond to <code>/v1/&lt;resources&gt;/:id</code> or <code>/v1/&lt;resources&gt;</code> respectively, with the exception of the <code>/v1/account</code> and <code>/v1/actor</code> endpoints, which only returns the account associated with the API credentials provided.</p>\n\t<p>As an example, <code>api.huntress.io/v1/agents</code> would return a list of agents, while <code>api.huntress.io/v1/agents/1</code> would return a singular agent with ID: 1.</p>\n\t<p>Parameters are provided to the API through a query string. As an example, providing the organization_id filter as a parameter to the <code>/v1/agents</code> endpoint would look like <code>api.huntress/io/v1/agents?organization_id=1</code>. Accessing a sequential page with the same filter active would look like <code>api.huntress.io/v1/agents?organization_id=1&amp;page_token=MjAyMi0wMy0wMVQxODo1NDoyNFo</code>.</p>\n\t</details>\n\t<details>\n\t\t<summary><h3 id='response'>Response</h3></summary>\n\t<p>The Huntress API responds with a JSON object containing requested resources if the request is valid and authorized.</p>\n\t<h4 id='singular-case'>Singular Case</h4>\n\t<div class=\"scalar-code-copy\">\n\t<pre class=\"scalar-codeblock-pre\"><code class=\"hljs-json\"><span class=\"hljs-punctuation\">{</span>\n<span class=\"hljs-attr\">  \"report\"</span><span class=\"hljs-punctuation\">: { ... }\n}</span></code>\n</div>\n\t<p>In the case of accessing a singular resource, the JSON object in question will contain one key that maps the singular resource to the singular representation of the resource name. As an example, if you were to request <code>api.huntress.io/v1/reports/1</code>, the JSON response would contain a single key <code>report</code> that maps to the report with ID: 1.</p>\n\t<h4 id='multiple-case'>Multiple Case</h4><div class=\"highlight\"><pre class=\"highlight json tab-json\">\n<pre class=\"scalar-codeblock-pre\"><code  class=\"hljs-json\"><span class=\"hljs-punctuation\">{</span>\n<span class=\"hljs-attr\">  \"reports\"</span><span class=\"hljs-punctuation\">: [ ... ],</span>\n<span class=\"hljs-attr\">  \"pagination\"</span><span class=\"hljs-punctuation\">: { ... }</span>\n<span class=\"hljs-punctuation\">}</span>\n</code></pre></div>\n\t<p>When accessing a list of resources, the JSON response contains two keys at the root level. The first key is the plural representation of that resource. The second is a <code>pagination</code> key that represents the current state of pagination based on parameters provided in the original request. As an example, a request to <code>api.huntress.io/v1/reports</code> returns a JSON object with the keys <code>reports</code> and <code>pagination</code> at its root level. Further details on the fields within the pagination object can be seen at <a href=\"#pagination\">the relevant section</a>.</p>\n\t</details>\n</details>\n",
+      "type": "text/plain"
+    }
+  }
+}

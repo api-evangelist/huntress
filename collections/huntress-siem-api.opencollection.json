@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts SIEM API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SIEM",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute ESQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/siem/query"
+          },
+          "docs": "Execute an ESQL query against your SIEM logs and receive paginated JSON results.\n\nThis endpoint uses POST so that the ESQL query string can be sent in the request body\nrather than as a URL query parameter, avoiding URL length limits for complex queries.\n\nQueries must begin with `FROM logs`. Results are limited to 200 rows per page.\nIf `next_page_token` is present, pass it as `page_token` in a subsequent request\n(with the same `range_start` and `range_end`) to retrieve the next page.\n\n**Response*"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

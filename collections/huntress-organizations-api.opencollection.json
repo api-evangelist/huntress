@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Organizations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/organizations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization name."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization key."
+              }
+            ]
+          },
+          "docs": "Shows details of Organizations belonging to the account associated with your API credentials.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n"
+        },
+        {
+          "info": {
+            "name": "Create an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/organizations"
+          },
+          "docs": "Create an Organization"
+        },
+        {
+          "info": {
+            "name": "Get Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Organization ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Shows details on a single Organization associated with your account."
+        },
+        {
+          "info": {
+            "name": "Update an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update an Organization"
+        },
+        {
+          "info": {
+            "name": "Delete an Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/organizations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the organization to be deleted"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Organization.\n\n**Please note:** This will remove the organization and associated configurations across the Huntress Platform, including Managed SAT. For more information, see our [offboarding guide](https://support.huntress.io/hc/en-us/articles/51332785737235-Huntress-Product-Offboarding-Guide).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Incident Reports API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incident Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Incident Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/incident_reports",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "indicator_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by indicator type. One of footholds, monitored_files, ransomware_canaries, antivirus_detections, process_detections, managed_identity, mde_detections, siem_detections, favicon_detections, behavioral_detections, email_security_detections, app_control, ai_misuse"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status. One of sent, closed, dismissed, auto_remediating, deleting, partner_dismissed"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter by severity. One of low, high, critical"
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "query",
+                "description": "Filter by platform. One of windows, darwin, microsoft_365, google, linux, email_security, other"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID within Huntress account"
+              },
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by agent ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Shows Incident Reports associated with your account.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n"
+        },
+        {
+          "info": {
+            "name": "Get Incident Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/incident_reports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Incident Report ID within Huntress account"
+              }
+            ]
+          },
+          "docs": "Shows details on a single Incident Report associated with your account."
+        },
+        {
+          "info": {
+            "name": "Create an Incident Report Resolution",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/incident_reports/:id/resolution",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to resolve a single Incident Report. All remediations belonging to the Incident Report must be approved first.\n\nWhile resolution updates the report status to resolved, assisted remediations may still be running in the background and manual remediations may still require completion by a user.\n\nThis endpoint requires an API key with permissions to resolve incident reports. **Note that the default account API key is read-only, so you'll need to create a user-based API key with the"
+        },
+        {
+          "info": {
+            "name": "List Remediations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/incident_reports/:incident_report_id/remediations",
+            "params": [
+              {
+                "name": "incident_report_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "types[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by type of remediation. Must be a comma-separated string containing the values: assisted, manual, containment"
+              },
+              {
+                "name": "statuses[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status of remediation. Must be a comma-separated string containing the values: unapproved, approved, completed, failed, cancelled"
+              }
+            ]
+          },
+          "docs": "Shows details of Remediations belonging to a single Incident Report.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n"
+        },
+        {
+          "info": {
+            "name": "Get Remediation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/incident_reports/:incident_report_id/remediations/:remediation_id",
+            "params": [
+              {
+                "name": "incident_report_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "remediation_id",
+                "value": "",
+                "type": "path",
+                "description": "Incident Report ID"
+              }
+            ]
+          },
+          "docs": "Shows details for a single Remediation belonging to a single Incident Report"
+        },
+        {
+          "info": {
+            "name": "Bulk Approve Remediations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/incident_reports/:incident_report_id/remediations/bulk_approval",
+            "params": [
+              {
+                "name": "incident_report_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve all unapproved remediations for an Incident Report. Approval immediately triggers the execution of assisted remediations.\nManual remediations are not executed, and must be independently completed. Once all remediations are approved,\nthe incident report becomes eligible for resolution.\n\nThis endpoint requires an API key with permissions to write to remediations. **Note that the default account API key is read-only, so you'll need to create a user-based API key with the appropriate permiss"
+        },
+        {
+          "info": {
+            "name": "Bulk Reject Remediations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/incident_reports/:incident_report_id/remediations/bulk_rejection",
+            "params": [
+              {
+                "name": "incident_report_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reject all unapproved remediations for an Incident Report. Rejecting the remediations will send the incident report back to the Huntress SOC.\n\nThis endpoint requires an API key with permissions to write to remediations. **Note that the default account API key is read-only, so you'll need to create a user-based API key with the appropriate permissions to access this endpoint**.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

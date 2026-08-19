@@ -1,0 +1,171 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Unwanted Access Rules API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Unwanted Access Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Unwanted Access Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/unwanted_access_rules",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID within Huntress account."
+              },
+              {
+                "name": "identity_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to rules attached directly to this identity."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by rule type."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by rule status as shown in the Portal UI."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the level the rule is attached to."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to a single rule category."
+              },
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country code value (ISO 3166-1 alpha-2). Implies `category=country`."
+              },
+              {
+                "name": "vpn",
+                "value": "",
+                "type": "query",
+                "description": "Filter by VPN (tunnel operator) value. Implies `category=vpn`."
+              },
+              {
+                "name": "ip_address",
+                "value": "",
+                "type": "query",
+                "description": "Filter by IP Address value. Implies `category=ip_address`."
+              },
+              {
+                "name": "logic",
+                "value": "",
+                "type": "query",
+                "description": "Filter by rule logic. `standard` returns rules with explicit values,\n`catchall` returns rules matching all values in a category,\nand `catchall_exception` returns rules that exclude specifically set values from an existing catchall rule.\nOmit this parameter to include all three.\n"
+              }
+            ]
+          },
+          "docs": "Shows Unwanted Access Rules associated with your account.\n\nUnwanted Access Rules govern how Huntress responds to identity access attempts matching specific attributes. Each rule targets a category (country, vpn, ip_address) and declares a determination — `expected` or `unauthorized` — at the account, organization, or identity scope.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.\nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) wit"
+        },
+        {
+          "info": {
+            "name": "Create an Unwanted Access Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/unwanted_access_rules"
+          },
+          "docs": "Creates a new Unwanted Access Rule associated with your account, an organization, or a specific identity.\n\n**Rule logic.** Provide exactly one of `country_code`, `vpn`, or `logic`:\n  - Omit `logic` and supply `country_code` or `vpn` to create `standard` rules. Provide a single value to create one rule, or a comma-separated list to create one `standard` rule per value in a single request. All rules share the same scope, type, and schedule, and are created atomically. If any value fails validation"
+        },
+        {
+          "info": {
+            "name": "Get Unwanted Access Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/unwanted_access_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unwanted Access Rule ID."
+              }
+            ]
+          },
+          "docs": "Shows details on a single Unwanted Access Rule associated with your account."
+        },
+        {
+          "info": {
+            "name": "Update an Unwanted Access Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/unwanted_access_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unwanted Access Rule ID."
+              }
+            ]
+          },
+          "docs": "Updates the schedule and notes on an existing Unwanted Access Rule. The rule's category, value, scope, logic, and type cannot be changed.\n\nStandard, catchall, and catchall exception rules can all be updated, but catchall and catchall exception rules must keep `starts_at` and `expires_at` nil. Passing a value for those fields on those rules will return a 422.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Unwanted Access Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/unwanted_access_rules/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Unwanted Access Rule ID."
+              }
+            ]
+          },
+          "docs": "Deletes a single Unwanted Access Rule associated with your account. Standard, catchall, and catchall exception rules can all be deleted through this endpoint.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

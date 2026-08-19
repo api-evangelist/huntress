@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Huntress API Reference Accounts Agents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max number of resources returned in a paged collection. Defaults to 10, with a minimum of 1 and maximum 500."
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Token used to request the next page in paginated results. Defaults to 'null'"
+              },
+              {
+                "name": "sort_field",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Defaults to 'id'."
+              },
+              {
+                "name": "sort_direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Defaults to 'desc'."
+              },
+              {
+                "name": "organization_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by organization ID within Huntress account"
+              },
+              {
+                "name": "platform",
+                "value": "",
+                "type": "query",
+                "description": "Filter by platform. One of windows, darwin, linux"
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query",
+                "description": "Filter by hostname."
+              },
+              {
+                "name": "os",
+                "value": "",
+                "type": "query",
+                "description": "Filter by operating system."
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Filter by agent version."
+              }
+            ]
+          },
+          "docs": "Shows Agents associated with your account.\n\n**Note:** This endpoint will also return a `pagination` key on the root level.  \nPlease refer to the [pagination section](https://api.huntress.io/docs#pagination) within our docs for more information.\n"
+        },
+        {
+          "info": {
+            "name": "Get Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Shows details on a single Agent associated with your account."
+        },
+        {
+          "info": {
+            "name": "Update Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the editable attributes of a single Agent.\n\n**Note that the default account API key is read-only, so you'll need to create a\nuser-based API key with the appropriate permissions to access this endpoint.**\n"
+        },
+        {
+          "info": {
+            "name": "Uninstall Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Schedules a remote uninstall of a single Agent, removing the Huntress agent\nfrom the host. Uninstall is asynchronous: the host is tasked to uninstall on\nits next callback, and the Agent is immediately removed from your account, so\nsubsequent requests for it return 404.\n\nThis endpoint requires an API key with permission to uninstall agents.\n**Note that the default account API key is read-only, so you'll need to create a\nuser-based API key with the appropriate permissions to access this endpoint.*"
+        },
+        {
+          "info": {
+            "name": "Isolate Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/agents/:id/isolation",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Schedules host isolation for a single Agent, cutting the host off from the\nnetwork while leaving Huntress connectivity intact. Isolation is asynchronous:\na successful request returns the Agent with a `firewall_status` of\n\"Pending Isolation\" until the endpoint confirms isolation.\n\nThis endpoint requires an API key with permission to isolate agents.\n**Note that the default account API key is read-only, so you'll need to create a\nuser-based API key with the appropriate permissions to access this en"
+        },
+        {
+          "info": {
+            "name": "Release Agent Isolation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/agents/:id/isolation",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Schedules release of host isolation for a single Agent, restoring the host's\nnetwork connectivity. Release is asynchronous: a successful request returns the\nAgent with a `firewall_status` of \"Pending Release\" until the endpoint confirms\nthe host is back online.\n\nThis endpoint requires an API key with permission to release agents.\n**Note that the default account API key is read-only, so you'll need to create a\nuser-based API key with the appropriate permissions to access this endpoint.**\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
