@@ -46,6 +46,17 @@ tags:
 - SIEM
 - Identity Threat Detection
 - MSP
+- Webhook
+tags_raw:
+- Company
+- Security
+- Cybersecurity
+- Managed Detection and Response
+- Endpoint Security
+- SOC
+- SIEM
+- Identity Threat Detection
+- MSP
 - Webhooks
 apis:
 - aid: huntress:huntress-accounts-api
@@ -54,6 +65,8 @@ apis:
   humanURL: https://api.huntress.io/docs
   baseURL: https://api.huntress.io/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -198,6 +211,8 @@ apis:
   humanURL: https://api.huntress.io/docs
   baseURL: https://api.huntress.io/v1
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -315,6 +330,8 @@ apis:
   humanURL: https://api.huntress.io/docs
   baseURL: https://api.huntress.io/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
