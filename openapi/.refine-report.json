@@ -1,23 +1,7 @@
 {
   "provider": "huntress",
   "sources": [
-    "huntress-accounts-api-openapi.yml",
-    "huntress-actor-api-openapi.yml",
-    "huntress-agents-api-openapi.yml",
-    "huntress-escalations-api-openapi.yml",
-    "huntress-external-recon-api-openapi.yml",
-    "huntress-identities-api-openapi.yml",
-    "huntress-incident-reports-api-openapi.yml",
-    "huntress-invoices-api-openapi.yml",
-    "huntress-known-vpns-api-openapi.yml",
-    "huntress-organizations-api-openapi.yml",
-    "huntress-platform-actions-api-openapi.yml",
-    "huntress-reseller-api-openapi.yml",
-    "huntress-siem-api-openapi.yml",
-    "huntress-signals-api-openapi.yml",
-    "huntress-summary-reports-api-openapi.yml",
-    "huntress-unwanted-access-rules-api-openapi.yml",
-    "huntress-users-api-openapi.yml"
+    "_original/huntress-rest-openapi.json"
   ],
   "outputs": [
     "huntress-accounts-api-openapi.yml",
@@ -41,6 +25,28 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "huntress-rest-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "huntress-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-actor-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-escalations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-external-recon-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-identities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-incident-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-known-vpns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-platform-actions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-reseller-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-siem-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-signals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-summary-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-unwanted-access-rules-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "huntress-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
