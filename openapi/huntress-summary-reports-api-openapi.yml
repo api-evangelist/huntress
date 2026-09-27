@@ -156,35 +156,6 @@ components:
           type: string
           example: containment
           description: The remediation action category.
-    ReportIncident:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 12345678
-          description: The incident report identifier.
-        severity:
-          type: string
-          example: critical
-          description: The severity level of the incident.
-        sent_at:
-          type: string
-          example: '2026-04-17T12:34:56Z'
-          description: ISO-8601 formatted timestamp for when the incident was sent.
-        event_summary:
-          type: string
-          example: Suspicious login detected from unusual location.
-          description: A brief summary of the incident event.
-        body:
-          type: string
-          example: A suspicious login was detected from an unusual location.
-          description: The full description of the incident.
-        remediations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportIncidentRemediation'
-          description: Remediation actions taken for this incident.
     ReportExternalService:
       type: object
       properties:
@@ -616,6 +587,35 @@ components:
           example: true
           description: Indicates whether there are _any_ Windows agents.
       description: SummaryReport model
+    ReportIncident:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 12345678
+          description: The incident report identifier.
+        severity:
+          type: string
+          example: critical
+          description: The severity level of the incident.
+        sent_at:
+          type: string
+          example: '2026-04-17T12:34:56Z'
+          description: ISO-8601 formatted timestamp for when the incident was sent.
+        event_summary:
+          type: string
+          example: Suspicious login detected from unusual location.
+          description: A brief summary of the incident event.
+        body:
+          type: string
+          example: A suspicious login was detected from an unusual location.
+          description: The full description of the incident.
+        remediations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportIncidentRemediation'
+          description: Remediation actions taken for this incident.
     Pagination:
       type: object
       properties:

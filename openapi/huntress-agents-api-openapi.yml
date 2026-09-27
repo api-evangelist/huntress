@@ -344,14 +344,6 @@ components:
           description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
           default: false
       description: Isolate Agent
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
     UpdateAgent:
       type: object
       properties:
@@ -527,6 +519,14 @@ components:
           example: 19044
           description: The Windows Build Number. Should correspond to information on the <a href='https://docs.microsoft.com/en-us/windows/release-health/release-information'>Microsoft site</a>.
       description: Agent model
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

@@ -185,6 +185,14 @@ paths:
       operationId: getV1SignalsId
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     Signal:
       type: object
       properties:
@@ -249,14 +257,6 @@ components:
           example: '2025-06-26T18:57:03Z'
           description: ISO-8601 formatted timestamp for when this signal was last updated.
       description: Signal model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

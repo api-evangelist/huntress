@@ -248,6 +248,113 @@ paths:
       operationId: deleteV1OrganizationsId
 components:
   schemas:
+    OrganizationUpdateParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+        report_recipients:
+          type: array
+          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
+          example:
+          - vera@bradley.com
+          - my@user.net
+          items: null
+      description: Update an Organization
+    Organization:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A Huntress-unique identifier for the organization.
+        agents_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of all agents for the organization.
+        account_id:
+          type: integer
+          format: int64
+          example: 5
+          description: The unique identifier of the account associated with the organization.
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T18:54:02Z'
+          description: A timestamp for when the organization was created, formatted as per ISO-8601.
+        incident_reports_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of incident reports for the organization.
+        key:
+          type: string
+          example: test1
+          description: The subdomain associated with the organization.
+        logs_sources_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of SIEM log sources that are billable and eligible for billing.
+        identity_provider_tenant_id:
+          type: string
+          example: dcd219dd-bc68-4b9b-bf0b-4a33a796be35
+          description: The Identity Provider Tenant ID associated with the organization
+        billable_identity_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of billable identities for the organization.
+        name:
+          type: string
+          example: Acme Inc.
+          description: The public facing name for this organization.
+        report_recipients:
+          type: array
+          items:
+            type: string
+          example:
+          - test@test.com
+          - fakenotificiation@test.com
+          description: A list of emails Huntress is configured to send notification emails for the organization.
+        sat_learner_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of SAT learners.
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T18:54:02Z'
+          description: A timestamp for when the organization was updated, formatted as per ISO-8601.
+      required:
+      - microsoft_365_tenant_id
+      - microsoft_365_users_count
+      - notify_emails
+      description: Organization model
+    OrganizationCreationParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+      required:
+      - name
+      - key
+      description: Create an Organization
     OrganizationWithActualProductUsages:
       type: object
       properties:
@@ -357,40 +464,6 @@ components:
       - microsoft_365_users_count
       - notify_emails
       description: OrganizationWithActualProductUsages model
-    OrganizationCreationParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-      required:
-      - name
-      - key
-      description: Create an Organization
-    OrganizationUpdateParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-        report_recipients:
-          type: array
-          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
-          example:
-          - vera@bradley.com
-          - my@user.net
-          items: null
-      description: Update an Organization
     Pagination:
       type: object
       properties:
@@ -399,79 +472,6 @@ components:
         next_page_token:
           type: string
       description: Pagination model
-    Organization:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A Huntress-unique identifier for the organization.
-        agents_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of all agents for the organization.
-        account_id:
-          type: integer
-          format: int64
-          example: 5
-          description: The unique identifier of the account associated with the organization.
-        created_at:
-          type: string
-          format: date-time
-          example: '2022-03-01T18:54:02Z'
-          description: A timestamp for when the organization was created, formatted as per ISO-8601.
-        incident_reports_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of incident reports for the organization.
-        key:
-          type: string
-          example: test1
-          description: The subdomain associated with the organization.
-        logs_sources_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of SIEM log sources that are billable and eligible for billing.
-        identity_provider_tenant_id:
-          type: string
-          example: dcd219dd-bc68-4b9b-bf0b-4a33a796be35
-          description: The Identity Provider Tenant ID associated with the organization
-        billable_identity_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of billable identities for the organization.
-        name:
-          type: string
-          example: Acme Inc.
-          description: The public facing name for this organization.
-        report_recipients:
-          type: array
-          items:
-            type: string
-          example:
-          - test@test.com
-          - fakenotificiation@test.com
-          description: A list of emails Huntress is configured to send notification emails for the organization.
-        sat_learner_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of SAT learners.
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-03-01T18:54:02Z'
-          description: A timestamp for when the organization was updated, formatted as per ISO-8601.
-      required:
-      - microsoft_365_tenant_id
-      - microsoft_365_users_count
-      - notify_emails
-      description: Organization model
   securitySchemes:
     basic_auth:
       type: http

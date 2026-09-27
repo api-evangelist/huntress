@@ -239,6 +239,14 @@ components:
           example: '2025-09-05T18:20:34Z'
           description: ISO-8601 formatted timestamp for when this Platform Action was last updated.
       description: PlatformAction model
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     PlatformActionWithEntities:
       type: object
       properties:
@@ -320,14 +328,6 @@ components:
       required:
       - entities
       description: PlatformActionWithEntities model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

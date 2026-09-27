@@ -86,6 +86,13 @@ paths:
         required: true
 components:
   schemas:
+    SiemPagination:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          example: 019612ab-1234-7000-8000-000000000001
+          description: Token to retrieve the next page of results. Omitted when all results have been returned.
     SiemQueryResult:
       type: object
       properties:
@@ -105,13 +112,6 @@ components:
             next_page_token: 019612ab-1234-7000-8000-000000000002
           description: Pagination details. Contains `next_page_token` when additional results are available.
       description: SiemQueryResult model
-    SiemPagination:
-      type: object
-      properties:
-        next_page_token:
-          type: string
-          example: 019612ab-1234-7000-8000-000000000001
-          description: Token to retrieve the next page of results. Omitted when all results have been returned.
     postV1SiemQuery:
       type: object
       properties:
