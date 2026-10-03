@@ -335,6 +335,63 @@ components:
           type: string
           description: Free-text note attached to the rule. Pass an empty string or null to clear.
       description: Update an Unwanted Access Rule
+    UnwantedAccessRuleCreationParameters:
+      type: object
+      properties:
+        identity_id:
+          type: integer
+          format: int32
+          description: Scope the rule to a specific identity. Mutually exclusive with `organization_id`. If neither is provided, the rule is scoped to the account.
+        organization_id:
+          type: integer
+          format: int32
+          description: Scope the rule to an organization. Mutually exclusive with `identity_id`. If neither is provided, the rule is scoped to the account.
+        country_code:
+          type: string
+          description: ISO 3166-1 alpha-2 country code(s) this rule should match. Provide for `standard` rules. Accepts a single code or a comma-separated list, which creates one rule per code. Mutually exclusive with `vpn` and `logic`.
+        vpn:
+          type: string
+          description: Tunnel operator name(s) this rule should match. Provide for `standard` rules. Accepts a single name or a comma-separated list, which creates one rule per name. Mutually exclusive with `country_code` and `logic`.
+        logic:
+          type: string
+          description: Rule logic. Set to `catchall` to match every value in a category, or `catchall_exception` to opt an organization out of an account-level catchall. Omit to create a `standard` rule (in which case `country_code` or `vpn` is required). Mutually exclusive with `country_code` and `vpn`.
+          enum:
+          - catchall
+          - catchall_exception
+        type:
+          type: string
+          description: Whether matching access is `expected` or `unauthorized`. Must be `unauthorized` when rule `logic` is `catchall` and `expected` when rule `logic` is `catchall_exception`.
+          enum:
+          - expected
+          - unauthorized
+        starts_at:
+          type: string
+          format: date
+          description: UTC date (YYYY-MM-DD) when the rule becomes active. Omit for `expected` rules that should start immediately. Must be omitted for `unauthorized` rules and for rules with `logic` of `catchall` or `catchall_exception`.
+        expires_at:
+          type: string
+          format: date
+          description: UTC date (YYYY-MM-DD) when the rule expires. Omit for `expected` rules that should never expire. Must be omitted for `unauthorized` rules and for rules with `logic` of `catchall` or `catchall_exception`.
+        notes:
+          type: string
+          description: Optional free-text note to attach to the rule.
+        category:
+          type: string
+          description: Category that the catchall or exception applies to. Required when `logic` is provided.
+          enum:
+          - country
+          - vpn
+      required:
+      - type
+      description: Create an Unwanted Access Rule
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     UnwantedAccessRule:
       type: object
       properties:
@@ -423,63 +480,6 @@ components:
           example: '2025-09-05T18:20:34Z'
           description: ISO-8601 formatted timestamp for when this rule was last updated.
       description: UnwantedAccessRule model
-    UnwantedAccessRuleCreationParameters:
-      type: object
-      properties:
-        identity_id:
-          type: integer
-          format: int32
-          description: Scope the rule to a specific identity. Mutually exclusive with `organization_id`. If neither is provided, the rule is scoped to the account.
-        organization_id:
-          type: integer
-          format: int32
-          description: Scope the rule to an organization. Mutually exclusive with `identity_id`. If neither is provided, the rule is scoped to the account.
-        country_code:
-          type: string
-          description: ISO 3166-1 alpha-2 country code(s) this rule should match. Provide for `standard` rules. Accepts a single code or a comma-separated list, which creates one rule per code. Mutually exclusive with `vpn` and `logic`.
-        vpn:
-          type: string
-          description: Tunnel operator name(s) this rule should match. Provide for `standard` rules. Accepts a single name or a comma-separated list, which creates one rule per name. Mutually exclusive with `country_code` and `logic`.
-        logic:
-          type: string
-          description: Rule logic. Set to `catchall` to match every value in a category, or `catchall_exception` to opt an organization out of an account-level catchall. Omit to create a `standard` rule (in which case `country_code` or `vpn` is required). Mutually exclusive with `country_code` and `vpn`.
-          enum:
-          - catchall
-          - catchall_exception
-        type:
-          type: string
-          description: Whether matching access is `expected` or `unauthorized`. Must be `unauthorized` when rule `logic` is `catchall` and `expected` when rule `logic` is `catchall_exception`.
-          enum:
-          - expected
-          - unauthorized
-        starts_at:
-          type: string
-          format: date
-          description: UTC date (YYYY-MM-DD) when the rule becomes active. Omit for `expected` rules that should start immediately. Must be omitted for `unauthorized` rules and for rules with `logic` of `catchall` or `catchall_exception`.
-        expires_at:
-          type: string
-          format: date
-          description: UTC date (YYYY-MM-DD) when the rule expires. Omit for `expected` rules that should never expire. Must be omitted for `unauthorized` rules and for rules with `logic` of `catchall` or `catchall_exception`.
-        notes:
-          type: string
-          description: Optional free-text note to attach to the rule.
-        category:
-          type: string
-          description: Category that the catchall or exception applies to. Required when `logic` is provided.
-          enum:
-          - country
-          - vpn
-      required:
-      - type
-      description: Create an Unwanted Access Rule
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

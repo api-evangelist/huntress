@@ -333,17 +333,6 @@ paths:
       operationId: ReleaseAgent
 components:
   schemas:
-    IsolateAgent:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: Reason recorded for the isolation.
-        strict_isolation:
-          type: boolean
-          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
-          default: false
-      description: Isolate Agent
     UpdateAgent:
       type: object
       properties:
@@ -527,6 +516,17 @@ components:
         next_page_token:
           type: string
       description: Pagination model
+    IsolateAgent:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Reason recorded for the isolation.
+        strict_isolation:
+          type: boolean
+          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
+          default: false
+      description: Isolate Agent
   securitySchemes:
     basic_auth:
       type: http

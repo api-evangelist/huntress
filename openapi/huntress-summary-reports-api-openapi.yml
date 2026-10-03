@@ -156,17 +156,6 @@ components:
           type: string
           example: containment
           description: The remediation action category.
-    ReportExternalService:
-      type: object
-      properties:
-        name:
-          type: string
-          example: SSH
-          description: The name of the external service.
-        risky:
-          type: boolean
-          example: true
-          description: Whether this service is considered risky.
     SummaryReport:
       type: object
       properties:
@@ -587,6 +576,17 @@ components:
           example: true
           description: Indicates whether there are _any_ Windows agents.
       description: SummaryReport model
+    ReportExternalService:
+      type: object
+      properties:
+        name:
+          type: string
+          example: SSH
+          description: The name of the external service.
+        risky:
+          type: boolean
+          example: true
+          description: Whether this service is considered risky.
     ReportIncident:
       type: object
       properties:

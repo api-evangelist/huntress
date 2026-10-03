@@ -323,6 +323,44 @@ components:
             name: Robert Tables
           description: The user associated with this membership.
       description: MemberInvitation model
+    MembershipCreationParameters:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the user you are inviting.
+          example: accounting@example.com
+        first_name:
+          type: string
+          description: The first name of the user you are inviting.
+          example: Accounting
+        last_name:
+          type: string
+          description: The last name of the user you are inviting.
+          example: Department
+        permissions:
+          type: string
+          description: The specific permissions this membership will grant to the user.
+          enum:
+          - Admin
+          - Security Engineer
+          - User
+          - Read-only
+          - Finance
+          - Marketing
+          - Provisioner
+          example: Read-only
+        organization_id:
+          type: integer
+          format: int32
+          description: Include this parameter to invite a user to an organization instead of your account.
+          example: 123456
+      required:
+      - email
+      - first_name
+      - last_name
+      - permissions
+      description: Create a Membership
     Membership:
       type: object
       properties:
@@ -390,44 +428,6 @@ components:
           - User
           example: Security Engineer
       description: Update a User's membership
-    MembershipCreationParameters:
-      type: object
-      properties:
-        email:
-          type: string
-          description: The email address of the user you are inviting.
-          example: accounting@example.com
-        first_name:
-          type: string
-          description: The first name of the user you are inviting.
-          example: Accounting
-        last_name:
-          type: string
-          description: The last name of the user you are inviting.
-          example: Department
-        permissions:
-          type: string
-          description: The specific permissions this membership will grant to the user.
-          enum:
-          - Admin
-          - Security Engineer
-          - User
-          - Read-only
-          - Finance
-          - Marketing
-          - Provisioner
-          example: Read-only
-        organization_id:
-          type: integer
-          format: int32
-          description: Include this parameter to invite a user to an organization instead of your account.
-          example: 123456
-      required:
-      - email
-      - first_name
-      - last_name
-      - permissions
-      description: Create a Membership
     Pagination:
       type: object
       properties:

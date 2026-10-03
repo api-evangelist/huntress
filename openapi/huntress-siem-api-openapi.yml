@@ -86,6 +86,28 @@ paths:
         required: true
 components:
   schemas:
+    postV1SiemQuery:
+      type: object
+      properties:
+        esql:
+          type: string
+          description: ESQL query string (must begin with FROM logs)
+        range_start:
+          type: string
+          format: date-time
+          description: Query range start (ISO 8601)
+        range_end:
+          type: string
+          format: date-time
+          description: Query range end (ISO 8601)
+        page_token:
+          type: string
+          description: Pagination token from previous response
+      required:
+      - esql
+      - range_start
+      - range_end
+      description: Execute ESQL Query
     SiemPagination:
       type: object
       properties:
@@ -112,28 +134,6 @@ components:
             next_page_token: 019612ab-1234-7000-8000-000000000002
           description: Pagination details. Contains `next_page_token` when additional results are available.
       description: SiemQueryResult model
-    postV1SiemQuery:
-      type: object
-      properties:
-        esql:
-          type: string
-          description: ESQL query string (must begin with FROM logs)
-        range_start:
-          type: string
-          format: date-time
-          description: Query range start (ISO 8601)
-        range_end:
-          type: string
-          format: date-time
-          description: Query range end (ISO 8601)
-        page_token:
-          type: string
-          description: Pagination token from previous response
-      required:
-      - esql
-      - range_start
-      - range_end
-      description: Execute ESQL Query
   securitySchemes:
     basic_auth:
       type: http
