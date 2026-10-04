@@ -297,32 +297,14 @@ paths:
         required: true
 components:
   schemas:
-    MemberInvitation:
+    Pagination:
       type: object
       properties:
-        permissions:
+        next_page_url:
           type: string
-          example: Read-only
-          description: The specific level of permissions that have been granted to this user in the context of this membership.
-        account:
-          type: Object
-          example:
-            id: 1234
-            name: Exemplary Accounting, LLC
-          description: The account associated with this membership (if any).
-        organization:
-          type: Object
-          example:
-            id: 5678
-            name: Organic Zations
-          description: The organization associated with this membership (if any).
-        user:
-          type: Object
-          example:
-            email: little_bobby@example.com
-            name: Robert Tables
-          description: The user associated with this membership.
-      description: MemberInvitation model
+        next_page_token:
+          type: string
+      description: Pagination model
     MembershipCreationParameters:
       type: object
       properties:
@@ -361,6 +343,50 @@ components:
       - last_name
       - permissions
       description: Create a Membership
+    MemberInvitation:
+      type: object
+      properties:
+        permissions:
+          type: string
+          example: Read-only
+          description: The specific level of permissions that have been granted to this user in the context of this membership.
+        account:
+          type: Object
+          example:
+            id: 1234
+            name: Exemplary Accounting, LLC
+          description: The account associated with this membership (if any).
+        organization:
+          type: Object
+          example:
+            id: 5678
+            name: Organic Zations
+          description: The organization associated with this membership (if any).
+        user:
+          type: Object
+          example:
+            email: little_bobby@example.com
+            name: Robert Tables
+          description: The user associated with this membership.
+      description: MemberInvitation model
+    MembershipUpdateParameters:
+      type: object
+      properties:
+        permissions:
+          type: string
+          description: 'The specific level of permissions that have been granted to the user in the context of this membership. For more information, see our [support article](https://support.huntress.io/hc/en-us/articles/4404012728083-Huntress-Portal-User-Permissions) on permissions. Accepted values:
+
+            '
+          enum:
+          - Admin
+          - Finance
+          - Marketing
+          - Provisioner
+          - Read-only
+          - Security Engineer
+          - User
+          example: Security Engineer
+      description: Update a User's membership
     Membership:
       type: object
       properties:
@@ -410,32 +436,6 @@ components:
           example: 2026-01-22 01:07:08 UTC
           description: The time and date that this membership was last updated.
       description: Membership model
-    MembershipUpdateParameters:
-      type: object
-      properties:
-        permissions:
-          type: string
-          description: 'The specific level of permissions that have been granted to the user in the context of this membership. For more information, see our [support article](https://support.huntress.io/hc/en-us/articles/4404012728083-Huntress-Portal-User-Permissions) on permissions. Accepted values:
-
-            '
-          enum:
-          - Admin
-          - Finance
-          - Marketing
-          - Provisioner
-          - Read-only
-          - Security Engineer
-          - User
-          example: Security Engineer
-      description: Update a User's membership
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

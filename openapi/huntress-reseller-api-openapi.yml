@@ -2754,54 +2754,6 @@ paths:
       operationId: getV1Actor
 components:
   schemas:
-    RemediationBulkRejectionParameters:
-      type: object
-      properties:
-        comment:
-          type: string
-          description: A description of why the remediations were rejected. This explanation helps Huntress SOC analysts fix the remediation plan and re-issue the incident report.
-        useful:
-          type: boolean
-          description: Whether or not the remediation plan was useful.
-        name:
-          type: string
-          description: Name of the user rejecting the remediations. Falls back to the user attached to the API key if not provided.
-        phone_number:
-          type: string
-          description: Phone number to be contacted by the Huntress SOC. Falls back to the phone number of the user attached to the API key if not provided.
-        email:
-          type: string
-          description: Email to be contacted by the Huntress SOC. Falls back to the email of the user attached to the API key if not provided.
-      required:
-      - comment
-      - useful
-      description: Bulk Reject Remediations Remediations
-    MemberInvitation:
-      type: object
-      properties:
-        permissions:
-          type: string
-          example: Read-only
-          description: The specific level of permissions that have been granted to this user in the context of this membership.
-        account:
-          type: Object
-          example:
-            id: 1234
-            name: Exemplary Accounting, LLC
-          description: The account associated with this membership (if any).
-        organization:
-          type: Object
-          example:
-            id: 5678
-            name: Organic Zations
-          description: The organization associated with this membership (if any).
-        user:
-          type: Object
-          example:
-            email: little_bobby@example.com
-            name: Robert Tables
-          description: The user associated with this membership.
-      description: MemberInvitation model
     Agent:
       type: object
       properties:
@@ -2959,6 +2911,207 @@ components:
           example: 19044
           description: The Windows Build Number. Should correspond to information on the <a href='https://docs.microsoft.com/en-us/windows/release-health/release-information'>Microsoft site</a>.
       description: Agent model
+    Remediation:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for a remediation.
+        type:
+          type: string
+          example: manual
+          description: 'The type of the remediation. Can be one of: assisted, manual, containment'
+        action:
+          type: string
+          example: Delete File
+          description: Description of the remediation's required steps.
+        parameters:
+          type: array
+          items:
+            type: string
+          example:
+          - name: path
+            description: c:\windows\system32\tasks\malicious_task
+          description: Additional context on how the remediation will be performed.<br>For containment remediations, this will be a string showing the entity to which the remediation was applied.<br>For assisted remediations this will be an array of key value pairs representing all the parameters that are related to the remediation.<br>Manual remediations will have no information.
+        status:
+          type: string
+          example: completed
+          description: 'The status of the remediation. Can be one of: unapproved, approved, completed, failed, cancelled'
+        approved_at:
+          type: string
+          format: date-time
+          example: '2025-06-26T18:57:03Z'
+          description: ISO-8601 formatted timestamp for when the remediation was approved.
+        approved_by:
+          $ref: '#/components/schemas/User'
+          example:
+            id: 123123
+            name: John Smith
+            email: john.smith@example.com
+          description: The user that approved the remediation.
+        completed_at:
+          type: string
+          format: date-time
+          example: '2025-06-26T18:57:03Z'
+          description: ISO-8601 formatted timestamp for when the remediation was completed.
+      description: Remediation model
+    RemediationBulkRejectionParameters:
+      type: object
+      properties:
+        comment:
+          type: string
+          description: A description of why the remediations were rejected. This explanation helps Huntress SOC analysts fix the remediation plan and re-issue the incident report.
+        useful:
+          type: boolean
+          description: Whether or not the remediation plan was useful.
+        name:
+          type: string
+          description: Name of the user rejecting the remediations. Falls back to the user attached to the API key if not provided.
+        phone_number:
+          type: string
+          description: Phone number to be contacted by the Huntress SOC. Falls back to the phone number of the user attached to the API key if not provided.
+        email:
+          type: string
+          description: Email to be contacted by the Huntress SOC. Falls back to the email of the user attached to the API key if not provided.
+      required:
+      - comment
+      - useful
+      description: Bulk Reject Remediations Remediations
+    ExternalPort:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 42
+          description: A unique identifier for an external port record.
+        ip_address:
+          type: string
+          example: 203.0.113.5
+          description: The public IPv4 address associated with this external port.
+        port:
+          type: integer
+          format: int32
+          example: 22
+          description: The port number.
+        protocol:
+          type: string
+          example: TCP
+          description: The transport protocol (usually TCP or UDP).
+        service:
+          type: string
+          example: ssh
+          description: The service or application detected on the port.
+        risky_service:
+          type: boolean
+          example: true
+          description: Whether the detected service is considered risky.
+        last_scan_at:
+          type: string
+          format: date-time
+          example: '2026-03-15T12:00:00Z'
+          description: Timestamp of the last Huntress scan, formatted as per ISO-8601.
+        last_external_scan_at:
+          type: string
+          format: date-time
+          example: '2026-03-14T08:00:00Z'
+          description: Timestamp of the last external scan, formatted as per ISO-8601.
+        organization_ids:
+          type: array
+          example:
+          - 1
+          - 5
+          description: IDs of organizations associated with this external port that are accessible to the current user.
+      description: ExternalPort model
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for the subscription.
+        account:
+          type: Object
+          example:
+            id: 1
+            name: Little Bobby's Table Emporium
+          description: The account associated with this subscription.
+        product:
+          type: string
+          enum:
+          - edr
+          - ispm
+          - itdr
+          - sat
+          - siem
+          example: edr
+          description: The product type for this subscription.
+        status:
+          type: string
+          enum:
+          - draft
+          - approved
+          - accepted
+          - active
+          - completed
+          example: active
+          description: The subscription status.
+        minimum_usage:
+          type: integer
+          format: int64
+          example: 50
+          description: The current minimum usage commitment for this subscription.
+        terminal_minimum_usage:
+          type: integer
+          format: int64
+          example: 100
+          description: The minimum usage commitment for this subscription after all subscription schedules are completed. Usually, this will be the same as the current minimum, but it may be higher during an ongoing schedule.
+        billing_interval:
+          type: string
+          enum:
+          - monthly
+          - annual
+          example: monthly
+          description: The billing interval for this subscription.
+        effective_date:
+          type: string
+          example: '2024-01-01T00:00:00Z'
+          description: ISO-8601 formatted date when this subscription becomes effective.
+        renewal_date:
+          type: string
+          example: '2025-01-01T00:00:00Z'
+          description: ISO-8601 formatted date when this subscription renews.
+        auto_renew:
+          type: boolean
+          example: true
+          description: Whether this subscription will auto-renew.
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionSchedule'
+          example:
+          - id: 1
+            minimum: 100
+            maximum: 500
+            status: active
+            target_price: 200
+            months: 12
+            promo_units: 0
+            starts_at: '2024-01-01T00:00:00Z'
+            ends_at: '2025-01-01T00:00:00Z'
+          description: The schedules associated with this subscription.
+      description: Subscription model
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     OrganizationWithActualProductUsages:
       type: object
       properties:
@@ -3068,360 +3221,242 @@ components:
       - microsoft_365_users_count
       - notify_emails
       description: OrganizationWithActualProductUsages model
-    ExternalPort:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 42
-          description: A unique identifier for an external port record.
-        ip_address:
-          type: string
-          example: 203.0.113.5
-          description: The public IPv4 address associated with this external port.
-        port:
-          type: integer
-          format: int32
-          example: 22
-          description: The port number.
-        protocol:
-          type: string
-          example: TCP
-          description: The transport protocol (usually TCP or UDP).
-        service:
-          type: string
-          example: ssh
-          description: The service or application detected on the port.
-        risky_service:
-          type: boolean
-          example: true
-          description: Whether the detected service is considered risky.
-        last_scan_at:
-          type: string
-          format: date-time
-          example: '2026-03-15T12:00:00Z'
-          description: Timestamp of the last Huntress scan, formatted as per ISO-8601.
-        last_external_scan_at:
-          type: string
-          format: date-time
-          example: '2026-03-14T08:00:00Z'
-          description: Timestamp of the last external scan, formatted as per ISO-8601.
-        organization_ids:
-          type: array
-          example:
-          - 1
-          - 5
-          description: IDs of organizations associated with this external port that are accessible to the current user.
-      description: ExternalPort model
-    IsolateAgent:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: Reason recorded for the isolation.
-        strict_isolation:
-          type: boolean
-          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
-          default: false
-      description: Isolate Agent
-    Subscription:
+    SubscriptionSchedule:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A unique identifier for the subscription.
-        account:
-          type: Object
-          example:
-            id: 1
-            name: Little Bobby's Table Emporium
-          description: The account associated with this subscription.
-        product:
-          type: string
-          enum:
-          - edr
-          - ispm
-          - itdr
-          - sat
-          - siem
-          example: edr
-          description: The product type for this subscription.
-        status:
-          type: string
-          enum:
-          - draft
-          - approved
-          - accepted
-          - active
-          - completed
-          example: active
-          description: The subscription status.
-        minimum_usage:
-          type: integer
-          format: int64
-          example: 50
-          description: The current minimum usage commitment for this subscription.
-        terminal_minimum_usage:
+          description: A unique identifier for the subscription schedule.
+        minimum:
           type: integer
           format: int64
           example: 100
-          description: The minimum usage commitment for this subscription after all subscription schedules are completed. Usually, this will be the same as the current minimum, but it may be higher during an ongoing schedule.
-        billing_interval:
+          description: The minimum usage commitment for this schedule period.
+        maximum:
+          type: integer
+          format: int64
+          example: 500
+          description: The maximum usage limit for this schedule period.
+        status:
           type: string
           enum:
-          - monthly
-          - annual
-          example: monthly
-          description: The billing interval for this subscription.
-        effective_date:
-          type: string
-          example: '2024-01-01T00:00:00Z'
-          description: ISO-8601 formatted date when this subscription becomes effective.
-        renewal_date:
-          type: string
-          example: '2025-01-01T00:00:00Z'
-          description: ISO-8601 formatted date when this subscription renews.
-        auto_renew:
-          type: boolean
-          example: true
-          description: Whether this subscription will auto-renew.
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubscriptionSchedule'
-          example:
-          - id: 1
-            minimum: 100
-            maximum: 500
-            status: active
-            target_price: 200
-            months: 12
-            promo_units: 0
-            starts_at: '2024-01-01T00:00:00Z'
-            ends_at: '2025-01-01T00:00:00Z'
-          description: The schedules associated with this subscription.
-      description: Subscription model
-    IncidentReport:
-      type: object
-      properties:
-        id:
+          - active
+          - completed
+          - pending
+          example: active
+          description: The schedule status.
+        target_price:
           type: integer
           format: int64
-          example: 1
-          description: A unique identifier for an incident report.
-        account_id:
-          type: integer
-          format: int64
-          example: 5
-          description: Unique identifier for the account this incident report is associated with.
-        agent_id:
+          example: 200
+          description: The target price per unit for this schedule period.
+        months:
           type: integer
           format: int64
           example: 12
-          description: Unique identifier for the agent this incident report is associated with.
-        body:
-          type: string
-          example: <Content>
-          description: Autogenerated content describing the details of the incident in question.
-        closed_at:
-          type: string
-          format: date-time
-          example: '2022-03-15T14:22:00Z'
-          description: ISO-8601 formatted timestamp for when this incident report had its status set to `closed`. Null if non-applicable.
-        indicator_counts:
-          type: object
-          example:
-            footholds: 1
-            monitored_files: 0
-            process_detections: 0
-            ransomware_canaries: 0
-            antivirus_detections: 0
-          description: Mapping of indicator types to number of incidences of that threat in the context of this incident report.
-        indicator_types:
-          type: array
-          items:
-            type: string
-          example:
-          - footholds
-          description: Unique list of threat indicators that have been found in the context of this incident report.
-        organization_id:
+          description: The number of months this schedule period covers.
+        promo_units:
           type: integer
           format: int64
-          example: 4
-          description: Unique identifier for the organization this incident report is associated with.
-        platform:
+          example: 0
+          description: The number of promotional units for this schedule period.
+        starts_at:
           type: string
-          example: windows
-          description: The platform of the host machine (`darwin`,`google`,`microsoft_365`,`linux`,`windows`, or `other`).
-        remediations:
+          example: '2024-01-01T00:00:00Z'
+          description: ISO-8601 formatted date when this schedule period starts.
+        ends_at:
+          type: string
+          example: '2025-01-01T00:00:00Z'
+          description: ISO-8601 formatted date when this schedule period ends.
+    AccountUpdateParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the account
+        subdomain:
+          type: string
+          description: Subdomain this account will use to access the Huntress portal
+        phone_number:
+          type: string
+          description: Primary phone number used to contact account owner
+        support_type:
+          type: string
+          description: 'Specifies whether a reseller account is managed by the partner or by
+
+            Huntress.
+
+
+            NOTE: This field is only applicable for Managed Resellers. For all
+
+            other types of resellers, there is only one valid support type, so it
+
+            cannot be updated.
+
+            '
+          enum:
+          - huntress_supported
+          - partner_supported
+        billing_address:
           type: object
-          example:
-            total_count: 1
-            has_more: false
-            items:
-            - id: 1
-              type: manual
-              action: Delete File
-              parameters:
-              - name: path
-                description: c:\windows\system32\tasks\malicious_task
-              status: completed
-              approved_at: '2025-06-26T18:57:03Z'
-              approved_by:
-                id: '123123'
-                email: john.smith@example.com
-                name: John smith
-              completed_at: '2025-06-26T18:57:03Z'
-          description: This represents an itemized list of the first 10 remediations for an incident report. If there are more than 10, use the remediations endpoint to retrieve information about them.
-        sent_at:
+          description: Billing address for the account. If provided, must be valid.
+          properties:
+            line1:
+              type: string
+              description: Street address line 1
+            line2:
+              type: string
+              description: Street address line 2
+            city:
+              type: string
+              description: City
+            state:
+              type: string
+              description: State or province (required for US and CA)
+            postal_code:
+              type: string
+              description: Postal or ZIP code (required for US and GB)
+            country:
+              type: string
+              description: Two-letter ISO 3166-1 alpha-2 country code
+        shipping_address:
+          type: object
+          description: Shipping address for the account. If provided, must be valid.
+          properties:
+            line1:
+              type: string
+              description: Street address line 1
+            line2:
+              type: string
+              description: Street address line 2
+            city:
+              type: string
+              description: City
+            state:
+              type: string
+              description: State or province (required for US and CA)
+            postal_code:
+              type: string
+              description: Postal or ZIP code (required for US and GB)
+            country:
+              type: string
+              description: Two-letter ISO 3166-1 alpha-2 country code
+      description: Update Account
+    SubscriptionUpgradeParameters:
+      type: object
+      properties:
+        minimum:
+          type: integer
+          format: int32
+          description: New minimum usage commitment (must be greater than zero)
+        purchase_order:
           type: string
-          format: date-time
-          example: '2022-03-01T21:00:00Z'
-          description: ISO-8601 formatted timestamp for when a Huntress SOC analyst has notified necessary parties regarding this incident report. Null if not sent.
+          description: Purchase order number (defaults to existing subscription's PO)
+        on_renewal:
+          type: boolean
+          description: Schedule upgrade for next renewal instead of immediately
+          default: false
+      required:
+      - minimum
+      description: Upgrade Reseller Subscription
+    MembershipUpdateParameters:
+      type: object
+      properties:
+        permissions:
+          type: string
+          description: 'The specific level of permissions that have been granted to the user in the context of this membership. For more information, see our [support article](https://support.huntress.io/hc/en-us/articles/4404012728083-Huntress-Portal-User-Permissions) on permissions. Accepted values:
+
+            '
+          enum:
+          - Admin
+          - Finance
+          - Marketing
+          - Provisioner
+          - Read-only
+          - Security Engineer
+          - User
+          example: Security Engineer
+      description: Update a User's membership
+    ReportIncident:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 12345678
+          description: The incident report identifier.
         severity:
           type: string
-          example: low
-          description: The severity of the incident report. Can be one of `low`, `high`, `critical`.
-        status:
+          example: critical
+          description: The severity level of the incident.
+        sent_at:
           type: string
-          example: closed
-          description: Status of the incident report. Can be one of `sent`, `closed`, `dismissed`
-        status_updated_at:
+          example: '2026-04-17T12:34:56Z'
+          description: ISO-8601 formatted timestamp for when the incident was sent.
+        event_summary:
           type: string
-          format: date-time
-          example: '2022-03-15T14:22:00Z'
-          description: ISO-8601 formatted timestamp for when the status of this incident report was last updated.
-        subject:
+          example: Suspicious login detected from unusual location.
+          description: A brief summary of the incident event.
+        body:
           type: string
-          example: LOW - Incident on laptop01 (Test)
-          description: Autogenerated one-line description of the incident.
-        summary:
+          example: A suspicious login was detected from an unusual location.
+          description: The full description of the incident.
+        remediations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportIncidentRemediation'
+          description: Remediation actions taken for this incident.
+    ReportIncidentRemediation:
+      type: object
+      properties:
+        type:
           type: string
-          example: Huntress detected a malicious scheduled task on this host. We recommend removing the file and scheduled task listed in the remediation steps below.
-          description: Details of the incident report, as provided by a Huntress SOC analyst.
-        updated_at:
+          example: Remediations::SessionRevocation
+          description: The remediation type.
+        subtype:
           type: string
-          format: date-time
-          example: '2022-03-01T20:31:30Z'
-          description: ISO-8601 formatted timestamp for when this incident report was last updated.
-      description: IncidentReport model
-    Organization:
+          example: containment
+          description: The remediation action category.
+    OrganizationUsageLineItem:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A Huntress-unique identifier for the organization.
-        agents_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of all agents for the organization.
-        account_id:
-          type: integer
-          format: int64
-          example: 5
-          description: The unique identifier of the account associated with the organization.
-        created_at:
+          description: A unique identifier for this Organization Usage Line Item.
+        period_start:
           type: string
-          format: date-time
-          example: '2022-03-01T18:54:02Z'
-          description: A timestamp for when the organization was created, formatted as per ISO-8601.
-        incident_reports_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of incident reports for the organization.
-        key:
+          example: '2026-02-11T14:12:08Z'
+          description: The time and date that this billing period started.
+        period_end:
           type: string
-          example: test1
-          description: The subdomain associated with the organization.
-        logs_sources_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of SIEM log sources that are billable and eligible for billing.
-        identity_provider_tenant_id:
-          type: string
-          example: dcd219dd-bc68-4b9b-bf0b-4a33a796be35
-          description: The Identity Provider Tenant ID associated with the organization
-        billable_identity_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of billable identities for the organization.
-        name:
-          type: string
-          example: Acme Inc.
-          description: The public facing name for this organization.
-        report_recipients:
-          type: array
-          items:
-            type: string
+          example: '2027-02-11T14:12:08Z'
+          description: The time and date that this billing period ended.
+        account:
+          type: Object
           example:
-          - test@test.com
-          - fakenotificiation@test.com
-          description: A list of emails Huntress is configured to send notification emails for the organization.
-        sat_learner_count:
-          type: integer
-          format: int64
-          example: 42
-          description: Number of SAT learners.
-        updated_at:
-          type: string
-          format: date-time
-          example: '2022-03-01T18:54:02Z'
-          description: A timestamp for when the organization was updated, formatted as per ISO-8601.
-      required:
-      - microsoft_365_tenant_id
-      - microsoft_365_users_count
-      - notify_emails
-      description: Organization model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
-    OrganizationCreationParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-      required:
-      - name
-      - key
-      description: Create an Organization
-    UpdateAgent:
-      type: object
-      properties:
-        tags:
-          type: array
-          description: The full set of user classifications on the host. The supplied list replaces any existing tags. Values are normalized to lowercase, hyphenated values (for example, "My Server" becomes "my-server"), and blank or duplicate values are dropped.
-          items:
-            type: object
-            properties:
-              ? ''
-              : type: array
-                description: The full set of user classifications on the host. The supplied list replaces any existing tags. Values are normalized to lowercase, hyphenated values (for example, "My Server" becomes "my-server"), and blank or duplicate values are dropped.
-                items:
-                  type: string
-        tamper_protection_configured:
-          type: boolean
-          description: Enable or disable EDR tamper protection for the agent. Applies asynchronously, so the host-reported state is exposed separately as tamper_protection_actual. Requires an API key with permission to manage agent security settings, and the agent must support tamper protection.
-      description: Update Agent
+            id: 123
+            name: Willy Wonka
+            subdomain: willy_wonka
+          description: The account in which this data belongs to.
+        organization:
+          type: Object
+          example:
+            id: 123
+            name: Willy Wonka
+          description: The organization to which this data belongs.
+        actual_usage:
+          type: Object
+          example:
+            edr: 400
+            itdr: 20
+            sat: 300
+            siem: 50
+          description: A breakdown by Huntress product of the number of units actually used for an organization.
+      description: OrganizationUsageLineItem model
     SummaryReport:
       type: object
       properties:
@@ -3891,6 +3926,86 @@ components:
             actual: 300
           description: The accounts breakdown of its use of the product and the billing around it.
       description: AccountUsageLineItem model
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for the user.
+        email:
+          type: string
+          example: john.smith@example.com
+          description: The user's email.
+        name:
+          type: string
+          example: John Smith
+          description: The user's name.
+    MembershipCreationParameters:
+      type: object
+      properties:
+        email:
+          type: string
+          description: The email address of the user you are inviting.
+          example: accounting@example.com
+        first_name:
+          type: string
+          description: The first name of the user you are inviting.
+          example: Accounting
+        last_name:
+          type: string
+          description: The last name of the user you are inviting.
+          example: Department
+        permissions:
+          type: string
+          description: The specific permissions this membership will grant to the user.
+          enum:
+          - Admin
+          - Security Engineer
+          - User
+          - Read-only
+          - Finance
+          - Marketing
+          - Provisioner
+          example: Read-only
+        organization_id:
+          type: integer
+          format: int32
+          description: Include this parameter to invite a user to an organization instead of your account.
+          example: 123456
+      required:
+      - email
+      - first_name
+      - last_name
+      - permissions
+      description: Create a Membership
+    MemberInvitation:
+      type: object
+      properties:
+        permissions:
+          type: string
+          example: Read-only
+          description: The specific level of permissions that have been granted to this user in the context of this membership.
+        account:
+          type: Object
+          example:
+            id: 1234
+            name: Exemplary Accounting, LLC
+          description: The account associated with this membership (if any).
+        organization:
+          type: Object
+          example:
+            id: 5678
+            name: Organic Zations
+          description: The organization associated with this membership (if any).
+        user:
+          type: Object
+          example:
+            email: little_bobby@example.com
+            name: Robert Tables
+          description: The user associated with this membership.
+      description: MemberInvitation model
     Address:
       type: object
       properties:
@@ -3912,84 +4027,135 @@ components:
         country:
           type: string
           description: Two-letter ISO 3166-1 alpha-2 country code.
-    ReportIncident:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 12345678
-          description: The incident report identifier.
-        severity:
-          type: string
-          example: critical
-          description: The severity level of the incident.
-        sent_at:
-          type: string
-          example: '2026-04-17T12:34:56Z'
-          description: ISO-8601 formatted timestamp for when the incident was sent.
-        event_summary:
-          type: string
-          example: Suspicious login detected from unusual location.
-          description: A brief summary of the incident event.
-        body:
-          type: string
-          example: A suspicious login was detected from an unusual location.
-          description: The full description of the incident.
-        remediations:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportIncidentRemediation'
-          description: Remediation actions taken for this incident.
-    OrganizationUsageLineItem:
+    IncidentReport:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A unique identifier for this Organization Usage Line Item.
-        period_start:
+          description: A unique identifier for an incident report.
+        account_id:
+          type: integer
+          format: int64
+          example: 5
+          description: Unique identifier for the account this incident report is associated with.
+        agent_id:
+          type: integer
+          format: int64
+          example: 12
+          description: Unique identifier for the agent this incident report is associated with.
+        body:
           type: string
-          example: '2026-02-11T14:12:08Z'
-          description: The time and date that this billing period started.
-        period_end:
+          example: <Content>
+          description: Autogenerated content describing the details of the incident in question.
+        closed_at:
           type: string
-          example: '2027-02-11T14:12:08Z'
-          description: The time and date that this billing period ended.
+          format: date-time
+          example: '2022-03-15T14:22:00Z'
+          description: ISO-8601 formatted timestamp for when this incident report had its status set to `closed`. Null if non-applicable.
+        indicator_counts:
+          type: object
+          example:
+            footholds: 1
+            monitored_files: 0
+            process_detections: 0
+            ransomware_canaries: 0
+            antivirus_detections: 0
+          description: Mapping of indicator types to number of incidences of that threat in the context of this incident report.
+        indicator_types:
+          type: array
+          items:
+            type: string
+          example:
+          - footholds
+          description: Unique list of threat indicators that have been found in the context of this incident report.
+        organization_id:
+          type: integer
+          format: int64
+          example: 4
+          description: Unique identifier for the organization this incident report is associated with.
+        platform:
+          type: string
+          example: windows
+          description: The platform of the host machine (`darwin`,`google`,`microsoft_365`,`linux`,`windows`, or `other`).
+        remediations:
+          type: object
+          example:
+            total_count: 1
+            has_more: false
+            items:
+            - id: 1
+              type: manual
+              action: Delete File
+              parameters:
+              - name: path
+                description: c:\windows\system32\tasks\malicious_task
+              status: completed
+              approved_at: '2025-06-26T18:57:03Z'
+              approved_by:
+                id: '123123'
+                email: john.smith@example.com
+                name: John smith
+              completed_at: '2025-06-26T18:57:03Z'
+          description: This represents an itemized list of the first 10 remediations for an incident report. If there are more than 10, use the remediations endpoint to retrieve information about them.
+        sent_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T21:00:00Z'
+          description: ISO-8601 formatted timestamp for when a Huntress SOC analyst has notified necessary parties regarding this incident report. Null if not sent.
+        severity:
+          type: string
+          example: low
+          description: The severity of the incident report. Can be one of `low`, `high`, `critical`.
+        status:
+          type: string
+          example: closed
+          description: Status of the incident report. Can be one of `sent`, `closed`, `dismissed`
+        status_updated_at:
+          type: string
+          format: date-time
+          example: '2022-03-15T14:22:00Z'
+          description: ISO-8601 formatted timestamp for when the status of this incident report was last updated.
+        subject:
+          type: string
+          example: LOW - Incident on laptop01 (Test)
+          description: Autogenerated one-line description of the incident.
+        summary:
+          type: string
+          example: Huntress detected a malicious scheduled task on this host. We recommend removing the file and scheduled task listed in the remediation steps below.
+          description: Details of the incident report, as provided by a Huntress SOC analyst.
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T20:31:30Z'
+          description: ISO-8601 formatted timestamp for when this incident report was last updated.
+      description: IncidentReport model
+    Actor:
+      type: object
+      properties:
+        reseller:
+          type: Object
+          example:
+            id: 12345
+            name: ResellerCo
+          description: Information about the reseller associated with the supplied API credentials (if any).
         account:
           type: Object
           example:
-            id: 123
-            name: Willy Wonka
-            subdomain: willy_wonka
-          description: The account in which this data belongs to.
-        organization:
+            id: 12345
+            name: Huntress
+            subdomain: huntress
+            status: enabled
+          description: Information about the account associated with the supplied API credentials (if any).
+        user:
           type: Object
           example:
-            id: 123
-            name: Willy Wonka
-          description: The organization to which this data belongs.
-        actual_usage:
-          type: Object
-          example:
-            edr: 400
-            itdr: 20
-            sat: 300
-            siem: 50
-          description: A breakdown by Huntress product of the number of units actually used for an organization.
-      description: OrganizationUsageLineItem model
-    ReportIncidentRemediation:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Remediations::SessionRevocation
-          description: The remediation type.
-        subtype:
-          type: string
-          example: containment
-          description: The remediation action category.
+            id: 12345
+            email: email@example.com
+            name: Your User
+          description: Information about the user associated with the supplied API credentials (if any).
+      description: Actor model
     AccountCreationParameters:
       type: object
       properties:
@@ -4171,6 +4337,243 @@ components:
       - phone_number
       - admin
       description: Create Account
+    Membership:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for this membership. Note that this is _not_ the id of the user, account, etc. Instead, it identifies this specific relationship, which can be used to modify or delete the membership.
+        permissions:
+          type: string
+          enum:
+          - Admin
+          - Security Engineer
+          - User
+          - Read-only
+          - Finance
+          - Marketing
+          - Admin-Read-only
+          - Provisioner
+          example: Read-only
+          description: The specific level of permissions that have been granted to this user in the context of this membership.
+        account:
+          type: Object
+          example:
+            id: 1234
+            name: Exemplary Accounting, LLC
+          description: The account associated with this membership (if any).
+        organization:
+          type: Object
+          example:
+            id: 5678
+            name: Organic Zations
+          description: The organization associated with this membership (if any).
+        user:
+          type: Object
+          example:
+            id: 90210
+            email: little_bobby@example.com
+            name: Robert Tables
+          description: The user associated with this membership.
+        created_at:
+          type: string
+          example: 2026-01-22 01:07:08 UTC
+          description: The time and date that this membership was created.
+        updated_at:
+          type: string
+          example: 2026-01-22 01:07:08 UTC
+          description: The time and date that this membership was last updated.
+      description: Membership model
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for the account.
+        name:
+          type: string
+          example: Your Account
+          description: The public facing display name for the account.
+        subdomain:
+          type: string
+          example: exampleaccount
+          description: The subdomain for the account.
+        status:
+          type: string
+          enum:
+          - enabled
+          - disabled
+          example: enabled
+          description: The current status of the account.
+        support_type:
+          type: string
+          enum:
+          - huntress_supported
+          - partner_supported
+          - not_applicable
+          example: huntress_supported
+          description: For accounts that have been provisioned through a reseller, this field indicates whether the account is huntress supported or partner supported.
+        neighborhood_watch:
+          type: Object
+          example:
+            edr: 10
+            ispm: 10
+            itdr: 10
+            sat: 10
+            siem: 10
+          description: The count of Neighborhood Watch seats assigned to the account, by product.
+        billing_address:
+          $ref: '#/components/schemas/Address'
+          description: The billing address for the account, or null if not set.
+        shipping_address:
+          $ref: '#/components/schemas/Address'
+          description: The shipping address for the account, or null if not set.
+      description: Account model
+    OrganizationCreationParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+      required:
+      - name
+      - key
+      description: Create an Organization
+    ReportExternalService:
+      type: object
+      properties:
+        name:
+          type: string
+          example: SSH
+          description: The name of the external service.
+        risky:
+          type: boolean
+          example: true
+          description: Whether this service is considered risky.
+    IsolateAgent:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Reason recorded for the isolation.
+        strict_isolation:
+          type: boolean
+          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
+          default: false
+      description: Isolate Agent
+    SubscriptionCreationParameters:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int32
+          description: The reseller subaccount ID
+        product:
+          type: string
+          description: Filter by product type
+          enum:
+          - edr
+          - ispm
+          - itdr
+          - sat
+          - siem
+        minimum:
+          type: integer
+          format: int32
+          description: Minimum usage commitment (must be greater than zero)
+        purchase_order:
+          type: string
+          description: Purchase order number
+        billing_interval:
+          type: string
+          description: Billing interval
+          enum:
+          - monthly
+          - annual
+          default: monthly
+      required:
+      - account_id
+      - product
+      - minimum
+      - purchase_order
+      description: Create Reseller Subscription
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+          description: A unique identifier for the invoice.
+        amount:
+          type: integer
+          format: int32
+          example: 303
+          description: The amount intended to be collected by this invoice. <a href='https://stripe.com/docs/api/charges/object#charge_object-amount'>Mimics Stripe.</a>.
+        created_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T20:56:15Z'
+          description: ISO-8601 formatted timestamp for when this invoice was created.
+        currency_type:
+          type: string
+          example: usd
+          description: The currency type, using a <a href='https://en.wikipedia.org/wiki/ISO_4217'>ISO-4217</a> three-letter code in lowercase.
+        plan:
+          type: string
+          example: Huntress Partner 100 Agents
+          description: The corresponding name of huntress subscription plan sku.
+        quantity:
+          type: integer
+          format: int64
+          example: 101
+          description: The total count of licensed agents accounted for in this invoice.
+        receipt:
+          type: string
+          example: https://pay.stripe/com/invoice/invst_uuid
+          description: A direct link to stripe payment invoice for this invoice.
+        status:
+          type: string
+          example: paid
+          description: The invoice status. Can be one of `open`, `paid`, `failed`, `partial_refund`, `full_refund`.
+        has_usage:
+          type: boolean
+          example: true
+          description: Whether this invoice has associated usage line items.
+        updated_at:
+          type: string
+          format: date-time
+          example: '2022-03-01T20:56:15Z'
+          description: ISO-8601 formatted timestamp for when this invoice was last updated.
+      description: Invoice model
+    OrganizationUpdateParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+        report_recipients:
+          type: array
+          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
+          example:
+          - vera@bradley.com
+          - my@user.net
+          items: null
+      description: Update an Organization
     Signal:
       type: object
       properties:
@@ -4235,218 +4638,79 @@ components:
           example: '2025-06-26T18:57:03Z'
           description: ISO-8601 formatted timestamp for when this signal was last updated.
       description: Signal model
-    Invoice:
+    Organization:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A unique identifier for the invoice.
-        amount:
+          description: A Huntress-unique identifier for the organization.
+        agents_count:
           type: integer
-          format: int32
-          example: 303
-          description: The amount intended to be collected by this invoice. <a href='https://stripe.com/docs/api/charges/object#charge_object-amount'>Mimics Stripe.</a>.
+          format: int64
+          example: 42
+          description: Number of all agents for the organization.
+        account_id:
+          type: integer
+          format: int64
+          example: 5
+          description: The unique identifier of the account associated with the organization.
         created_at:
           type: string
           format: date-time
-          example: '2022-03-01T20:56:15Z'
-          description: ISO-8601 formatted timestamp for when this invoice was created.
-        currency_type:
-          type: string
-          example: usd
-          description: The currency type, using a <a href='https://en.wikipedia.org/wiki/ISO_4217'>ISO-4217</a> three-letter code in lowercase.
-        plan:
-          type: string
-          example: Huntress Partner 100 Agents
-          description: The corresponding name of huntress subscription plan sku.
-        quantity:
+          example: '2022-03-01T18:54:02Z'
+          description: A timestamp for when the organization was created, formatted as per ISO-8601.
+        incident_reports_count:
           type: integer
           format: int64
-          example: 101
-          description: The total count of licensed agents accounted for in this invoice.
-        receipt:
+          example: 42
+          description: Number of incident reports for the organization.
+        key:
           type: string
-          example: https://pay.stripe/com/invoice/invst_uuid
-          description: A direct link to stripe payment invoice for this invoice.
-        status:
+          example: test1
+          description: The subdomain associated with the organization.
+        logs_sources_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of SIEM log sources that are billable and eligible for billing.
+        identity_provider_tenant_id:
           type: string
-          example: paid
-          description: The invoice status. Can be one of `open`, `paid`, `failed`, `partial_refund`, `full_refund`.
-        has_usage:
-          type: boolean
-          example: true
-          description: Whether this invoice has associated usage line items.
+          example: dcd219dd-bc68-4b9b-bf0b-4a33a796be35
+          description: The Identity Provider Tenant ID associated with the organization
+        billable_identity_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of billable identities for the organization.
+        name:
+          type: string
+          example: Acme Inc.
+          description: The public facing name for this organization.
+        report_recipients:
+          type: array
+          items:
+            type: string
+          example:
+          - test@test.com
+          - fakenotificiation@test.com
+          description: A list of emails Huntress is configured to send notification emails for the organization.
+        sat_learner_count:
+          type: integer
+          format: int64
+          example: 42
+          description: Number of SAT learners.
         updated_at:
           type: string
           format: date-time
-          example: '2022-03-01T20:56:15Z'
-          description: ISO-8601 formatted timestamp for when this invoice was last updated.
-      description: Invoice model
-    SubscriptionCreationParameters:
-      type: object
-      properties:
-        account_id:
-          type: integer
-          format: int32
-          description: The reseller subaccount ID
-        product:
-          type: string
-          description: Filter by product type
-          enum:
-          - edr
-          - ispm
-          - itdr
-          - sat
-          - siem
-        minimum:
-          type: integer
-          format: int32
-          description: Minimum usage commitment (must be greater than zero)
-        purchase_order:
-          type: string
-          description: Purchase order number
-        billing_interval:
-          type: string
-          description: Billing interval
-          enum:
-          - monthly
-          - annual
-          default: monthly
+          example: '2022-03-01T18:54:02Z'
+          description: A timestamp for when the organization was updated, formatted as per ISO-8601.
       required:
-      - account_id
-      - product
-      - minimum
-      - purchase_order
-      description: Create Reseller Subscription
-    ReportExternalService:
-      type: object
-      properties:
-        name:
-          type: string
-          example: SSH
-          description: The name of the external service.
-        risky:
-          type: boolean
-          example: true
-          description: Whether this service is considered risky.
-    AccountUpdateParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the account
-        subdomain:
-          type: string
-          description: Subdomain this account will use to access the Huntress portal
-        phone_number:
-          type: string
-          description: Primary phone number used to contact account owner
-        support_type:
-          type: string
-          description: 'Specifies whether a reseller account is managed by the partner or by
-
-            Huntress.
-
-
-            NOTE: This field is only applicable for Managed Resellers. For all
-
-            other types of resellers, there is only one valid support type, so it
-
-            cannot be updated.
-
-            '
-          enum:
-          - huntress_supported
-          - partner_supported
-        billing_address:
-          type: object
-          description: Billing address for the account. If provided, must be valid.
-          properties:
-            line1:
-              type: string
-              description: Street address line 1
-            line2:
-              type: string
-              description: Street address line 2
-            city:
-              type: string
-              description: City
-            state:
-              type: string
-              description: State or province (required for US and CA)
-            postal_code:
-              type: string
-              description: Postal or ZIP code (required for US and GB)
-            country:
-              type: string
-              description: Two-letter ISO 3166-1 alpha-2 country code
-        shipping_address:
-          type: object
-          description: Shipping address for the account. If provided, must be valid.
-          properties:
-            line1:
-              type: string
-              description: Street address line 1
-            line2:
-              type: string
-              description: Street address line 2
-            city:
-              type: string
-              description: City
-            state:
-              type: string
-              description: State or province (required for US and CA)
-            postal_code:
-              type: string
-              description: Postal or ZIP code (required for US and GB)
-            country:
-              type: string
-              description: Two-letter ISO 3166-1 alpha-2 country code
-      description: Update Account
-    SubscriptionUpgradeParameters:
-      type: object
-      properties:
-        minimum:
-          type: integer
-          format: int32
-          description: New minimum usage commitment (must be greater than zero)
-        purchase_order:
-          type: string
-          description: Purchase order number (defaults to existing subscription's PO)
-        on_renewal:
-          type: boolean
-          description: Schedule upgrade for next renewal instead of immediately
-          default: false
-      required:
-      - minimum
-      description: Upgrade Reseller Subscription
-    Actor:
-      type: object
-      properties:
-        reseller:
-          type: Object
-          example:
-            id: 12345
-            name: ResellerCo
-          description: Information about the reseller associated with the supplied API credentials (if any).
-        account:
-          type: Object
-          example:
-            id: 12345
-            name: Huntress
-            subdomain: huntress
-            status: enabled
-          description: Information about the account associated with the supplied API credentials (if any).
-        user:
-          type: Object
-          example:
-            id: 12345
-            email: email@example.com
-            name: Your User
-          description: Information about the user associated with the supplied API credentials (if any).
-      description: Actor model
+      - microsoft_365_tenant_id
+      - microsoft_365_users_count
+      - notify_emails
+      description: Organization model
     SubscriptionUpdateParameters:
       type: object
       properties:
@@ -4471,288 +4735,24 @@ components:
           type: boolean
           description: Set auto-renew (active subscriptions only)
       description: Update Reseller Subscription
-    User:
+    UpdateAgent:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A unique identifier for the user.
-        email:
-          type: string
-          example: john.smith@example.com
-          description: The user's email.
-        name:
-          type: string
-          example: John Smith
-          description: The user's name.
-    OrganizationUpdateParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-        report_recipients:
+        tags:
           type: array
-          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
-          example:
-          - vera@bradley.com
-          - my@user.net
-          items: null
-      description: Update an Organization
-    Remediation:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A unique identifier for a remediation.
-        type:
-          type: string
-          example: manual
-          description: 'The type of the remediation. Can be one of: assisted, manual, containment'
-        action:
-          type: string
-          example: Delete File
-          description: Description of the remediation's required steps.
-        parameters:
-          type: array
+          description: The full set of user classifications on the host. The supplied list replaces any existing tags. Values are normalized to lowercase, hyphenated values (for example, "My Server" becomes "my-server"), and blank or duplicate values are dropped.
           items:
-            type: string
-          example:
-          - name: path
-            description: c:\windows\system32\tasks\malicious_task
-          description: Additional context on how the remediation will be performed.<br>For containment remediations, this will be a string showing the entity to which the remediation was applied.<br>For assisted remediations this will be an array of key value pairs representing all the parameters that are related to the remediation.<br>Manual remediations will have no information.
-        status:
-          type: string
-          example: completed
-          description: 'The status of the remediation. Can be one of: unapproved, approved, completed, failed, cancelled'
-        approved_at:
-          type: string
-          format: date-time
-          example: '2025-06-26T18:57:03Z'
-          description: ISO-8601 formatted timestamp for when the remediation was approved.
-        approved_by:
-          $ref: '#/components/schemas/User'
-          example:
-            id: 123123
-            name: John Smith
-            email: john.smith@example.com
-          description: The user that approved the remediation.
-        completed_at:
-          type: string
-          format: date-time
-          example: '2025-06-26T18:57:03Z'
-          description: ISO-8601 formatted timestamp for when the remediation was completed.
-      description: Remediation model
-    SubscriptionSchedule:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A unique identifier for the subscription schedule.
-        minimum:
-          type: integer
-          format: int64
-          example: 100
-          description: The minimum usage commitment for this schedule period.
-        maximum:
-          type: integer
-          format: int64
-          example: 500
-          description: The maximum usage limit for this schedule period.
-        status:
-          type: string
-          enum:
-          - active
-          - completed
-          - pending
-          example: active
-          description: The schedule status.
-        target_price:
-          type: integer
-          format: int64
-          example: 200
-          description: The target price per unit for this schedule period.
-        months:
-          type: integer
-          format: int64
-          example: 12
-          description: The number of months this schedule period covers.
-        promo_units:
-          type: integer
-          format: int64
-          example: 0
-          description: The number of promotional units for this schedule period.
-        starts_at:
-          type: string
-          example: '2024-01-01T00:00:00Z'
-          description: ISO-8601 formatted date when this schedule period starts.
-        ends_at:
-          type: string
-          example: '2025-01-01T00:00:00Z'
-          description: ISO-8601 formatted date when this schedule period ends.
-    MembershipCreationParameters:
-      type: object
-      properties:
-        email:
-          type: string
-          description: The email address of the user you are inviting.
-          example: accounting@example.com
-        first_name:
-          type: string
-          description: The first name of the user you are inviting.
-          example: Accounting
-        last_name:
-          type: string
-          description: The last name of the user you are inviting.
-          example: Department
-        permissions:
-          type: string
-          description: The specific permissions this membership will grant to the user.
-          enum:
-          - Admin
-          - Security Engineer
-          - User
-          - Read-only
-          - Finance
-          - Marketing
-          - Provisioner
-          example: Read-only
-        organization_id:
-          type: integer
-          format: int32
-          description: Include this parameter to invite a user to an organization instead of your account.
-          example: 123456
-      required:
-      - email
-      - first_name
-      - last_name
-      - permissions
-      description: Create a Membership
-    Membership:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A unique identifier for this membership. Note that this is _not_ the id of the user, account, etc. Instead, it identifies this specific relationship, which can be used to modify or delete the membership.
-        permissions:
-          type: string
-          enum:
-          - Admin
-          - Security Engineer
-          - User
-          - Read-only
-          - Finance
-          - Marketing
-          - Admin-Read-only
-          - Provisioner
-          example: Read-only
-          description: The specific level of permissions that have been granted to this user in the context of this membership.
-        account:
-          type: Object
-          example:
-            id: 1234
-            name: Exemplary Accounting, LLC
-          description: The account associated with this membership (if any).
-        organization:
-          type: Object
-          example:
-            id: 5678
-            name: Organic Zations
-          description: The organization associated with this membership (if any).
-        user:
-          type: Object
-          example:
-            id: 90210
-            email: little_bobby@example.com
-            name: Robert Tables
-          description: The user associated with this membership.
-        created_at:
-          type: string
-          example: 2026-01-22 01:07:08 UTC
-          description: The time and date that this membership was created.
-        updated_at:
-          type: string
-          example: 2026-01-22 01:07:08 UTC
-          description: The time and date that this membership was last updated.
-      description: Membership model
-    MembershipUpdateParameters:
-      type: object
-      properties:
-        permissions:
-          type: string
-          description: 'The specific level of permissions that have been granted to the user in the context of this membership. For more information, see our [support article](https://support.huntress.io/hc/en-us/articles/4404012728083-Huntress-Portal-User-Permissions) on permissions. Accepted values:
-
-            '
-          enum:
-          - Admin
-          - Finance
-          - Marketing
-          - Provisioner
-          - Read-only
-          - Security Engineer
-          - User
-          example: Security Engineer
-      description: Update a User's membership
-    Account:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-          example: 1
-          description: A unique identifier for the account.
-        name:
-          type: string
-          example: Your Account
-          description: The public facing display name for the account.
-        subdomain:
-          type: string
-          example: exampleaccount
-          description: The subdomain for the account.
-        status:
-          type: string
-          enum:
-          - enabled
-          - disabled
-          example: enabled
-          description: The current status of the account.
-        support_type:
-          type: string
-          enum:
-          - huntress_supported
-          - partner_supported
-          - not_applicable
-          example: huntress_supported
-          description: For accounts that have been provisioned through a reseller, this field indicates whether the account is huntress supported or partner supported.
-        neighborhood_watch:
-          type: Object
-          example:
-            edr: 10
-            ispm: 10
-            itdr: 10
-            sat: 10
-            siem: 10
-          description: The count of Neighborhood Watch seats assigned to the account, by product.
-        billing_address:
-          $ref: '#/components/schemas/Address'
-          description: The billing address for the account, or null if not set.
-        shipping_address:
-          $ref: '#/components/schemas/Address'
-          description: The shipping address for the account, or null if not set.
-      description: Account model
+            type: object
+            properties:
+              ? ''
+              : type: array
+                description: The full set of user classifications on the host. The supplied list replaces any existing tags. Values are normalized to lowercase, hyphenated values (for example, "My Server" becomes "my-server"), and blank or duplicate values are dropped.
+                items:
+                  type: string
+        tamper_protection_configured:
+          type: boolean
+          description: Enable or disable EDR tamper protection for the agent. Applies asynchronously, so the host-reported state is exposed separately as tamper_protection_actual. Requires an API key with permission to manage agent security settings, and the agent must support tamper protection.
+      description: Update Agent
   securitySchemes:
     basic_auth:
       type: http

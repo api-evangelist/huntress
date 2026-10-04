@@ -145,17 +145,14 @@ paths:
       operationId: getV1ReportsId
 components:
   schemas:
-    ReportIncidentRemediation:
+    Pagination:
       type: object
       properties:
-        type:
+        next_page_url:
           type: string
-          example: Remediations::SessionRevocation
-          description: The remediation type.
-        subtype:
+        next_page_token:
           type: string
-          example: containment
-          description: The remediation action category.
+      description: Pagination model
     SummaryReport:
       type: object
       properties:
@@ -576,17 +573,6 @@ components:
           example: true
           description: Indicates whether there are _any_ Windows agents.
       description: SummaryReport model
-    ReportExternalService:
-      type: object
-      properties:
-        name:
-          type: string
-          example: SSH
-          description: The name of the external service.
-        risky:
-          type: boolean
-          example: true
-          description: Whether this service is considered risky.
     ReportIncident:
       type: object
       properties:
@@ -616,14 +602,28 @@ components:
           items:
             $ref: '#/components/schemas/ReportIncidentRemediation'
           description: Remediation actions taken for this incident.
-    Pagination:
+    ReportIncidentRemediation:
       type: object
       properties:
-        next_page_url:
+        type:
           type: string
-        next_page_token:
+          example: Remediations::SessionRevocation
+          description: The remediation type.
+        subtype:
           type: string
-      description: Pagination model
+          example: containment
+          description: The remediation action category.
+    ReportExternalService:
+      type: object
+      properties:
+        name:
+          type: string
+          example: SSH
+          description: The name of the external service.
+        risky:
+          type: boolean
+          example: true
+          description: Whether this service is considered risky.
   securitySchemes:
     basic_auth:
       type: http

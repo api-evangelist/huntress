@@ -242,63 +242,80 @@ paths:
         required: true
 components:
   schemas:
-    EscalationResolutionParameters:
+    Escalation:
       type: object
       properties:
-        determination:
+        id:
+          type: integer
+          format: int64
+          example: 84938
+          description: A Huntress-unique identifier for the escalation.
+        account:
+          type: Account
+          example:
+            id: 1
+            name: Your Account Name
+          description: The Account the escalation pertains to.
+        organizations:
+          type: array
+          items:
+            type: string
+          example:
+          - id: 1234
+            name: ExampleCo
+          description: An array of Organizations this escalation pertains to
+        created_at:
           type: string
-          description: Determination is only used for Unwanted Country Access and Unwanted VPN Access Escalations. This field determines whether **all** the associated identities are expected or unauthorized.
-          enum:
-          - expected
-          - unauthorized
-        scope:
+          format: date-time
+          example: '2025-09-05T18:20:34Z'
+          description: ISO-8601 formatted timestamp for when this escalation was created.
+        resolved_at:
           type: string
-          description: 'Scope is used only for Unwanted Access Escalations. This determines what kinds of access rules are created in response to the Escalation. This parameter is better explained using an example:
-
-            In the scenario when `email123@example.com` logs in from Russia and the determination is `unauthorized`:
-
-
-            When the scope is `identity`:
-
-
-            Rules created based on the resolution will only apply to the identities associated with the Escalation. In this case a rule will be created specifically preventing `email123@example.com` from logging in from Russia.
-
-
-            When the scope is `organization`:
-
-
-            Rules created based on the resolution will apply to all identities in the organization. In this case all logins from Russia will be prevented across the organization.
-
-
-            When the scope is `account`:
-
-
-            Rules created based on the resolution will apply to all identities on the account. In this case all logins from Russia will be prevented across the account.
-
-            '
+          format: date-time
+          example: '2025-09-05T18:20:34Z'
+          description: ISO-8601 formatted timestamp for when this escalation was resolved.
+        severity:
+          type: string
           enum:
-          - account
-          - organization
-          - identity
-      description: Create an Escalation Resolution
-    EscalationResolution:
+          - low
+          - high
+          - critical
+          example: low
+          description: The severity of the escalation.
+        status:
+          type: string
+          enum:
+          - open
+          - sent
+          - resolved
+          example: resolved
+          description: The status of the Escalation
+        subject:
+          type: string
+          example: Defender Disabled
+          description: The subject of the Escalation
+        subtype:
+          type: string
+          example: US
+          description: An additional classifier for the escalation. The interpretation depends on the escalation type (e.g. an ISO country code for Unexpected Country Access escalations).
+        type:
+          type: string
+          example: Environmental Issue
+          description: The type of the Escalation
+        updated_at:
+          type: string
+          format: date-time
+          example: '2025-09-05T18:20:34Z'
+          description: ISO-8601 formatted timestamp for when this escalation was last updated.
+      description: Escalation model
+    Pagination:
       type: object
       properties:
-        escalation:
-          $ref: '#/components/schemas/EscalationWithEntities'
-          description: The resolved Escalation.
-        resolution_method:
+        next_page_url:
           type: string
-          enum:
-          - rule
-          - dismiss
-          - direct
-          example: rule
-          description: The code path the server took to resolve the Escalation. `rule` indicates a bulk resolution that created attribute rules from the supplied `determination` and `scope` parameters. `dismiss` indicates a temporary resolution from omitting both parameters on an Unwanted Access Escalation. `direct` indicates a simple resolution on an Escalation type that does not accept resolution parameters.
-      required:
-      - escalation
-      - resolution_method
-      description: EscalationResolution model
+        next_page_token:
+          type: string
+      description: Pagination model
     EscalationWithEntities:
       type: object
       properties:
@@ -381,80 +398,63 @@ components:
       required:
       - entities
       description: EscalationWithEntities model
-    Pagination:
+    EscalationResolution:
       type: object
       properties:
-        next_page_url:
+        escalation:
+          $ref: '#/components/schemas/EscalationWithEntities'
+          description: The resolved Escalation.
+        resolution_method:
           type: string
-        next_page_token:
-          type: string
-      description: Pagination model
-    Escalation:
+          enum:
+          - rule
+          - dismiss
+          - direct
+          example: rule
+          description: The code path the server took to resolve the Escalation. `rule` indicates a bulk resolution that created attribute rules from the supplied `determination` and `scope` parameters. `dismiss` indicates a temporary resolution from omitting both parameters on an Unwanted Access Escalation. `direct` indicates a simple resolution on an Escalation type that does not accept resolution parameters.
+      required:
+      - escalation
+      - resolution_method
+      description: EscalationResolution model
+    EscalationResolutionParameters:
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 84938
-          description: A Huntress-unique identifier for the escalation.
-        account:
-          type: Account
-          example:
-            id: 1
-            name: Your Account Name
-          description: The Account the escalation pertains to.
-        organizations:
-          type: array
-          items:
-            type: string
-          example:
-          - id: 1234
-            name: ExampleCo
-          description: An array of Organizations this escalation pertains to
-        created_at:
+        determination:
           type: string
-          format: date-time
-          example: '2025-09-05T18:20:34Z'
-          description: ISO-8601 formatted timestamp for when this escalation was created.
-        resolved_at:
-          type: string
-          format: date-time
-          example: '2025-09-05T18:20:34Z'
-          description: ISO-8601 formatted timestamp for when this escalation was resolved.
-        severity:
-          type: string
+          description: Determination is only used for Unwanted Country Access and Unwanted VPN Access Escalations. This field determines whether **all** the associated identities are expected or unauthorized.
           enum:
-          - low
-          - high
-          - critical
-          example: low
-          description: The severity of the escalation.
-        status:
+          - expected
+          - unauthorized
+        scope:
           type: string
+          description: 'Scope is used only for Unwanted Access Escalations. This determines what kinds of access rules are created in response to the Escalation. This parameter is better explained using an example:
+
+            In the scenario when `email123@example.com` logs in from Russia and the determination is `unauthorized`:
+
+
+            When the scope is `identity`:
+
+
+            Rules created based on the resolution will only apply to the identities associated with the Escalation. In this case a rule will be created specifically preventing `email123@example.com` from logging in from Russia.
+
+
+            When the scope is `organization`:
+
+
+            Rules created based on the resolution will apply to all identities in the organization. In this case all logins from Russia will be prevented across the organization.
+
+
+            When the scope is `account`:
+
+
+            Rules created based on the resolution will apply to all identities on the account. In this case all logins from Russia will be prevented across the account.
+
+            '
           enum:
-          - open
-          - sent
-          - resolved
-          example: resolved
-          description: The status of the Escalation
-        subject:
-          type: string
-          example: Defender Disabled
-          description: The subject of the Escalation
-        subtype:
-          type: string
-          example: US
-          description: An additional classifier for the escalation. The interpretation depends on the escalation type (e.g. an ISO country code for Unexpected Country Access escalations).
-        type:
-          type: string
-          example: Environmental Issue
-          description: The type of the Escalation
-        updated_at:
-          type: string
-          format: date-time
-          example: '2025-09-05T18:20:34Z'
-          description: ISO-8601 formatted timestamp for when this escalation was last updated.
-      description: Escalation model
+          - account
+          - organization
+          - identity
+      description: Create an Escalation Resolution
   securitySchemes:
     basic_auth:
       type: http

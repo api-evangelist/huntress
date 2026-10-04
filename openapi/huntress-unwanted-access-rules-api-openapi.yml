@@ -320,21 +320,14 @@ paths:
         required: true
 components:
   schemas:
-    UnwantedAccessRuleUpdateParameters:
+    Pagination:
       type: object
       properties:
-        starts_at:
+        next_page_url:
           type: string
-          format: date
-          description: UTC date (YYYY-MM-DD) when the rule becomes active. Pass an empty string or null to clear.
-        expires_at:
+        next_page_token:
           type: string
-          format: date
-          description: UTC date (YYYY-MM-DD) when the rule expires. Pass an empty string or null to clear.
-        notes:
-          type: string
-          description: Free-text note attached to the rule. Pass an empty string or null to clear.
-      description: Update an Unwanted Access Rule
+      description: Pagination model
     UnwantedAccessRuleCreationParameters:
       type: object
       properties:
@@ -384,14 +377,6 @@ components:
       required:
       - type
       description: Create an Unwanted Access Rule
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
     UnwantedAccessRule:
       type: object
       properties:
@@ -480,6 +465,21 @@ components:
           example: '2025-09-05T18:20:34Z'
           description: ISO-8601 formatted timestamp for when this rule was last updated.
       description: UnwantedAccessRule model
+    UnwantedAccessRuleUpdateParameters:
+      type: object
+      properties:
+        starts_at:
+          type: string
+          format: date
+          description: UTC date (YYYY-MM-DD) when the rule becomes active. Pass an empty string or null to clear.
+        expires_at:
+          type: string
+          format: date
+          description: UTC date (YYYY-MM-DD) when the rule expires. Pass an empty string or null to clear.
+        notes:
+          type: string
+          description: Free-text note attached to the rule. Pass an empty string or null to clear.
+      description: Update an Unwanted Access Rule
   securitySchemes:
     basic_auth:
       type: http

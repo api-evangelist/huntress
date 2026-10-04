@@ -248,40 +248,14 @@ paths:
       operationId: deleteV1OrganizationsId
 components:
   schemas:
-    OrganizationUpdateParameters:
+    Pagination:
       type: object
       properties:
-        name:
+        next_page_url:
           type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
+        next_page_token:
           type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-        report_recipients:
-          type: array
-          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
-          example:
-          - vera@bradley.com
-          - my@user.net
-          items: null
-      description: Update an Organization
-    OrganizationCreationParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-      required:
-      - name
-      - key
-      description: Create an Organization
+      description: Pagination model
     OrganizationWithActualProductUsages:
       type: object
       properties:
@@ -391,6 +365,25 @@ components:
       - microsoft_365_users_count
       - notify_emails
       description: OrganizationWithActualProductUsages model
+    OrganizationUpdateParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+        report_recipients:
+          type: array
+          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
+          example:
+          - vera@bradley.com
+          - my@user.net
+          items: null
+      description: Update an Organization
     Organization:
       type: object
       properties:
@@ -464,14 +457,21 @@ components:
       - microsoft_365_users_count
       - notify_emails
       description: Organization model
-    Pagination:
+    OrganizationCreationParameters:
       type: object
       properties:
-        next_page_url:
+        name:
           type: string
-        next_page_token:
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
           type: string
-      description: Pagination model
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+      required:
+      - name
+      - key
+      description: Create an Organization
   securitySchemes:
     basic_auth:
       type: http

@@ -146,6 +146,14 @@ paths:
       operationId: getV1InvoicesId
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     Invoice:
       type: object
       properties:
@@ -195,14 +203,6 @@ components:
           example: '2022-03-01T20:56:15Z'
           description: ISO-8601 formatted timestamp for when this invoice was last updated.
       description: Invoice model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http
