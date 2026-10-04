@@ -1,0 +1,97 @@
+slug: huntress
+provider: Huntress
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Incident Reports
+  spec_file: huntress-incident-reports-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.9
+  evidence: GET /v1/incident_reports List Incident Reports; POST /v1/incident_reports/{id}/resolution;
+    POST .../remediations/bulk_approval  Bulk Approve Remediations
+  reason: Security incident reports with remediation approval/rejection and resolution workflow — plainly
+    SOC incident response on a managed detection and response platform.
+- tag: Escalations
+  spec_file: huntress-escalations-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GET /v1/escalations List Escalations; POST /v1/escalations/{id}/resolution  Create an Escalation
+    Resolution; schema EscalationWithEntities
+  reason: SOC escalations raised to the customer with resolution workflow — security incident detection
+    and response handling, not generic ITSM, given the vendor's 24/7 SOC context.
+- tag: Agents
+  spec_file: huntress-agents-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: POST /v1/agents/{id}/isolation  IsolateAgent  Isolate Agent; DELETE /v1/agents/{id}/isolation  Release
+    Agent Isolation; DELETE /v1/agents/{id} UninstallAgent
+  reason: Manages EDR endpoint agents including host isolation — a core detection-and-response containment
+    action on a managed security platform. Some of the surface is pure endpoint inventory/deployment,
+    which is why not 0.95.
+- tag: External Recon
+  spec_file: huntress-external-recon-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.8
+  evidence: GET /v1/external_ports  getV1ExternalPorts  List External Ports; schema ExternalPort
+  reason: Externally exposed port discovery = attack-surface scanning, which maps to Vulnerability Management
+    (scanning and exposure identification). Could arguably sit under threat detection, hence 0.8.
+- tag: SIEM
+  spec_file: huntress-siem-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: POST /v1/siem/query  Execute ESQL Query; schemas SiemQueryResult, SiemPagination
+  reason: Querying the vendor's Managed SIEM log store is security monitoring/investigation, i.e. SOC/SIEM
+    threat detection and response.
+- tag: Invoices
+  spec_file: huntress-invoices-api-openapi.yml
+  capability_id: BC-200.30
+  capability_id_l1: BC-200
+  capability_name: Accounts Receivable Management
+  confidence: 0.7
+  evidence: GET /v1/invoices  List Account Invoices; GET /v1/invoices/{id}  Get Account Invoice; schema
+    Invoice
+  reason: Read access to the customer's own invoices from the vendor. From the API's perspective this
+    is customer invoicing/statement access; BC-4250.30 (Invoicing & Statement Management) would also fit,
+    but the surface is read-only and minimal, so a moderate-confidence AR mapping is given.
+- tag: Reseller
+  spec_file: huntress-reseller-api-openapi.yml
+  capability_id: BC-4250
+  capability_id_l1: BC-4250
+  capability_name: Subscription Billing & Revenue Management
+  confidence: 0.7
+  evidence: GET /v1/reseller/invoices  List Reseller Invoices; GET /v1/reseller/invoices/{id}/account_usage_line_items  List
+    Account Usage Line Items; POST /v1/reseller/subscriptions  Create Reseller Subscription
+  reason: Operations expose reseller invoices with usage-based line items plus subscription create/update/upgrade
+    — the recurring billing and revenue surface of the SaaS commercial model. Left L2 null because the
+    surface spans invoicing, usage metering and subscription modification rather than one sub-capability.
+- tag: Unwanted Access Rules
+  spec_file: huntress-unwanted-access-rules-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.7
+  evidence: POST /v1/unwanted_access_rules  UnwantedAccessRuleCreationParameters  Create an Unwanted Access
+    Rule
+  reason: Rules defining unwanted access are part of the vendor's identity threat detection (ITDR) surface,
+    clearly cybersecurity. L2 left null because the rules sit between identity/access control and threat
+    detection policy.

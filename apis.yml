@@ -362,6 +362,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/huntress-capability-edges.yml
+  name: Huntress Business Capability Map
 - type: DeveloperPortal
   url: https://api.huntress.io/docs
 - type: Documentation
