@@ -1,0 +1,12 @@
+{
+ "url": "https://api.huntress.io/v1/swagger_doc.json",
+ "requested_url": "https://api.huntress.io/v1/swagger_doc.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 247695,
+ "sha256": "21e046824826d16f96f3c3c6367eab17792a108c2e3e5b28b1dcbb4bd089543d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.902), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
