@@ -182,6 +182,14 @@ paths:
       operationId: getV1IdentitiesId
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     Identity:
       type: object
       properties:
@@ -277,14 +285,6 @@ components:
           example: '2022-03-01T20:05:10Z'
           description: A timestamp for when the identity was last updated, formatted as per ISO-8601.
       description: Identity model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

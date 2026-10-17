@@ -333,25 +333,6 @@ paths:
       operationId: ReleaseAgent
 components:
   schemas:
-    IsolateAgent:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: Reason recorded for the isolation.
-        strict_isolation:
-          type: boolean
-          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
-          default: false
-      description: Isolate Agent
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
     UpdateAgent:
       type: object
       properties:
@@ -370,6 +351,17 @@ components:
           type: boolean
           description: Enable or disable EDR tamper protection for the agent. Applies asynchronously, so the host-reported state is exposed separately as tamper_protection_actual. Requires an API key with permission to manage agent security settings, and the agent must support tamper protection.
       description: Update Agent
+    IsolateAgent:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: Reason recorded for the isolation.
+        strict_isolation:
+          type: boolean
+          description: Apply strict isolation. Only honored on Windows (WFP) and Linux (eBPF).
+          default: false
+      description: Isolate Agent
     Agent:
       type: object
       properties:
@@ -527,6 +519,14 @@ components:
           example: 19044
           description: The Windows Build Number. Should correspond to information on the <a href='https://docs.microsoft.com/en-us/windows/release-health/release-information'>Microsoft site</a>.
       description: Agent model
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

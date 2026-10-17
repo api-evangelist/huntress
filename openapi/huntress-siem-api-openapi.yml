@@ -86,13 +86,6 @@ paths:
         required: true
 components:
   schemas:
-    SiemPagination:
-      type: object
-      properties:
-        next_page_token:
-          type: string
-          example: 019612ab-1234-7000-8000-000000000001
-          description: Token to retrieve the next page of results. Omitted when all results have been returned.
     SiemQueryResult:
       type: object
       properties:
@@ -134,6 +127,13 @@ components:
       - range_start
       - range_end
       description: Execute ESQL Query
+    SiemPagination:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          example: 019612ab-1234-7000-8000-000000000001
+          description: Token to retrieve the next page of results. Omitted when all results have been returned.
   securitySchemes:
     basic_auth:
       type: http

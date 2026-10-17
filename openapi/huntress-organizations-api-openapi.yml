@@ -248,14 +248,6 @@ paths:
       operationId: deleteV1OrganizationsId
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
     OrganizationWithActualProductUsages:
       type: object
       properties:
@@ -365,25 +357,6 @@ components:
       - microsoft_365_users_count
       - notify_emails
       description: OrganizationWithActualProductUsages model
-    OrganizationUpdateParameters:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
-          example: Most Amazing Company, Ltd.
-        key:
-          type: string
-          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
-          example: amazing
-        report_recipients:
-          type: array
-          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
-          example:
-          - vera@bradley.com
-          - my@user.net
-          items: null
-      description: Update an Organization
     Organization:
       type: object
       properties:
@@ -472,6 +445,33 @@ components:
       - name
       - key
       description: Create an Organization
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
+    OrganizationUpdateParameters:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the organization. Value cannot be blank and must be 256 characters or less.
+          example: Most Amazing Company, Ltd.
+        key:
+          type: string
+          description: Organization keys are used to associate a Huntress Agent into a grouping. Value cannot be blank and must be 256 characters or less.
+          example: amazing
+        report_recipients:
+          type: array
+          description: Any emails specified here will automatically receive quarterly and monthly branded reports.
+          example:
+          - vera@bradley.com
+          - my@user.net
+          items: null
+      description: Update an Organization
   securitySchemes:
     basic_auth:
       type: http

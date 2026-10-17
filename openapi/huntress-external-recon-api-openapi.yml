@@ -156,6 +156,14 @@ paths:
       operationId: getV1ExternalPortsId
 components:
   schemas:
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
     ExternalPort:
       type: object
       properties:
@@ -202,14 +210,6 @@ components:
           - 5
           description: IDs of organizations associated with this external port that are accessible to the current user.
       description: ExternalPort model
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http

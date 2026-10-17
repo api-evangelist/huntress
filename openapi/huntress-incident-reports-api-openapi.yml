@@ -442,30 +442,52 @@ paths:
         required: true
 components:
   schemas:
-    Pagination:
-      type: object
-      properties:
-        next_page_url:
-          type: string
-        next_page_token:
-          type: string
-      description: Pagination model
-    User:
+    Remediation:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A unique identifier for the user.
-        email:
+          description: A unique identifier for a remediation.
+        type:
           type: string
-          example: john.smith@example.com
-          description: The user's email.
-        name:
+          example: manual
+          description: 'The type of the remediation. Can be one of: assisted, manual, containment'
+        action:
           type: string
-          example: John Smith
-          description: The user's name.
+          example: Delete File
+          description: Description of the remediation's required steps.
+        parameters:
+          type: array
+          items:
+            type: string
+          example:
+          - name: path
+            description: c:\windows\system32\tasks\malicious_task
+          description: Additional context on how the remediation will be performed.<br>For containment remediations, this will be a string showing the entity to which the remediation was applied.<br>For assisted remediations this will be an array of key value pairs representing all the parameters that are related to the remediation.<br>Manual remediations will have no information.
+        status:
+          type: string
+          example: completed
+          description: 'The status of the remediation. Can be one of: unapproved, approved, completed, failed, cancelled'
+        approved_at:
+          type: string
+          format: date-time
+          example: '2025-06-26T18:57:03Z'
+          description: ISO-8601 formatted timestamp for when the remediation was approved.
+        approved_by:
+          $ref: '#/components/schemas/User'
+          example:
+            id: 123123
+            name: John Smith
+            email: john.smith@example.com
+          description: The user that approved the remediation.
+        completed_at:
+          type: string
+          format: date-time
+          example: '2025-06-26T18:57:03Z'
+          description: ISO-8601 formatted timestamp for when the remediation was completed.
+      description: Remediation model
     IncidentReport:
       type: object
       properties:
@@ -570,52 +592,22 @@ components:
           example: '2022-03-01T20:31:30Z'
           description: ISO-8601 formatted timestamp for when this incident report was last updated.
       description: IncidentReport model
-    Remediation:
+    User:
       type: object
       properties:
         id:
           type: integer
           format: int64
           example: 1
-          description: A unique identifier for a remediation.
-        type:
+          description: A unique identifier for the user.
+        email:
           type: string
-          example: manual
-          description: 'The type of the remediation. Can be one of: assisted, manual, containment'
-        action:
+          example: john.smith@example.com
+          description: The user's email.
+        name:
           type: string
-          example: Delete File
-          description: Description of the remediation's required steps.
-        parameters:
-          type: array
-          items:
-            type: string
-          example:
-          - name: path
-            description: c:\windows\system32\tasks\malicious_task
-          description: Additional context on how the remediation will be performed.<br>For containment remediations, this will be a string showing the entity to which the remediation was applied.<br>For assisted remediations this will be an array of key value pairs representing all the parameters that are related to the remediation.<br>Manual remediations will have no information.
-        status:
-          type: string
-          example: completed
-          description: 'The status of the remediation. Can be one of: unapproved, approved, completed, failed, cancelled'
-        approved_at:
-          type: string
-          format: date-time
-          example: '2025-06-26T18:57:03Z'
-          description: ISO-8601 formatted timestamp for when the remediation was approved.
-        approved_by:
-          $ref: '#/components/schemas/User'
-          example:
-            id: 123123
-            name: John Smith
-            email: john.smith@example.com
-          description: The user that approved the remediation.
-        completed_at:
-          type: string
-          format: date-time
-          example: '2025-06-26T18:57:03Z'
-          description: ISO-8601 formatted timestamp for when the remediation was completed.
-      description: Remediation model
+          example: John Smith
+          description: The user's name.
     RemediationBulkRejectionParameters:
       type: object
       properties:
@@ -638,6 +630,14 @@ components:
       - comment
       - useful
       description: Bulk Reject Remediations Remediations
+    Pagination:
+      type: object
+      properties:
+        next_page_url:
+          type: string
+        next_page_token:
+          type: string
+      description: Pagination model
   securitySchemes:
     basic_auth:
       type: http
